@@ -52,6 +52,8 @@ This package contains the fortran library for exodusII.
 %package devel
 Summary:    Development headers and libraries for exodusII
 Group:      Development/Libraries/C and C++
+Requires:   libexoIIv2c = %{version}
+Requires:   libexoIIv2for = %{version}
 
 %description devel
 EXODUS II is a model developed to store and retrieve data for finite element
