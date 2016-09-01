@@ -6,14 +6,11 @@
 
 Name:           cereal
 Version:        1.2.1
-Release:        0
+Release:        1%{?dist}
 Summary:        A header-only C++11 serialization library
-License:        BSD-3-Clause
-Group:          Development/Libraries/C and C++
+License:        BSD
 Url:            http://uscilab.github.io/cereal/
 Source0:        https://github.com/USCiLab/cereal/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
-
-BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 
 BuildRequires:  gcc-c++
 BuildRequires:  boost-devel
@@ -27,8 +24,7 @@ light-weight, and easy to extend - it has no external dependencies and can be
 easily bundled with other code or used standalone.
 
 %package devel
-Summary:        Development headers and libraries for cereal library
-Group:          Development/Libraries/C and C++
+Summary:        Development headers and libraries for %{name}
 BuildArch:      noarch
 
 %description devel
@@ -42,22 +38,29 @@ This package contains development headers and libraries for the cereal library
 
 %prep
 %setup -q
+#https://github.com/USCiLab/cereal/pull/337
 sed -i 's/-Werror//' CMakeLists.txt
 
 %build
 mkdir %{_target_platform}
-cd %{_target_platform}
+pushd %{_target_platform}
 %{cmake} .. -DSKIP_PORTABILITY_TEST=ON
-make %{?_smp_mflags}
+%make_build 
 
 %install
-make -C %{_target_platform} install DESTDIR=%{buildroot}
+%make_install -C %{_target_platform}
 
 %check
 #test_portable_binary_archive is broken
+#https://github.com/USCiLab/cereal/issues/338
 make -C %{_target_platform} test ARGS="-V -E test_portable_binary_archive"
 
 %files devel
-%doc LICENSE README.md
-%{_includedir}/cereal
-%{_datadir}/cmake/cereal
+%doc README.md
+%license LICENSE
+%{_includedir}/%{name}
+%{_datadir}/cmake/%{name}
+
+%changelog
+* Thu Sep 01 2016 Christoph Junghans <junghans@votca.org> - 1.2.1-1
+- First release.
