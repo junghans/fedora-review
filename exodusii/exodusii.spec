@@ -6,7 +6,9 @@ License:        BSD
 Url:            http://sourceforge.net/projects/exodusii/
 #last version of the orinal source, got merge into https://github.com/gsjaardema/seacas
 # but has different API
-Source:         http://distfiles.gentoo.org/distfiles/exodus-%{version}.tar.gz
+Source0:         http://distfiles.gentoo.org/distfiles/exodus-%{version}.tar.gz
+Source1:        http://prod.sandia.gov/techlib/access-control.cgi/1992/922137.pdf
+Source2:        http://fossies.org/linux/Trilinos-trilinos-release/packages/seacas/doc/exodusII.pdf 
 Patch1:         sovers.diff
 
 BuildRequires:  gcc-c++
@@ -37,6 +39,19 @@ Application Programming Interface (API).
 
 This package contains development headers and libraries for exodusII.
 
+%package doc
+Summary:    PDF documentation for exodusII
+
+%description doc
+EXODUS II is a model developed to store and retrieve data for finite element
+analyses. It is used for pre-processing (problem definition), post-processing
+(results visualization), as well as code to code data transfer. An EXODUS II
+data file is a random access, machine independent, binary file that is written
+and read via C, C++, or Fortran library routines which comprise the
+Application Programming Interface (API).
+
+This package contains pdf documentation for exodusII.
+
 %prep
 %setup -n exodus-%{version} -q
 %patch -P 1 -p1
@@ -53,7 +68,9 @@ pushd %{_target_platform}
 [[ %{_lib} = lib ]] || mv %{buildroot}/%{_prefix}/{lib,%{_lib}}
 ln -s libexoIIv2c-%version.so "%buildroot/%_libdir/libexoIIv2c.so"
 ln -s libexoIIv2for-%version.so "%buildroot/%_libdir/libexoIIv2for.so"
- 
+mkdir -p %{buildroot}/%{_docdir}/%{name}
+cp %{S:1} %{S:2} %{buildroot}/%{_docdir}/%{name}
+
 %check
 make -C exodus/%{_target_platform}  check f_check
 
@@ -70,6 +87,9 @@ make -C exodus/%{_target_platform}  check f_check
 %license exodus/COPYRIGHT
 %{_libdir}/libexoIIv2c-*.so
 %{_libdir}/libexoIIv2for-*.so
+
+%files doc
+%{_docdir}/%{name}
  
 %changelog
 * Thu Sep 01 2016 Christoph Junghans <junghans@votca.org> - 6.02-1
