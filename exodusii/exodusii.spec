@@ -1,6 +1,6 @@
 Name:           exodusii
 Version:        6.02
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Library to store and retrieve transient finite element data
 License:        BSD
 Url:            http://sourceforge.net/projects/exodusii/
@@ -92,5 +92,9 @@ make -C exodus/%{_target_platform}  check f_check
 %{_docdir}/%{name}
  
 %changelog
+* Sat Sep 03 2016 Christoph Junghans <junghans@votca.org> - 6.02-2
+- Minor changes from review (bug #1336552)
+- Added doc package
+
 * Thu Sep 01 2016 Christoph Junghans <junghans@votca.org> - 6.02-1
 - First release.
