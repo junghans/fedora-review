@@ -1,6 +1,6 @@
 Name:           exodusii
 Version:        6.02
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Library to store and retrieve transient finite element data
 License:        BSD
 Url:            http://sourceforge.net/projects/exodusii/
@@ -10,13 +10,13 @@ Source0:         http://distfiles.gentoo.org/distfiles/exodus-%{version}.tar.gz
 Source1:        http://prod.sandia.gov/techlib/access-control.cgi/1992/922137.pdf
 Source2:        http://fossies.org/linux/Trilinos-trilinos-release/packages/seacas/doc/exodusII.pdf 
 Patch1:         sovers.diff
+Patch2:         exodus-6.02-testresults.patch
 
 BuildRequires:  gcc-c++
 BuildRequires:  tcsh
 BuildRequires:  gcc-gfortran
 BuildRequires:  cmake
 BuildRequires:  netcdf-devel
-BuildRequires:  zlib-devel
 
 %description
 EXODUS II is a model developed to store and retrieve data for finite element
@@ -28,6 +28,7 @@ Application Programming Interface (API).
 
 %package devel
 Summary:    Development headers and libraries for exodusII
+Requires:   %{name} = %{version}-%{release}
 
 %description devel
 EXODUS II is a model developed to store and retrieve data for finite element
@@ -41,6 +42,7 @@ This package contains development headers and libraries for exodusII.
 
 %package doc
 Summary:    PDF documentation for exodusII
+BuildArch:  noarch
 
 %description doc
 EXODUS II is a model developed to store and retrieve data for finite element
@@ -55,12 +57,16 @@ This package contains pdf documentation for exodusII.
 %prep
 %setup -n exodus-%{version} -q
 %patch -P 1 -p1
+%patch -P 2 -p1
+#avoid over-linking
+#zlib is actually not a direct dep of exodus, but hdf5
+sed -i '/FATAL_ERROR.*ZLib/s/^/#/' exodus/CMakeLists.txt
 
 %build
 cd exodus
 mkdir %{_target_platform}
 pushd %{_target_platform}
-%{cmake} -DBUILD_SHARED=ON ..
+%{cmake} -DBUILD_SHARED=ON -DHDF5HL_LIBRARY="" -DHDF5_LIBRARY="" -DCMAKE_DISABLE_FIND_PACKAGE_ZLIB=ON -DZLIB_LIBRARY="" ..
 %make_build
 
 %install
@@ -69,7 +75,7 @@ pushd %{_target_platform}
 ln -s libexoIIv2c-%version.so "%buildroot/%_libdir/libexoIIv2c.so"
 ln -s libexoIIv2for-%version.so "%buildroot/%_libdir/libexoIIv2for.so"
 mkdir -p %{buildroot}/%{_docdir}/%{name}
-cp %{S:1} %{S:2} %{buildroot}/%{_docdir}/%{name}
+cp -p %{S:1} %{S:2} %{buildroot}/%{_docdir}/%{name}
 
 %check
 make -C exodus/%{_target_platform}  check f_check
@@ -83,7 +89,6 @@ make -C exodus/%{_target_platform}  check f_check
 %{_libdir}/libexoIIv2for.so
 
 %files
-%doc exodus/README
 %license exodus/COPYRIGHT
 %{_libdir}/libexoIIv2c-*.so
 %{_libdir}/libexoIIv2for-*.so
@@ -92,6 +97,11 @@ make -C exodus/%{_target_platform}  check f_check
 %{_docdir}/%{name}
  
 %changelog
+* Sat Sep 09 2016 Christoph Junghans <junghans@votca.org> - 6.02-3
+- Fixed testsuite
+- Avoid over-linking
+- Minor changes from review (bug #1336552)
+
 * Sat Sep 03 2016 Christoph Junghans <junghans@votca.org> - 6.02-2
 - Minor changes from review (bug #1336552)
 - Added doc package
