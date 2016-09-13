@@ -9,14 +9,50 @@ Source0:        https://bitbucket.org/berkeleylab/gasnet/downloads/GASNet-%{vers
 Patch0:         https://bitbucket.org/berkeleylab/gasnet/commits/ef402803a4791dd73792042a886e9c3fb0989d17/raw#/ef402803a4791dd73792042a886e9c3fb0989d17.patch
 BuildRequires:  automake
 BuildRequires:  gcc-c++
-BuildRequires:  openmpi
-BuildRequires:  openmpi-devel
+Requires:       %{name}-common = %{version}-%{release}
 
 %description
 GASNet is a language-independent, low-level networking layer that provides
 network-independent, high-performance communication primitives tailored for
 implementing parallel global address space SPMD languages
 such as UPC, Titanium, and Co-Array Fortran.
+
+%package common
+Summary:        GASNet Open MPI binaries and libraries 
+
+%description common
+GASNet is a language-independent, low-level networking layer that provides
+network-independent, high-performance communication primitives tailored for
+implementing parallel global address space SPMD languages
+such as UPC, Titanium, and Co-Array Fortran.
+
+GASNet files shared between serial and parallel versions
+
+%package openmpi
+Summary:        GASNet Open MPI binaries and libraries 
+Requires:       %{name}-common = %{version}-%{release}
+BuildRequires:  openmpi-devel
+
+%description openmpi
+GASNet is a language-independent, low-level networking layer that provides
+network-independent, high-performance communication primitives tailored for
+implementing parallel global address space SPMD languages
+such as UPC, Titanium, and Co-Array Fortran.
+
+GASNet compiles with Open MPI, package incl. binaries and libraries
+
+%package mpich
+Summary:        GASNet Open MPI binaries and libraries 
+Requires:       %{name}-common = %{version}-%{release}
+BuildRequires:  mpich-devel
+
+%description mpich
+GASNet is a language-independent, low-level networking layer that provides
+network-independent, high-performance communication primitives tailored for
+implementing parallel global address space SPMD languages
+such as UPC, Titanium, and Co-Array Fortran.
+
+GASNet compiles with MPICH, package incl. binaries and libraries
 
 %package devel
 Summary:        Development package for GASNet
@@ -48,23 +84,48 @@ Documentation package for GASNet.
 ./Bootstrap -y
 
 %build
-%{_openmpi_load}
-%configure --enable-udp --enable-mpi CC="gcc -fPIC" CXX="g++ -fPIC"
+mkdir serial openmpi mpich
+%global dconfigure %(printf %%s '%configure' | sed 's!\./configure!../configure!g')
+
+pushd serial
+%dconfigure --enable-udp --disable-mpi CC="gcc -fPIC" CXX="g++ -fPIC"
 %make_build MANUAL_CFLAGS="%optflags -fPIC" MANUAL_MPICFLAGS="%optflags -fPIC" MANUAL_CXXFLAGS="%optflags -fPIC"
+popd
+
+pushd openmpi
+%{_openmpi_load}
+%dconfigure --enable-udp --enable-mpi --bindir="${MPI_BIN}"  --includedir="${MPI_INCLUDE}" --libdir="${MPI_LIB}" CC="gcc -fPIC" CXX="g++ -fPIC"
+%make_build MANUAL_CFLAGS="%optflags -fPIC" MANUAL_MPICFLAGS="%optflags -fPIC" MANUAL_CXXFLAGS="%optflags -fPIC"
+%{_openmpi_unload}
+popd
+
+pushd mpich
+%{_mpich_load}
+%dconfigure --enable-udp --enable-mpi --bindir="${MPI_BIN}"  --includedir="${MPI_INCLUDE}" --libdir="${MPI_LIB}" CC="gcc -fPIC" CXX="g++ -fPIC"
+%make_build MANUAL_CFLAGS="%optflags -fPIC" MANUAL_MPICFLAGS="%optflags -fPIC" MANUAL_CXXFLAGS="%optflags -fPIC"
+%{_mpich_unload}
+popd
 
 %install
-%make_install
+%make_install -C serial
+%make_install -C openmpi
+%make_install -C mpich
+
+#shared between serial and parallel
+rm -f %{_libdir}/*mpi*/bin/gasnet_trace
+
 chmod +x %{buildroot}/%{_bindir}/*.pl
 sed -i '1s@env @@' %{buildroot}/%{_bindir}/*.pl
 
 #Upstream doesn't want to support shared libs: https://bitbucket.org/berkeleylab/gasnet/pull-requests/36
 #but we need it down-stream (legion package)
-for l in %{buildroot}/%{_libdir}/*.a; do \
+for l in %{buildroot}/%{_libdir}/*.a %{buildroot}/%{_libdir}/*/lib/*.a; do \
     soname=`basename $l .a`; \
+    libdir=`dirname $l`; \
     gcc -shared -Wl,-soname=${soname}-%{version}.so \
         -Wl,--whole-archive ${l} -Wl,--no-whole-archive \
-        "$@" -o %{buildroot}/%{_libdir}/${soname}-%{version}.so && \
-    ln -s ${soname}-%{version}.so %{buildroot}/%{_libdir}/${soname}.so; \
+        "$@" -o ${libdir}/${soname}-%{version}.so && \
+    ln -s ${soname}-%{version}.so ${libdir}/${soname}.so; \
     rm ${l} ; \
 done
 
@@ -72,19 +133,38 @@ done
 %postun -p /sbin/ldconfig
 
 %files
-%{_bindir}/*
+%{_bindir}/amudprun
 %{_libdir}/lib*-%{version}.so
 %doc ChangeLog README README-release README-tools
 %license license.txt
+
+%files common
+%{_bindir}/gasnet_trace*
+
+%files openmpi
+%{_libdir}/openmpi*/bin/*
+%{_libdir}/openmpi*/lib/lib*-%{version}.so
+
+%files mpich
+%{_libdir}/mpich*/bin/*
+%{_libdir}/mpich*/lib/lib*-%{version}.so
 
 %files doc
 %{_datadir}/doc/GASNet
 
 %files devel
 %doc ChangeLog README-git README-devel
-%{_includedir}/*
+%{_includedir}/*.h
+%{_includedir}/*.mk
+%{_includedir}/*-conduit
 %{_libdir}/lib*[a-z].so
 %{_libdir}/valgrind
+%{_includedir}/openmpi-*/*
+%{_libdir}/openmpi*/lib/lib*[a-z].so
+%{_libdir}/openmpi*/lib/valgrind
+%{_includedir}/mpich-*/*
+%{_libdir}/mpich*/lib/lib*[a-z].so
+%{_libdir}/mpich*/lib/valgrind
 
 %changelog
 * Mon Sep 12 2016 Christoph Junghans <junghans@votca.org> - 1.26.4-1
