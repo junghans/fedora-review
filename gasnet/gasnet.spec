@@ -7,6 +7,8 @@ Url:            https://bitbucket.org/berkeleylab/gasnet/
 Source0:        https://bitbucket.org/berkeleylab/gasnet/downloads/GASNet-%{version}.tar.gz
 # PATCH-FIX-UPSTREAM - ef402803a4791dd73792042a886e9c3fb0989d17.patch - Support overwriting of flags, see https://bitbucket.org/berkeleylab/gasnet/pull-requests/34
 Patch0:         https://bitbucket.org/berkeleylab/gasnet/commits/ef402803a4791dd73792042a886e9c3fb0989d17/raw#/ef402803a4791dd73792042a886e9c3fb0989d17.patch
+# PATCH-FIX-UPSTREAM - ef26bec6ac1531fd61ed4e6e7509046e45cd8614.patch - Filter fPIC functions in make check, see https://bitbucket.org/berkeleylab/gasnet/pull-requests/37
+Patch1:         https://bitbucket.org/junghans/gasnet/commits/ef26bec6ac1531fd61ed4e6e7509046e45cd8614/raw#/ef26bec6ac1531fd61ed4e6e7509046e45cd8614.patch
 BuildRequires:  automake
 BuildRequires:  gcc-c++
 Requires:       %{name}-common = %{version}-%{release}
@@ -18,7 +20,7 @@ implementing parallel global address space SPMD languages
 such as UPC, Titanium, and Co-Array Fortran.
 
 %package common
-Summary:        GASNet Open MPI binaries and libraries 
+Summary:        GASNet Open MPI binaries and libraries
 
 %description common
 GASNet is a language-independent, low-level networking layer that provides
@@ -29,7 +31,7 @@ such as UPC, Titanium, and Co-Array Fortran.
 GASNet files shared between serial and parallel versions
 
 %package openmpi
-Summary:        GASNet Open MPI binaries and libraries 
+Summary:        GASNet Open MPI binaries and libraries
 Requires:       %{name}-common = %{version}-%{release}
 BuildRequires:  openmpi-devel
 
@@ -42,7 +44,7 @@ such as UPC, Titanium, and Co-Array Fortran.
 GASNet compiles with Open MPI, package incl. binaries and libraries
 
 %package mpich
-Summary:        GASNet Open MPI binaries and libraries 
+Summary:        GASNet Open MPI binaries and libraries
 Requires:       %{name}-common = %{version}-%{release}
 BuildRequires:  mpich-devel
 
@@ -81,6 +83,7 @@ Documentation package for GASNet.
 %prep
 %setup -q -n GASNet-%{version}
 %patch0 -p1
+%patch1 -p1
 ./Bootstrap -y
 
 %build
