@@ -88,23 +88,32 @@ mkdir serial openmpi mpich
 %global dconfigure %(printf %%s '%configure' | sed 's!\./configure!../configure!g')
 
 pushd serial
-%dconfigure --enable-udp --disable-mpi CC="gcc -fPIC" CXX="g++ -fPIC"
+%dconfigure --enable-udp --disable-mpi --enable-par --disable-aligned-segments  --enable-segment-fast --disable-pshm --with-segment-mmap-max=4GB CC="gcc -fPIC" CXX="g++ -fPIC"
 %make_build MANUAL_CFLAGS="%optflags -fPIC" MANUAL_MPICFLAGS="%optflags -fPIC" MANUAL_CXXFLAGS="%optflags -fPIC"
 popd
 
 pushd openmpi
 %{_openmpi_load}
-%dconfigure --enable-udp --enable-mpi --bindir="${MPI_BIN}"  --includedir="${MPI_INCLUDE}" --libdir="${MPI_LIB}" CC="gcc -fPIC" CXX="g++ -fPIC"
+%dconfigure --enable-udp --enable-mpi --enable-par --disable-aligned-segments  --enable-segment-fast --disable-pshm --with-segment-mmap-max=4GB --bindir="${MPI_BIN}"  --includedir="${MPI_INCLUDE}" --libdir="${MPI_LIB}" CC="gcc -fPIC" CXX="g++ -fPIC"
 %make_build MANUAL_CFLAGS="%optflags -fPIC" MANUAL_MPICFLAGS="%optflags -fPIC" MANUAL_CXXFLAGS="%optflags -fPIC"
 %{_openmpi_unload}
 popd
 
 pushd mpich
 %{_mpich_load}
-%dconfigure --enable-udp --enable-mpi --bindir="${MPI_BIN}"  --includedir="${MPI_INCLUDE}" --libdir="${MPI_LIB}" CC="gcc -fPIC" CXX="g++ -fPIC"
+%dconfigure --enable-udp --enable-mpi --enable-par --disable-aligned-segments  --enable-segment-fast --disable-pshm --with-segment-mmap-max=4GB --bindir="${MPI_BIN}"  --includedir="${MPI_INCLUDE}" --libdir="${MPI_LIB}" CC="gcc -fPIC" CXX="g++ -fPIC"
 %make_build MANUAL_CFLAGS="%optflags -fPIC" MANUAL_MPICFLAGS="%optflags -fPIC" MANUAL_CXXFLAGS="%optflags -fPIC"
 %{_mpich_unload}
 popd
+
+%check
+make -C serial check MANUAL_CFLAGS="%optflags -fPIC" MANUAL_MPICFLAGS="%optflags -fPIC" MANUAL_CXXFLAGS="%optflags -fPIC"
+%{_openmpi_load}
+make -C openmpi check MANUAL_CFLAGS="%optflags -fPIC" MANUAL_MPICFLAGS="%optflags -fPIC" MANUAL_CXXFLAGS="%optflags -fPIC"
+%{_openmpi_unload}
+%{_mpich_load}
+make -C mpich check MANUAL_CFLAGS="%optflags -fPIC" MANUAL_MPICFLAGS="%optflags -fPIC" MANUAL_CXXFLAGS="%optflags -fPIC"
+%{_mpich_unload}
 
 %install
 %make_install -C serial
@@ -116,21 +125,36 @@ rm -f %{_libdir}/*mpi*/bin/gasnet_trace
 
 chmod +x %{buildroot}/%{_bindir}/*.pl
 sed -i '1s@env @@' %{buildroot}/%{_bindir}/*.pl
+chmod +x %{buildroot}/%{_libdir}/*mpi*/bin/*.pl
+sed -i '1s@env @@' %{buildroot}/%{_libdir}/*mpi*/bin/*.pl
 
 #Upstream doesn't want to support shared libs: https://bitbucket.org/berkeleylab/gasnet/pull-requests/36
-#but we need it down-stream (legion package)
-for l in %{buildroot}/%{_libdir}/*.a %{buildroot}/%{_libdir}/*/lib/*.a; do \
+#mind the order for link deps, libgasnet-smp-par first then libam* then the rest
+for l in %{buildroot}/%{_libdir}/{,*mpi*/lib}/lib{gasnet-smp-par,am*,*}.a; do \
+    [[ -f $l ]] || continue; \
     soname=`basename $l .a`; \
     libdir=`dirname $l`; \
-    gcc -shared -Wl,-soname=${soname}-%{version}.so \
+    libs= ; \
+    [[ ${soname} = libgasnet-*-par* ]] && libs+=" -lpthread"; \
+    [[ ${soname} = libamudp ]] && libs+=" -L${libdir} -lgasnet-smp-par"; \
+    [[ ${soname} = libammpi ]] && libs+=" -L${libdir#%{buildroot}} -lmpi"; \
+    [[ ${soname} = libgasnet-udp-* ]] && libs+=" -L${libdir} -lamudp"; \
+    [[ ${soname} = libgasnet-mpi-* ]] && libs+=" -L${libdir} -lammpi"; \
+    [[ ${l} = *mpi*/libgasnet-*-* ]] && libs+=" -lrt"; \
+    g++ -shared -Wl,-soname=${soname}-%{version}.so \
         -Wl,--whole-archive ${l} -Wl,--no-whole-archive \
-        "$@" -o ${libdir}/${soname}-%{version}.so && \
-    ln -s ${soname}-%{version}.so ${libdir}/${soname}.so; \
+        ${libs} -o ${libdir}/${soname}-%{version}.so \
+        -Wl,-z,defs -Wl,--rpath-link=. && \
+    ln -s ${soname}-%{version}.so ${libdir}/${soname}.so && \
     rm ${l} ; \
 done
 
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
+%post openmpi -p /sbin/ldconfig
+%postun openmpi -p /sbin/ldconfig
+%post mpich  -p /sbin/ldconfig
+%postun mpich -p /sbin/ldconfig
 
 %files
 %{_bindir}/amudprun
@@ -155,7 +179,7 @@ done
 %files devel
 %doc ChangeLog README-git README-devel
 %{_includedir}/*.h
-%{_includedir}/*.mk
+%{_includedir}/*.mak
 %{_includedir}/*-conduit
 %{_libdir}/lib*[a-z].so
 %{_libdir}/valgrind
