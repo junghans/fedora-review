@@ -1,0 +1,5 @@
+*.src.rpm diff=srpm
+# add following 3 lines to ~/.gitconfig
+#[diff "srpm"]
+#	textconv = rpm2cpio
+#	binary = true
