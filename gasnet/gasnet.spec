@@ -7,8 +7,8 @@ Url:            https://bitbucket.org/berkeleylab/gasnet/
 Source0:        https://bitbucket.org/berkeleylab/gasnet/downloads/GASNet-%{version}.tar.gz
 # PATCH-FIX-UPSTREAM - ef402803a4791dd73792042a886e9c3fb0989d17.patch - Support overwriting of flags, see https://bitbucket.org/berkeleylab/gasnet/pull-requests/34
 Patch0:         https://bitbucket.org/berkeleylab/gasnet/commits/ef402803a4791dd73792042a886e9c3fb0989d17/raw#/ef402803a4791dd73792042a886e9c3fb0989d17.patch
-# PATCH-FIX-UPSTREAM - ef26bec6ac1531fd61ed4e6e7509046e45cd8614.patch - Filter fPIC functions in make check, see https://bitbucket.org/berkeleylab/gasnet/pull-requests/37
-Patch1:         https://bitbucket.org/junghans/gasnet/commits/ef26bec6ac1531fd61ed4e6e7509046e45cd8614/raw#/ef26bec6ac1531fd61ed4e6e7509046e45cd8614.patch
+# PATCH-FIX-UPSTREAM - ef26bec6ac1531fd61ed4e6e7509046e45cd8614.patch - Filter fPIC functions in make check, see https://upc-bugs.lbl.gov/bugzilla/show_bug.cgi?id=3321 and https://bitbucket.org/berkeleylab/gasnet/pull-requests/37
+Patch1:         https://bitbucket.org/berkeleylab/gasnet/commits/ef26bec6ac1531fd61ed4e6e7509046e45cd8614/raw#/ef26bec6ac1531fd61ed4e6e7509046e45cd8614.patch
 BuildRequires:  automake
 BuildRequires:  gcc-c++
 Requires:       %{name}-common = %{version}-%{release}
@@ -41,12 +41,11 @@ network-independent, high-performance communication primitives tailored for
 implementing parallel global address space SPMD languages
 such as UPC, Titanium, and Co-Array Fortran.
 
-GASNet compiles with Open MPI, package incl. binaries and libraries
+GASNet compiled with Open MPI, package incl. binaries and libraries
 
 %package mpich
 Summary:        GASNet Open MPI binaries and libraries
 Requires:       %{name}-common = %{version}-%{release}
-BuildRequires:  mpich-devel
 
 %description mpich
 GASNet is a language-independent, low-level networking layer that provides
@@ -54,11 +53,13 @@ network-independent, high-performance communication primitives tailored for
 implementing parallel global address space SPMD languages
 such as UPC, Titanium, and Co-Array Fortran.
 
-GASNet compiles with MPICH, package incl. binaries and libraries
+GASNet compiled with MPICH, package incl. binaries and libraries
 
 %package devel
 Summary:        Development package for GASNet
 Requires:       %{name} = %{version}
+Requires:       mpich-devel
+Requires:       openmpi-devel
 
 %description devel
 GASNet is a language-independent, low-level networking layer that provides
