@@ -1,6 +1,6 @@
 Name:           gasnet
 Version:        1.26.4
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A Portable High-Performance Communication Layer for GAS Languages
 License:        PostgreSQL
 Url:            https://bitbucket.org/berkeleylab/gasnet/
@@ -11,7 +11,7 @@ Patch0:         https://bitbucket.org/berkeleylab/gasnet/commits/ef402803a4791dd
 Patch1:         https://bitbucket.org/berkeleylab/gasnet/commits/ef26bec6ac1531fd61ed4e6e7509046e45cd8614/raw#/ef26bec6ac1531fd61ed4e6e7509046e45cd8614.patch
 BuildRequires:  automake
 BuildRequires:  gcc-c++
-Requires:       %{name}-common = %{version}-%{release}
+Requires:       %{name}-common%{?_isa} = %{version}-%{release}
 
 %description
 GASNet is a language-independent, low-level networking layer that provides
@@ -32,7 +32,7 @@ GASNet files shared between serial and parallel versions
 
 %package openmpi
 Summary:        GASNet Open MPI binaries and libraries
-Requires:       %{name}-common = %{version}-%{release}
+Requires:       %{name}-common%{?_isa} = %{version}-%{release}
 BuildRequires:  openmpi-devel
 
 %description openmpi
@@ -45,7 +45,8 @@ GASNet compiled with Open MPI, package incl. binaries and libraries
 
 %package mpich
 Summary:        GASNet Open MPI binaries and libraries
-Requires:       %{name}-common = %{version}-%{release}
+Requires:       %{name}-common%{?_isa} = %{version}-%{release}
+BuildRequires:  mpich-devel
 
 %description mpich
 GASNet is a language-independent, low-level networking layer that provides
@@ -57,7 +58,7 @@ GASNet compiled with MPICH, package incl. binaries and libraries
 
 %package devel
 Summary:        Development package for GASNet
-Requires:       %{name} = %{version}
+Requires:       %{name}%{?_isa} = %{version}
 Requires:       mpich-devel
 Requires:       openmpi-devel
 
@@ -195,5 +196,8 @@ done
 %{_libdir}/mpich*/lib/valgrind
 
 %changelog
+* Thu Sep 22 2016 Christoph Junghans <junghans@votca.org> - 1.26.4-2
+- Minor changes from review (bug #1375744)
+
 * Mon Sep 12 2016 Christoph Junghans <junghans@votca.org> - 1.26.4-1
 - First release.
