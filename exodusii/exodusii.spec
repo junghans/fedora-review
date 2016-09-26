@@ -8,11 +8,10 @@ Url:            http://sourceforge.net/projects/exodusii/
 # but has different API
 Source0:         http://distfiles.gentoo.org/distfiles/exodus-%{version}.tar.gz
 Source1:        http://prod.sandia.gov/techlib/access-control.cgi/1992/922137.pdf
-Source2:        http://fossies.org/linux/Trilinos-trilinos-release/packages/seacas/doc/exodusII.pdf 
+Source2:        http://fossies.org/linux/Trilinos-trilinos-release/packages/seacas/doc/exodusII.pdf
 Patch1:         sovers.diff
 Patch2:         exodus-6.02-testresults.patch
 
-BuildRequires:  gcc-c++
 BuildRequires:  tcsh
 BuildRequires:  gcc-gfortran
 BuildRequires:  cmake
@@ -61,6 +60,8 @@ This package contains pdf documentation for exodusII.
 #avoid over-linking
 #zlib is actually not a direct dep of exodus, but hdf5
 sed -i '/FATAL_ERROR.*ZLib/s/^/#/' exodus/CMakeLists.txt
+#exoIIv2for gets NETCDF_LIBRARY through exoIIv2c
+sed -i '/TARGET_LINK_LIBRARIES(exoIIv2for/s/${NETCDF_LIBRARY}.*)/)/' exodus/forbind/CMakeLists.txt
 
 %build
 cd exodus
@@ -95,9 +96,9 @@ make -C exodus/%{_target_platform}  check f_check
 
 %files doc
 %{_docdir}/%{name}
- 
+
 %changelog
-* Sat Sep 09 2016 Christoph Junghans <junghans@votca.org> - 6.02-3
+* Fri Sep 09 2016 Christoph Junghans <junghans@votca.org> - 6.02-3
 - Fixed testsuite
 - Avoid over-linking
 - Minor changes from review (bug #1336552)
