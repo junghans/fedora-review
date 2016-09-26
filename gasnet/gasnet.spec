@@ -1,6 +1,6 @@
 Name:           gasnet
 Version:        1.26.4
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        A Portable High-Performance Communication Layer for GAS Languages
 License:        PostgreSQL
 Url:            https://bitbucket.org/berkeleylab/gasnet/
@@ -10,7 +10,6 @@ Patch0:         https://bitbucket.org/berkeleylab/gasnet/commits/ef402803a4791dd
 # PATCH-FIX-UPSTREAM - ef26bec6ac1531fd61ed4e6e7509046e45cd8614.patch - Filter fPIC functions in make check, see https://upc-bugs.lbl.gov/bugzilla/show_bug.cgi?id=3321 and https://bitbucket.org/berkeleylab/gasnet/pull-requests/37
 Patch1:         https://bitbucket.org/berkeleylab/gasnet/commits/ef26bec6ac1531fd61ed4e6e7509046e45cd8614/raw#/ef26bec6ac1531fd61ed4e6e7509046e45cd8614.patch
 BuildRequires:  automake
-BuildRequires:  gcc-c++
 Requires:       %{name}-common%{?_isa} = %{version}-%{release}
 
 %description
@@ -21,6 +20,7 @@ such as UPC, Titanium, and Co-Array Fortran.
 
 %package common
 Summary:        GASNet Open MPI binaries and libraries
+Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
 %description common
 GASNet is a language-independent, low-level networking layer that provides
@@ -126,7 +126,7 @@ make -C mpich check MANUAL_CFLAGS="%optflags -fPIC" MANUAL_MPICFLAGS="%optflags 
 %make_install -C mpich
 
 #shared between serial and parallel
-rm -f %{_libdir}/*mpi*/bin/gasnet_trace
+rm -f %{buildroot}/%{_libdir}/*mpi*/bin/gasnet_trace
 
 chmod +x %{buildroot}/%{_bindir}/*.pl
 sed -i '1s@env @@' %{buildroot}/%{_bindir}/*.pl
@@ -147,19 +147,19 @@ for l in %{buildroot}/%{_libdir}/{,*mpi*/lib}/lib{gasnet-smp-par,am*,*}.a; do \
     [[ ${soname} = libgasnet-mpi-* ]] && libs+=" -L${libdir} -lammpi"; \
     [[ ${l} = *mpi*/libgasnet-*-* ]] && libs+=" -lrt"; \
     g++ -shared -Wl,-soname=${soname}-%{version}.so \
+        -Wl,--as-needed -Wl,-z,defs -Wl,--rpath-link=. \
         -Wl,--whole-archive ${l} -Wl,--no-whole-archive \
-        ${libs} -o ${libdir}/${soname}-%{version}.so \
-        -Wl,-z,defs -Wl,--rpath-link=. && \
+        ${libs} -o ${libdir}/${soname}-%{version}.so && \
     ln -s ${soname}-%{version}.so ${libdir}/${soname}.so && \
     rm ${l} ; \
 done
 
+# MPI subpackages don't need the ldconfig magic.  They are hidden by
+# default, in MPI back-end-specific directory, and only show to the
+# user after the relevant environment module has been loaded.
+# rpmlint will report that as errors, but it is fine.
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
-%post openmpi -p /sbin/ldconfig
-%postun openmpi -p /sbin/ldconfig
-%post mpich  -p /sbin/ldconfig
-%postun mpich -p /sbin/ldconfig
 
 %files
 %{_bindir}/amudprun
@@ -196,6 +196,9 @@ done
 %{_libdir}/mpich*/lib/valgrind
 
 %changelog
+* Mon Sep 26 2016 Christoph Junghans <junghans@votca.org> - 1.26.4-3
+- More changes from review (bug #1375744)
+
 * Thu Sep 22 2016 Christoph Junghans <junghans@votca.org> - 1.26.4-2
 - Minor changes from review (bug #1375744)
 
