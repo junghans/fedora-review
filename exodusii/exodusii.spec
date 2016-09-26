@@ -1,6 +1,6 @@
 Name:           exodusii
 Version:        6.02
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Library to store and retrieve transient finite element data
 License:        BSD
 Url:            http://sourceforge.net/projects/exodusii/
@@ -60,13 +60,12 @@ This package contains pdf documentation for exodusII.
 #avoid over-linking
 #zlib is actually not a direct dep of exodus, but hdf5
 sed -i '/FATAL_ERROR.*ZLib/s/^/#/' exodus/CMakeLists.txt
-#exoIIv2for gets NETCDF_LIBRARY through exoIIv2c
-sed -i '/TARGET_LINK_LIBRARIES(exoIIv2for/s/${NETCDF_LIBRARY}.*)/)/' exodus/forbind/CMakeLists.txt
 
 %build
 cd exodus
 mkdir %{_target_platform}
 pushd %{_target_platform}
+export LDFLAGS="${LDFLAGS} -Wl,--as-needed"
 %{cmake} -DBUILD_SHARED=ON -DHDF5HL_LIBRARY="" -DHDF5_LIBRARY="" -DCMAKE_DISABLE_FIND_PACKAGE_ZLIB=ON -DZLIB_LIBRARY="" ..
 %make_build
 
@@ -98,6 +97,9 @@ make -C exodus/%{_target_platform}  check f_check
 %{_docdir}/%{name}
 
 %changelog
+* Mon Sep 26 2016 Christoph Junghans <junghans@votca.org> - 6.02-4
+- Fixed another overlinking issue by --as-needed
+
 * Fri Sep 09 2016 Christoph Junghans <junghans@votca.org> - 6.02-3
 - Fixed testsuite
 - Avoid over-linking
