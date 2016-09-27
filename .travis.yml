@@ -13,7 +13,17 @@ script:
   - PKG=$(git log -1 --pretty=%s | sed 's/:.*//')
   - if [[ ! -d ${PKG} ]]; then echo "Directory ${PKG} not found"; exit 1; fi
   - if [[ ! -f ${PKG}/${PKG}.spec ]]; then echo "No spec file (${PKG}.spec found in directory ${PKG}"; exit 1; fi
-  - echo "dnf -y install fedora-review && newgrp mock && cd /travis/${PKG} && rpmbuild -D'_sourcedir /travis/${PKG}' -D'_srcrpmdir /travis/${PKG}' -bs ${PKG}.spec && fedora-review -n ${PKG}" > review.sh
+  - |
+    { 
+      echo "#!/bin/bash -xe"
+      echo "dnf -y install fedora-review sudo"
+      echo "cd /travis/${PKG}"
+      echo "rpmbuild -D'_sourcedir /travis/${PKG}' -D'_srcrpmdir /travis/${PKG}' -bs ${PKG}.spec"
+      echo "useradd -r -m -g mock review"
+      echo "chown -R review:mock /travis/${PKG}"
+      echo "ls /etc/mock"
+      echo "sudo -u review fedora-review --mock-config ${MOCK_CONFIG} -v -n ${PKG} || { cat /home/review/.cache/fedora-review.log; exit 1; }"
+    } > review.sh
   - chmod +x review.sh
   - cat review.sh
-  - docker run -v "${PWD}:/travis:rw" -it fedora /bin/bash /travis/review.sh
+  - docker run --privileged=true -v "${PWD}:/travis:rw" -it fedora /travis/review.sh
