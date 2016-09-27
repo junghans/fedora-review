@@ -1,0 +1,17 @@
+language: generic
+
+sudo: required
+
+services:
+- docker
+
+env:
+  matrix:
+    - MOCK_CONFIG=fedora-rawhide-x86_64
+
+script:
+  - PKG=$(git log -1 --pretty=%s | sed 's/:.*//')
+  - if [[ ! -d ${PKG} ]]; then echo "Directory ${PKG} not found"; exit 1; fi
+  - if [[ ! -f ${PKG}/${PKG}.spec ]]; then echo "No spec file (${PKG}.spec found in directory ${PKG}"; exit 1; fi
+  - docker run -e "PKG=${PKG}" -v "${PWD}:/travis:rw" -it fedora /bin/bash -c
+    "dnf -y install fedora-review && cd /travis/${PKG} && rpmbuild -D'_sourcedir \$PWD' -D'_srcrpmdir \$PWD' -bs ${PKG}.spec"
