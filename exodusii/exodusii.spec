@@ -6,9 +6,9 @@ License:        BSD
 Url:            http://sourceforge.net/projects/exodusii/
 #last version of the orinal source, got merge into https://github.com/gsjaardema/seacas
 # but has different API
-Source0:         http://distfiles.gentoo.org/distfiles/exodus-%{version}.tar.gz
+Source0:        http://distfiles.gentoo.org/distfiles/exodus-%{version}.tar.gz
 Source1:        http://prod.sandia.gov/techlib/access-control.cgi/1992/922137.pdf
-Source2:        http://fossies.org/linux/Trilinos-trilinos-release/packages/seacas/doc/exodusII.pdf
+Source2:        http://gsjaardema.github.io/seacas/exodusII.pdf
 Patch1:         sovers.diff
 Patch2:         exodus-6.02-testresults.patch
 

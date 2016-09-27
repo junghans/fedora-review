@@ -14,16 +14,40 @@ script:
   - if [[ ! -d ${PKG} ]]; then echo "Directory ${PKG} not found"; exit 1; fi
   - if [[ ! -f ${PKG}/${PKG}.spec ]]; then echo "No spec file (${PKG}.spec found in directory ${PKG}"; exit 1; fi
   - |
-    { 
-      echo "#!/bin/bash -xe"
-      echo "dnf -y install fedora-review sudo"
-      echo "cd /travis/${PKG}"
-      echo "rpmbuild -D'_sourcedir /travis/${PKG}' -D'_srcrpmdir /travis/${PKG}' -bs ${PKG}.spec"
-      echo "useradd -r -m -g mock review"
-      echo "chown -R review:mock /travis/${PKG}"
-      echo "ls /etc/mock"
-      echo "sudo -u review fedora-review --mock-config ${MOCK_CONFIG} -v -n ${PKG} || { cat /home/review/.cache/fedora-review.log; exit 1; }"
+    {
+      H="/travis/${PKG}"
+      echo "#!/bin/bash -e"
+      echo "dnf -y install fedora-review"
+      echo "rpmbuild -D'_sourcedir ${H}' -D'_srcrpmdir ${H}' -bs ${H}/${PKG}.spec"
+      echo "useradd -d ${H} -g mock review"
+      echo "chown -R review:mock ${H}"
+      echo "su - -c 'fedora-review -v --mock-config ${MOCK_CONFIG} -n ${PKG}' review"
+      echo "cat ${H}/review-${PKG}/review.txt"
     } > review.sh
   - chmod +x review.sh
-  - cat review.sh
-  - docker run --privileged=true -v "${PWD}:/travis:rw" -it fedora /travis/review.sh
+  - docker run --privileged -v "${PWD}:/travis:rw" -it fedora /travis/review.sh
+
+after_success:
+  - git config --global user.name "Automatic Deployment (Travis CI)"
+  - git config --global user.email "builds@travis-ci.org"
+  - git fetch origin gh-pages && git checkout -b gh-pages FETCH_HEAD
+  - cd ${PKG}
+  - rm -f ${PKG}*.src.rpm
+  - git checkout ${TRAVIS_COMMIT} -- ./${PKG}.spec
+  - cp review-${PKG}/review.txt .
+  - cp review-${PKG}/results/${PKG}*.src.rpm .
+  - git add ${PKG}.spec ${PKG}*.src.rpm review.txt
+  - if [[ ${encrypted_404fa93e7e35_key} && ${encrypted_404fa93e7e35_iv} && ${TRAVIS_BRANCH} == master ]]; then
+      git commit -m "Review output";
+      openssl aes-256-cbc -K $encrypted_404fa93e7e35_key -iv $encrypted_404fa93e7e35_iv -in deploy.enc -out ~/.ssh/id_rsa -d;
+      chmod 600 ~/.ssh/id_rsa;
+      git push git@github.com:${TRAVIS_REPO_SLUG} gh-pages:gh-pages;
+    else
+      git status;
+      echo "###################################################";
+      echo "Spec URL http://${TRAVIS_REPO_SLUG%/*}.github.io/${TRAVIS_REPO_SLUG#/*}/${PKG}/${PKG}.spec";
+      echo "SRPM URL http://${TRAVIS_REPO_SLUG%/*}.github.io/${TRAVIS_REPO_SLUG#/*}/${PKG}/$(echo ${PKG}*.src.rpm)";
+      echo "Review.txt http://${TRAVIS_REPO_SLUG%/*}.github.io/${TRAVIS_REPO_SLUG#/*}/${PKG}/review.txt";
+      echo "Build log https://travis-ci.org/${TRAVIS_REPO_SLUG}/builds/${TRAVIS_BUILD_ID}";
+      echo "###################################################";
+   fi
