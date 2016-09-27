@@ -13,7 +13,7 @@ script:
   - PKG=$(git log -1 --pretty=%s | sed 's/:.*//')
   - if [[ ! -d ${PKG} ]]; then echo "Directory ${PKG} not found"; exit 1; fi
   - if [[ ! -f ${PKG}/${PKG}.spec ]]; then echo "No spec file (${PKG}.spec found in directory ${PKG}"; exit 1; fi
-  - echo "dnf -y install fedora-review && rpmbuild -D'_sourcedir /travis/${PKG}' -D'_srcrpmdir /travis/${PKG}' -bs /travis/${PKG}/${PKG}.spec" > review.sh
+  - echo "dnf -y install fedora-review && newgrp mock && cd /travis/${PKG} && rpmbuild -D'_sourcedir /travis/${PKG}' -D'_srcrpmdir /travis/${PKG}' -bs ${PKG}.spec && fedora-review -n ${PKG}" > review.sh
   - chmod +x review.sh
   - cat review.sh
   - docker run -v "${PWD}:/travis:rw" -it fedora /bin/bash /travis/review.sh
