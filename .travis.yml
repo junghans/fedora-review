@@ -45,11 +45,11 @@ after_success:
       chmod 600 ~/.ssh/id_rsa;
       git push git@github.com:${TRAVIS_REPO_SLUG} gh-pages:gh-pages;
       echo "###################################################";
-      echo "Spec URL http://${TRAVIS_REPO_SLUG%/*}.github.io/${TRAVIS_REPO_SLUG#/*}/${PKG}/${PKG}.spec";
-      echo "SRPM URL http://${TRAVIS_REPO_SLUG%/*}.github.io/${TRAVIS_REPO_SLUG#/*}/${PKG}/$(echo ${PKG}*.src.rpm)";
-      echo "Review.txt http://${TRAVIS_REPO_SLUG%/*}.github.io/${TRAVIS_REPO_SLUG#/*}/${PKG}/review.txt";
+      echo "Spec URL http://${TRAVIS_REPO_SLUG%/*}.github.io/${TRAVIS_REPO_SLUG#*/}/${PKG}/${PKG}.spec";
+      echo "SRPM URL http://${TRAVIS_REPO_SLUG%/*}.github.io/${TRAVIS_REPO_SLUG#*/}/${PKG}/$(echo ${PKG}*.src.rpm)";
+      echo "Review.txt http://${TRAVIS_REPO_SLUG%/*}.github.io/${TRAVIS_REPO_SLUG#*/}/${PKG}/review.txt";
       echo "Build log https://travis-ci.org/${TRAVIS_REPO_SLUG}/builds/${TRAVIS_BUILD_ID}";
-      echo "Raw Build log https://s3.amazonaws.com/archive.travis-ci.org/jobs/${TRAVIS_BUILD_ID}/log.txt";
+      echo "Raw Build log https://s3.amazonaws.com/archive.travis-ci.org/jobs/$((${TRAVIS_BUILD_ID}+1))/log.txt";
       echo "Spec changes https://github.com/${TRAVIS_REPO_SLUG}/commit/${TRAVIS_COMMIT}";
       echo "Review changes https://github.com/${TRAVIS_REPO_SLUG}/commit/$(git rev-parse HEAD)";
       echo "###################################################";
