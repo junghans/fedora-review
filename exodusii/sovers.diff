@@ -1,0 +1,104 @@
+From: Jan Engelhardt <jengelh@inai.de>
+Date: 2016-05-26 09:42:00.089515862 +0200
+
+Shared libraries must change their SONAME when an ABI change occurs. Without
+any versioning, this won't occur, so add versions as per
+https://en.opensuse.org/openSUSE:Shared_library_packaging_policy.
+
+---
+ exodus/cbind/CMakeLists.txt        |   10 +++++-----
+ exodus/cbind/test/CMakeLists.txt   |    4 ++--
+ exodus/forbind/CMakeLists.txt      |    8 ++++----
+ exodus/forbind/test/CMakeLists.txt |    2 +-
+ 4 files changed, 12 insertions(+), 12 deletions(-)
+
+Index: exodus-6.02/exodus/cbind/CMakeLists.txt
+===================================================================
+--- exodus-6.02.orig/exodus/cbind/CMakeLists.txt
++++ exodus-6.02/exodus/cbind/CMakeLists.txt
+@@ -276,20 +276,20 @@ IF(APPLE)
+     COMPILE_FLAGS -fno-common)
+ ENDIF(APPLE)
+ 
+-ADD_LIBRARY(exoIIv2c ${EXODUS_LIBRARY_TYPE} ${cbind_SRCS})
++ADD_LIBRARY(exoIIv2c-${EXODUSII_VERSION_FULL} ${EXODUS_LIBRARY_TYPE} ${cbind_SRCS})
+ 
+-TARGET_LINK_LIBRARIES(exoIIv2c ${NETCDF_LIBRARY} ${HDF5_LIBRARY} ${HDF5HL_LIBRARY} ${ZLIB_LIBRARY})
++TARGET_LINK_LIBRARIES(exoIIv2c-${EXODUSII_VERSION_FULL} ${NETCDF_LIBRARY} ${HDF5_LIBRARY} ${HDF5HL_LIBRARY} ${ZLIB_LIBRARY})
+ 
+ IF(MSVC)
+-  set_target_properties(exoIIv2c PROPERTIES COMPILE_DEFINITIONS _CRT_SECURE_NO_WARNINGS)
++  set_target_properties(exoIIv2c-${EXODUSII_VERSION_FULL} PROPERTIES COMPILE_DEFINITIONS _CRT_SECURE_NO_WARNINGS)
+ ENDIF(MSVC)
+ 
+ IF(EXODUS_LIBRARY_PROPERTIES)
+-  SET_TARGET_PROPERTIES(exoIIv2c PROPERTIES ${EXODUS_LIBRARY_PROPERTIES})
++  SET_TARGET_PROPERTIES(exoIIv2c-${EXODUSII_VERSION_FULL} PROPERTIES ${EXODUS_LIBRARY_PROPERTIES})
+ ENDIF(EXODUS_LIBRARY_PROPERTIES)
+ 
+ IF(NOT EXODUS_INSTALL_NO_LIBRARIES)
+-  INSTALL(TARGETS exoIIv2c
++  INSTALL(TARGETS exoIIv2c-${EXODUSII_VERSION_FULL}
+     RUNTIME DESTINATION lib COMPONENT Runtime
+     LIBRARY DESTINATION lib COMPONENT Runtime
+     ARCHIVE DESTINATION lib COMPONENT Development)
+Index: exodus-6.02/exodus/cbind/test/CMakeLists.txt
+===================================================================
+--- exodus-6.02.orig/exodus/cbind/test/CMakeLists.txt
++++ exodus-6.02/exodus/cbind/test/CMakeLists.txt
+@@ -17,7 +17,7 @@ CREATE_TEST_SOURCELIST( ExoIICTests
+   )
+ 
+ ADD_EXECUTABLE( ExoIICTests ${ExoIICTests} )
+-TARGET_LINK_LIBRARIES( ExoIICTests exoIIv2c )
++TARGET_LINK_LIBRARIES( ExoIICTests exoIIv2c-${EXODUSII_VERSION_FULL} )
+ 
+ SET( TestsToRun ${ExoIICTests} )
+ REMOVE( TestsToRun ExoIICTests.cxx )
+@@ -73,7 +73,7 @@ CONFIGURE_FILE(
+ 
+ FOREACH ( testName ${cbind_OLDTESTS} )
+   ADD_EXECUTABLE( ${testName} ${testName}.c )
+-  TARGET_LINK_LIBRARIES( ${testName} exoIIv2c )
++  TARGET_LINK_LIBRARIES( ${testName} exoIIv2c-${EXODUSII_VERSION_FULL} )
+ ENDFOREACH ( testName )
+ 
+ #SET( EXECUTABLE_OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR} )
+Index: exodus-6.02/exodus/forbind/CMakeLists.txt
+===================================================================
+--- exodus-6.02.orig/exodus/forbind/CMakeLists.txt
++++ exodus-6.02/exodus/forbind/CMakeLists.txt
+@@ -51,16 +51,16 @@ SET(forbind_SRCS
+    src/exo_jack.c
+ )
+ 
+-ADD_LIBRARY(exoIIv2for ${EXODUS_LIBRARY_TYPE} ${forbind_SRCS})
++ADD_LIBRARY(exoIIv2for-${EXODUSII_VERSION_FULL} ${EXODUS_LIBRARY_TYPE} ${forbind_SRCS})
+ 
+-TARGET_LINK_LIBRARIES(exoIIv2for exoIIv2c ${NETCDF_LIBRARY} ${HDF5_LIBRARY} ${HDF5HL_LIBRARY})
++TARGET_LINK_LIBRARIES(exoIIv2for-${EXODUSII_VERSION_FULL} exoIIv2c-${EXODUSII_VERSION_FULL} ${NETCDF_LIBRARY} ${HDF5_LIBRARY} ${HDF5HL_LIBRARY})
+ 
+ IF(EXODUS_LIBRARY_PROPERTIES)
+-  SET_TARGET_PROPERTIES(exoIIv2for PROPERTIES ${EXODUS_LIBRARY_PROPERTIES})
++  SET_TARGET_PROPERTIES(exoIIv2for-${EXODUSII_VERSION_FULL} PROPERTIES ${EXODUS_LIBRARY_PROPERTIES})
+ ENDIF(EXODUS_LIBRARY_PROPERTIES)
+ 
+ IF(NOT EXODUS_INSTALL_NO_LIBRARIES)
+-  INSTALL(TARGETS exoIIv2for
++  INSTALL(TARGETS exoIIv2for-${EXODUSII_VERSION_FULL}
+     RUNTIME DESTINATION lib COMPONENT Runtime
+     LIBRARY DESTINATION lib COMPONENT Runtime
+     ARCHIVE DESTINATION lib COMPONENT Development)
+Index: exodus-6.02/exodus/forbind/test/CMakeLists.txt
+===================================================================
+--- exodus-6.02.orig/exodus/forbind/test/CMakeLists.txt
++++ exodus-6.02/exodus/forbind/test/CMakeLists.txt
+@@ -30,7 +30,7 @@ SET( forbind_OLDTESTS
+ 
+ FOREACH ( testName ${forbind_OLDTESTS} )
+   ADD_EXECUTABLE( f_${testName} ${testName}.f )
+-  TARGET_LINK_LIBRARIES( f_${testName} exoIIv2for )
++  TARGET_LINK_LIBRARIES( f_${testName} exoIIv2for-${EXODUSII_VERSION_FULL} )
+   SET_TARGET_PROPERTIES(f_${testName} PROPERTIES LINKER_LANGUAGE Fortran)
+ ENDFOREACH ( testName )
+ 
