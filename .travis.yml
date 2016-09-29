@@ -21,7 +21,7 @@ script:
       echo "rpmbuild -D'_sourcedir ${H}' -D'_srcrpmdir ${H}' -bs ${H}/${PKG}.spec"
       echo "useradd -d ${H} -g mock review"
       echo "chown -R review:mock ${H}"
-      echo "./spinner.sh \"su - -c 'fedora-review -v --mock-config ${MOCK_CONFIG} -n ${PKG}' review\" || { cat ${H}/.cache/fedora-review.log ${H}/review-${PKG}/results/*.log; exit 1; }"
+      echo "/travis/spinner.sh \"su - -c 'fedora-review -v --mock-config ${MOCK_CONFIG} -n ${PKG}' review\" || { cat ${H}/.cache/fedora-review.log ${H}/review-${PKG}/results/*.log; exit 1; }"
       echo "cat ${H}/review-${PKG}/review.txt"
     } > review.sh
   - chmod +x review.sh
