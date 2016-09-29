@@ -160,17 +160,17 @@ Checking: votca-xtp-1.4-0.1rc1.fc26.x86_64.rpm
           votca-xtp-1.4-0.1rc1.fc26.src.rpm
 votca-xtp.x86_64: W: spelling-error %description -l en_US graining -> gaining, raining, training
 votca-xtp.x86_64: W: no-documentation
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_run
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_dump
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_kmc_run
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_testsuite
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_update
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_basisset
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_map
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_tools
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_parallel
 votca-xtp.x86_64: W: no-manual-page-for-binary xtp_overlap
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_basisset
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_update
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_map
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_dump
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_parallel
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_kmc_run
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_run
 votca-xtp.x86_64: W: no-manual-page-for-binary xtp_update_exciton
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_tools
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_testsuite
 votca-xtp-libs.x86_64: W: spelling-error %description -l en_US graining -> gaining, raining, training
 votca-xtp-libs.x86_64: W: shared-lib-calls-exit /usr/lib64/libvotca_xtp.so.4 exit@GLIBC_2.2.5
 votca-xtp-libs.x86_64: W: no-documentation
@@ -205,17 +205,17 @@ votca-xtp-common.noarch: W: spelling-error %description -l en_US graining -> gai
 votca-xtp-common.noarch: W: no-documentation
 votca-xtp.x86_64: W: spelling-error %description -l en_US graining -> gaining, raining, training
 votca-xtp.x86_64: W: no-documentation
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_parallel
 votca-xtp.x86_64: W: no-manual-page-for-binary xtp_basisset
 votca-xtp.x86_64: W: no-manual-page-for-binary xtp_overlap
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_tools
 votca-xtp.x86_64: W: no-manual-page-for-binary xtp_update_exciton
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_kmc_run
 votca-xtp.x86_64: W: no-manual-page-for-binary xtp_testsuite
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_update
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_map
 votca-xtp.x86_64: W: no-manual-page-for-binary xtp_run
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_kmc_run
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_tools
 votca-xtp.x86_64: W: no-manual-page-for-binary xtp_dump
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_map
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_parallel
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_update
 votca-xtp-libs.x86_64: W: spelling-error %description -l en_US graining -> gaining, raining, training
 votca-xtp-libs.x86_64: W: shared-lib-calls-exit /usr/lib64/libvotca_xtp.so.4 exit@GLIBC_2.2.5
 votca-xtp-libs.x86_64: W: no-documentation
