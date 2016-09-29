@@ -14,7 +14,7 @@ BuildRequires:  cmake
 BuildRequires:  pkgconfig
 BuildRequires:  votca-csg-devel = %{version}
 
-Requires:   %{name}-common%{_isa} = %{version}-%{release}
+Requires:   %{name}-common = %{version}-%{release}
 Requires:   %{name}-libs%{_isa} = %{version}-%{release}
 
 %description
