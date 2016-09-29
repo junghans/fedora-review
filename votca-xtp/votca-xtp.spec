@@ -74,12 +74,14 @@ This package contains architecture independent documentation files for VOTCA XTP
 
 %build
 mkdir %{_target_platform}
-cd %{_target_platform}
-%{cmake} .. -DLIB=%{_lib} -DCMAKE_BUILD_TYPE=Release
-make %{?_smp_mflags}
+pushd %{_target_platform}
+#save some memory
+%{cmake} .. -DLIB=%{_lib} -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS_RELEASE="-DNDEBUG -O1"
+%define _smp_mflags -j1
+%make_build
 
 %install
-make -C %{_target_platform} install DESTDIR=%{buildroot} INSTALL="install -p"
+%make_install -C%{_target_platform}
 
 %define pkgdocdir %{_docdir}/%{name}
 mkdir -p %{buildroot}%{pkgdocdir}
