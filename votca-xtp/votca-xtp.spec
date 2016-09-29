@@ -8,14 +8,14 @@ Summary:        VOTCA excitation and charge properties module
 License:        ASL 2.0
 URL:            http://www.votca.org
 Source0:        https://github.com/votca/xtp/archive/v%{version}%{?_rc}.tar.gz#/%{name}-%{version}%{?_rc}.tar.gz
-Source1:        https://github.com/votca/xtp/releases/download/v%{version}/votca-xtp-manual-%{version}.pdf
+Source1:        https://github.com/votca/xtp/releases/download/v%{version}/votca-xtp-manual-%{version}%{?_rc}.pdf
 
 BuildRequires:  cmake
 BuildRequires:  pkg-config
 BuildRequires:  votca-csg-devel = %{version}
 
 Requires:   %{name}-common%{_isa} = %{version}-%{release}
-Requires:   %{name}-libs %{_isa}= %{version}-%{release}
+Requires:   %{name}-libs%{_isa}= %{version}-%{release}
 
 %description
 Versatile Object-oriented Toolkit for Coarse-graining Applications (VOTCA) is
@@ -85,8 +85,8 @@ make -C %{_target_platform} install DESTDIR=%{buildroot} INSTALL="install -p"
 mkdir -p %{buildroot}%{pkgdocdir}
 cp %{S:1} %{buildroot}%{pkgdocdir}
 
-%post -n libs -p /sbin/ldconfig
-%postun -n libs -p /sbin/ldconfig
+%post libs -p /sbin/ldconfig
+%postun libs -p /sbin/ldconfig
 
 %files
 %{_bindir}/xtp_*
