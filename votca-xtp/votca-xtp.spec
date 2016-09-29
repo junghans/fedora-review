@@ -8,7 +8,7 @@ Summary:        VOTCA excitation and charge properties module
 License:        ASL 2.0
 URL:            http://www.votca.org
 Source0:        https://github.com/votca/xtp/archive/v%{version}%{?_rc}.tar.gz#/%{name}-%{version}%{?_rc}.tar.gz
-Source1:        https://github.com/votca/xtp/releases/download/v%{version}/votca-xtp-manual-%{version}%{?_rc}.pdf
+Source1:        https://github.com/votca/xtp/releases/download/v%{version}%{?_rc}/votca-xtp-manual-%{version}%{?_rc}.pdf
 
 BuildRequires:  cmake
 BuildRequires:  pkgconfig
