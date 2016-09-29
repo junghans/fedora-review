@@ -25,7 +25,7 @@ script:
       echo "cat ${H}/review-${PKG}/review.txt"
     } > review.sh
   - chmod +x review.sh
-  - docker run --privileged -v "${PWD}:/travis:rw" -it fedora /travis/review.sh
+  - docker run --privileged -v "${PWD}:/travis:rw" -it fedora:rawhide /travis/review.sh
 
 after_success:
   - git config --global user.name "Automatic Deployment (Travis CI)"
@@ -51,8 +51,6 @@ after_success:
       echo "Review.txt http://${TRAVIS_REPO_SLUG%/*}.github.io/${TRAVIS_REPO_SLUG#*/}/${PKG}/review.txt";
       echo "Build log https://travis-ci.org/${TRAVIS_REPO_SLUG}/builds/${TRAVIS_BUILD_ID}";
       echo "Raw Build log https://s3.amazonaws.com/archive.travis-ci.org/jobs/$((${TRAVIS_BUILD_ID}+1))/log.txt";
-      echo "Spec changes https://github.com/${TRAVIS_REPO_SLUG}/commit/${TRAVIS_COMMIT}";
-      echo "Review changes https://github.com/${TRAVIS_REPO_SLUG}/commit/$(git rev-parse HEAD)";
       echo "###################################################";
    else
       git status;
