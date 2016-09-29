@@ -15,14 +15,15 @@ BuildRequires:  pkgconfig
 BuildRequires:  votca-csg-devel = %{version}
 
 Requires:   %{name}-common%{_isa} = %{version}-%{release}
-Requires:   %{name}-libs%{_isa}= %{version}-%{release}
+Requires:   %{name}-libs%{_isa} = %{version}-%{release}
 
 %description
 Versatile Object-oriented Toolkit for Coarse-graining Applications (VOTCA) is
 a package intended to reduce the amount of routine work when doing systematic
 coarse-graining of various systems. The core is written in C++.
 
-This package contains the excitation and charge properties module of VOTCA package.
+This package contains the excitation and charge properties module of VOTCA
+package.
 
 %package libs
 Summary:        Libraries for VOTCA excitation and charge properties module
@@ -32,7 +33,8 @@ Versatile Object-oriented Toolkit for Coarse-graining Applications (VOTCA) is
 a package intended to reduce the amount of routine work when doing systematic
 coarse-graining of various systems. The core is written in C++.
 
-This package contains libraries for the excitation and charge properties module of VOTCA package.
+This package contains libraries for the excitation and charge properties module
+of VOTCA package.
 
 %package devel
 Summary:        Development headers and libraries for VOTCA XTP
@@ -44,8 +46,8 @@ Versatile Object-oriented Toolkit for Coarse-graining Applications (VOTCA) is
 a package intended to reduce the amount of routine work when doing systematic
 coarse-graining of various systems. The core is written in C++.
 
-This package contains development headers and libraries for the excitation and charge properties module
-Engine of VOTCA.
+This package contains development headers and libraries for the excitation and
+charge properties module
 
 %package common
 Summary:        Architecture independent data files for VOTCA XTP
@@ -67,7 +69,7 @@ Versatile Object-oriented Toolkit for Coarse-graining Applications (VOTCA) is
 a package intended to reduce the amount of routine work when doing systematic
 coarse-graining of various systems. The core is written in C++.
 
-This package contains architecture independent documentation files for VOTCA XTP.
+This package contains architecture independent documentation for VOTCA XTP.
 
 %prep
 %setup -qn xtp-%{version}%{?_rc}
@@ -82,6 +84,7 @@ pushd %{_target_platform}
 
 %install
 %make_install -C%{_target_platform}
+sed -i '1s@env @@' %{buildroot}/%{_bindir}/xtp_{basisset,update,update_exciton,testsuite}
 
 %define pkgdocdir %{_docdir}/%{name}
 mkdir -p %{buildroot}%{pkgdocdir}
@@ -110,6 +113,6 @@ cp %{S:1} %{buildroot}%{pkgdocdir}
 %{_libdir}/pkgconfig/libvotca_xtp.pc
 
 %changelog
-* Wed Sep 28 2016 Christoph Junghans <junghans@votca.org> - 1.4-0.1.rc1
+* Wed Sep 28 2016 Christoph Junghans <junghans@votca.org> - 1.4-0.1rc1
 - Imported 1.4_rc1
 

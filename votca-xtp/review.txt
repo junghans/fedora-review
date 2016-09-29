@@ -184,41 +184,30 @@ Checking: votca-xtp-1.4-0.1rc1.fc26.x86_64.rpm
           votca-xtp-debuginfo-1.4-0.1rc1.fc26.x86_64.rpm
           votca-xtp-1.4-0.1rc1.fc26.src.rpm
 votca-xtp.x86_64: W: spelling-error %description -l en_US graining -> gaining, raining, training
-votca-xtp.x86_64: E: description-line-too-long C This package contains the excitation and charge properties module of VOTCA package.
-votca-xtp.x86_64: W: incoherent-version-in-changelog 1.4-0.1.rc1 ['1.4-0.1rc1.fc26', '1.4-0.1rc1']
 votca-xtp.x86_64: W: no-documentation
-votca-xtp.x86_64: E: wrong-script-interpreter /usr/bin/xtp_basisset /usr/bin/env python2
-votca-xtp.x86_64: E: wrong-script-interpreter /usr/bin/xtp_update /usr/bin/env python2
-votca-xtp.x86_64: E: wrong-script-interpreter /usr/bin/xtp_update_exciton /usr/bin/env python2
-votca-xtp.x86_64: E: wrong-script-interpreter /usr/bin/xtp_testsuite /usr/bin/env python2
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_tools
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_overlap
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_update_exciton
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_basisset
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_update
 votca-xtp.x86_64: W: no-manual-page-for-binary xtp_map
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_basisset
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_run
 votca-xtp.x86_64: W: no-manual-page-for-binary xtp_parallel
 votca-xtp.x86_64: W: no-manual-page-for-binary xtp_testsuite
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_update_exciton
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_tools
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_overlap
 votca-xtp.x86_64: W: no-manual-page-for-binary xtp_dump
 votca-xtp.x86_64: W: no-manual-page-for-binary xtp_kmc_run
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_run
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_update
 votca-xtp-libs.x86_64: W: spelling-error %description -l en_US graining -> gaining, raining, training
-votca-xtp-libs.x86_64: E: description-line-too-long C This package contains libraries for the excitation and charge properties module of VOTCA package.
 votca-xtp-libs.x86_64: W: shared-lib-calls-exit /usr/lib64/libvotca_xtp.so.4 exit@GLIBC_2.2.5
 votca-xtp-libs.x86_64: W: no-documentation
 votca-xtp-devel.x86_64: W: spelling-error %description -l en_US graining -> gaining, raining, training
-votca-xtp-devel.x86_64: E: description-line-too-long C This package contains development headers and libraries for the excitation and charge properties module
 votca-xtp-devel.x86_64: W: only-non-binary-in-usr-lib
 votca-xtp-devel.x86_64: W: no-documentation
 votca-xtp-common.noarch: W: spelling-error %description -l en_US graining -> gaining, raining, training
 votca-xtp-common.noarch: W: no-documentation
 votca-xtp-doc.noarch: W: spelling-error %description -l en_US graining -> gaining, raining, training
-votca-xtp-doc.noarch: E: description-line-too-long C This package contains architecture independent documentation files for VOTCA XTP.
 votca-xtp-debuginfo.x86_64: E: script-without-shebang /usr/src/debug/xtp-1.4_rc1/src/tools/xtp_kmc_run.cc
 votca-xtp.src: W: spelling-error %description -l en_US graining -> gaining, raining, training
-votca-xtp.src: E: description-line-too-long C This package contains the excitation and charge properties module of VOTCA package.
-votca-xtp.src:18: W: comparison-operator-in-deptoken %{name}-libs%{_isa}=
-7 packages and 0 specfiles checked; 10 errors, 25 warnings.
+7 packages and 0 specfiles checked; 1 errors, 23 warnings.
 
 
 
@@ -232,8 +221,7 @@ votca-xtp-debuginfo (rpmlib, GLIBC filtered):
 votca-xtp-common (rpmlib, GLIBC filtered):
 
 votca-xtp (rpmlib, GLIBC filtered):
-    /usr/bin/env
-    1.4-0.1rc1.fc26
+    /usr/bin/python2
     libboost_filesystem.so.1.60.0()(64bit)
     libboost_program_options.so.1.60.0()(64bit)
     libboost_serialization.so.1.60.0()(64bit)
@@ -253,7 +241,7 @@ votca-xtp (rpmlib, GLIBC filtered):
     libvotca_xtp.so.4()(64bit)
     rtld(GNU_HASH)
     votca-xtp-common(x86-64)
-    votca-xtp-libs(x86-64)=
+    votca-xtp-libs(x86-64)
 
 votca-xtp-libs (rpmlib, GLIBC filtered):
     /sbin/ldconfig
