@@ -16,12 +16,13 @@ script:
   - |
     {
       H="/travis/${PKG}"
-      echo "#!/bin/bash -e"
+      echo "#!/bin/bash -xe"
       echo "dnf -y install fedora-review"
       echo "rpmbuild -D'_sourcedir ${H}' -D'_srcrpmdir ${H}' -bs ${H}/${PKG}.spec"
       echo "useradd -d ${H} -g mock review"
       echo "chown -R review:mock ${H}"
       echo "/travis/spinner.sh \"su - -c 'fedora-review -v --mock-config ${MOCK_CONFIG} -n ${PKG}' review\" || { cat ${H}/.cache/fedora-review.log; find  ${H}/review-${PKG} -name '*.log' -print -exec cat {} \\;; exit 1; }"
+      echo "find ${H}/review-${PKG} -name '*.log' -print -exec cat {} \\;"
       echo "cat ${H}/review-${PKG}/review.txt"
     } > review.sh
   - chmod +x review.sh
