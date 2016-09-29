@@ -33,8 +33,8 @@ Versatile Object-oriented Toolkit for Coarse-graining Applications (VOTCA) is
 a package intended to reduce the amount of routine work when doing systematic
 coarse-graining of various systems. The core is written in C++.
 
-This package contains libraries for the excitation and charge properties module
-of VOTCA package.
+This package contains libraries for the excitation and charge properties 
+module of VOTCA package.
 
 %package devel
 Summary:        Development headers and libraries for VOTCA XTP
@@ -47,7 +47,7 @@ a package intended to reduce the amount of routine work when doing systematic
 coarse-graining of various systems. The core is written in C++.
 
 This package contains development headers and libraries for the excitation and
-charge properties module
+charge properties module.
 
 %package common
 Summary:        Architecture independent data files for VOTCA XTP
