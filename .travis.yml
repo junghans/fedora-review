@@ -37,6 +37,7 @@ after_success:
   - cp review-${PKG}/review.txt .
   - cp review-${PKG}/results/${PKG}*.src.rpm .
   - git add ${PKG}.spec ${PKG}*.src.rpm review.txt
+  - git diff HEAD -- ${PKG}.spec review.txt | cat
   - if [[ ${encrypted_404fa93e7e35_key} && ${encrypted_404fa93e7e35_iv} && ${TRAVIS_BRANCH} == master ]]; then
       git commit -m "Review output";
       mkdir -p ~/.ssh;
