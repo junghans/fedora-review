@@ -24,12 +24,6 @@ Legend:
 [ ] = Manual review needed
 
 
-Issues:
-=======
-- Package installs properly.
-  Note: Installation errors (see attachment)
-  See: https://fedoraproject.org/wiki/Packaging:Guidelines
-
 
 ===== MUST items =====
 
@@ -77,6 +71,7 @@ Generic:
 [ ]: Package complies to the Packaging Guidelines
 [x]: Package successfully compiles and builds into binary rpms on at least
      one supported primary architecture.
+[x]: Package installs properly.
 [x]: Rpmlint is run on all rpms the build produces.
      Note: There are rpmlint messages (see attachment).
 [x]: If (and only if) the source package includes the text of the
@@ -145,33 +140,13 @@ Generic:
 ===== EXTRA items =====
 
 Generic:
-[!]: Rpmlint is run on all installed packages.
-     Note: Mock build failed
-     See: http://fedoraproject.org/wiki/Packaging/Guidelines#rpmlint
+[x]: Rpmlint is run on debuginfo package(s).
+     Note: There are rpmlint messages (see attachment).
+[x]: Rpmlint is run on all installed packages.
+     Note: There are rpmlint messages (see attachment).
 [x]: Large data in /usr/share should live in a noarch subpackage if package
      is arched.
 [x]: Spec file according to URL is the same as in SRPM.
-
-
-Installation errors
--------------------
-INFO: mock.py version 1.2.21 starting (python version = 3.5.2)...
-Start: init plugins
-INFO: selinux disabled
-Finish: init plugins
-Start: run
-Start: chroot init
-INFO: calling preinit hooks
-INFO: enabled root cache
-INFO: enabled dnf cache
-Start: cleaning dnf metadata
-Finish: cleaning dnf metadata
-Mock Version: 1.2.21
-INFO: Mock Version: 1.2.21
-Finish: chroot init
-INFO: installing package(s): /travis/votca-xtp/review-votca-xtp/results/votca-xtp-doc-1.4-0.1rc1.fc26.noarch.rpm /travis/votca-xtp/review-votca-xtp/results/votca-xtp-1.4-0.1rc1.fc26.x86_64.rpm /travis/votca-xtp/review-votca-xtp/results/votca-xtp-libs-1.4-0.1rc1.fc26.x86_64.rpm /travis/votca-xtp/review-votca-xtp/results/votca-xtp-common-1.4-0.1rc1.fc26.noarch.rpm /travis/votca-xtp/review-votca-xtp/results/votca-xtp-devel-1.4-0.1rc1.fc26.x86_64.rpm /travis/votca-xtp/review-votca-xtp/results/votca-xtp-debuginfo-1.4-0.1rc1.fc26.x86_64.rpm
-ERROR: Command failed. See logs for output.
- # /usr/bin/dnf --installroot /var/lib/mock/fedora-rawhide-x86_64/root/ --releasever 26 --disableplugin=local --setopt=deltarpm=false install /travis/votca-xtp/review-votca-xtp/results/votca-xtp-doc-1.4-0.1rc1.fc26.noarch.rpm /travis/votca-xtp/review-votca-xtp/results/votca-xtp-1.4-0.1rc1.fc26.x86_64.rpm /travis/votca-xtp/review-votca-xtp/results/votca-xtp-libs-1.4-0.1rc1.fc26.x86_64.rpm /travis/votca-xtp/review-votca-xtp/results/votca-xtp-common-1.4-0.1rc1.fc26.noarch.rpm /travis/votca-xtp/review-votca-xtp/results/votca-xtp-devel-1.4-0.1rc1.fc26.x86_64.rpm /travis/votca-xtp/review-votca-xtp/results/votca-xtp-debuginfo-1.4-0.1rc1.fc26.x86_64.rpm
 
 
 Rpmlint
@@ -185,17 +160,17 @@ Checking: votca-xtp-1.4-0.1rc1.fc26.x86_64.rpm
           votca-xtp-1.4-0.1rc1.fc26.src.rpm
 votca-xtp.x86_64: W: spelling-error %description -l en_US graining -> gaining, raining, training
 votca-xtp.x86_64: W: no-documentation
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_update
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_parallel
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_run
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_dump
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_kmc_run
 votca-xtp.x86_64: W: no-manual-page-for-binary xtp_testsuite
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_update
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_basisset
 votca-xtp.x86_64: W: no-manual-page-for-binary xtp_map
 votca-xtp.x86_64: W: no-manual-page-for-binary xtp_tools
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_basisset
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_update_exciton
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_dump
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_parallel
 votca-xtp.x86_64: W: no-manual-page-for-binary xtp_overlap
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_kmc_run
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_run
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_update_exciton
 votca-xtp-libs.x86_64: W: spelling-error %description -l en_US graining -> gaining, raining, training
 votca-xtp-libs.x86_64: W: shared-lib-calls-exit /usr/lib64/libvotca_xtp.so.4 exit@GLIBC_2.2.5
 votca-xtp-libs.x86_64: W: no-documentation
@@ -209,6 +184,45 @@ votca-xtp-debuginfo.x86_64: E: script-without-shebang /usr/src/debug/xtp-1.4_rc1
 votca-xtp.src: W: spelling-error %description -l en_US graining -> gaining, raining, training
 7 packages and 0 specfiles checked; 1 errors, 23 warnings.
 
+
+
+
+Rpmlint (debuginfo)
+-------------------
+Checking: votca-xtp-debuginfo-1.4-0.1rc1.fc26.x86_64.rpm
+votca-xtp-debuginfo.x86_64: E: script-without-shebang /usr/src/debug/xtp-1.4_rc1/src/tools/xtp_kmc_run.cc
+1 packages and 0 specfiles checked; 1 errors, 0 warnings.
+
+
+
+
+
+Rpmlint (installed packages)
+----------------------------
+votca-xtp-doc.noarch: W: spelling-error %description -l en_US graining -> gaining, raining, training
+votca-xtp-debuginfo.x86_64: E: script-without-shebang /usr/src/debug/xtp-1.4_rc1/src/tools/xtp_kmc_run.cc
+votca-xtp-common.noarch: W: spelling-error %description -l en_US graining -> gaining, raining, training
+votca-xtp-common.noarch: W: no-documentation
+votca-xtp.x86_64: W: spelling-error %description -l en_US graining -> gaining, raining, training
+votca-xtp.x86_64: W: no-documentation
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_parallel
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_basisset
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_overlap
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_tools
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_update_exciton
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_kmc_run
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_testsuite
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_update
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_map
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_run
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_dump
+votca-xtp-libs.x86_64: W: spelling-error %description -l en_US graining -> gaining, raining, training
+votca-xtp-libs.x86_64: W: shared-lib-calls-exit /usr/lib64/libvotca_xtp.so.4 exit@GLIBC_2.2.5
+votca-xtp-libs.x86_64: W: no-documentation
+votca-xtp-devel.x86_64: W: spelling-error %description -l en_US graining -> gaining, raining, training
+votca-xtp-devel.x86_64: W: only-non-binary-in-usr-lib
+votca-xtp-devel.x86_64: W: no-documentation
+6 packages and 0 specfiles checked; 1 errors, 22 warnings.
 
 
 
@@ -240,7 +254,7 @@ votca-xtp (rpmlib, GLIBC filtered):
     libvotca_tools.so.4()(64bit)
     libvotca_xtp.so.4()(64bit)
     rtld(GNU_HASH)
-    votca-xtp-common(x86-64)
+    votca-xtp-common
     votca-xtp-libs(x86-64)
 
 votca-xtp-libs (rpmlib, GLIBC filtered):
