@@ -11,7 +11,7 @@ Source0:        https://github.com/votca/xtp/archive/v%{version}%{?_rc}.tar.gz#/
 Source1:        https://github.com/votca/xtp/releases/download/v%{version}/votca-xtp-manual-%{version}%{?_rc}.pdf
 
 BuildRequires:  cmake
-BuildRequires:  pkg-config
+BuildRequires:  pkgconfig
 BuildRequires:  votca-csg-devel = %{version}
 
 Requires:   %{name}-common%{_isa} = %{version}-%{release}
@@ -37,7 +37,7 @@ This package contains libraries for the excitation and charge properties module 
 %package devel
 Summary:        Development headers and libraries for VOTCA XTP
 Requires:       %{name}-libs%{_isa} = %{version}-%{release}
-Requires:       votca-csg-devel = %{version}-%{release}
+Requires:       votca-csg-devel%{_isa} = %{version}
 
 %description devel
 Versatile Object-oriented Toolkit for Coarse-graining Applications (VOTCA) is
