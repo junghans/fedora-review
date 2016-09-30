@@ -102,7 +102,7 @@ cp %{S:1} %{buildroot}%{_docdir}/%{name}
 
 %files common
 %license LICENSE.md
-%{_datadir}/votca/*
+%{_datadir}/votca/xtp
 
 %files libs
 %license LICENSE.md
