@@ -86,9 +86,8 @@ pushd %{_target_platform}
 %make_install -C%{_target_platform}
 sed -i '1s@env @@' %{buildroot}/%{_bindir}/xtp_{basisset,update,update_exciton,testsuite}
 
-%define pkgdocdir %{_docdir}/%{name}
-mkdir -p %{buildroot}%{pkgdocdir}
-cp %{S:1} %{buildroot}%{pkgdocdir}
+mkdir -p %{buildroot}%{_docdir}/%{name}
+cp %{S:1} %{buildroot}%{_docdir}/%{name}
 
 %post libs -p /sbin/ldconfig
 %postun libs -p /sbin/ldconfig
@@ -98,9 +97,11 @@ cp %{S:1} %{buildroot}%{pkgdocdir}
 
 %files doc
 %doc CHANGELOG.md NOTICE README LICENSE.md
-%{pkgdocdir}
+%license LICENSE.md
+%{_docdir}/%{name}
 
 %files common
+%license LICENSE.md
 %{_datadir}/votca
 
 %files libs

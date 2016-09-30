@@ -125,8 +125,7 @@ Generic:
 [ ]: Packages should try to preserve timestamps of original installed
      files.
 [ ]: Spec use %global instead of %define unless justified.
-     Note: %define requiring justification: %define _smp_mflags -j1,
-     %define pkgdocdir %{_docdir}/%{name}
+     Note: %define requiring justification: %define _smp_mflags -j1
 [x]: Reviewer should test that the package builds in mock.
 [x]: Buildroot is not present
 [x]: Package has no %clean section with rm -rf %{buildroot} (or
@@ -161,16 +160,16 @@ Checking: votca-xtp-1.4-0.1rc1.fc26.x86_64.rpm
 votca-xtp.x86_64: W: spelling-error %description -l en_US graining -> gaining, raining, training
 votca-xtp.x86_64: W: no-documentation
 votca-xtp.x86_64: W: no-manual-page-for-binary xtp_overlap
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_basisset
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_update
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_map
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_dump
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_parallel
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_kmc_run
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_run
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_update_exciton
 votca-xtp.x86_64: W: no-manual-page-for-binary xtp_tools
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_update
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_kmc_run
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_update_exciton
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_run
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_parallel
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_basisset
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_dump
 votca-xtp.x86_64: W: no-manual-page-for-binary xtp_testsuite
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_map
 votca-xtp-libs.x86_64: W: spelling-error %description -l en_US graining -> gaining, raining, training
 votca-xtp-libs.x86_64: W: shared-lib-calls-exit /usr/lib64/libvotca_xtp.so.4 exit@GLIBC_2.2.5
 votca-xtp-libs.x86_64: W: no-documentation
@@ -206,16 +205,16 @@ votca-xtp-common.noarch: W: no-documentation
 votca-xtp.x86_64: W: spelling-error %description -l en_US graining -> gaining, raining, training
 votca-xtp.x86_64: W: no-documentation
 votca-xtp.x86_64: W: no-manual-page-for-binary xtp_basisset
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_overlap
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_update_exciton
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_testsuite
 votca-xtp.x86_64: W: no-manual-page-for-binary xtp_run
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_kmc_run
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_tools
 votca-xtp.x86_64: W: no-manual-page-for-binary xtp_dump
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_map
-votca-xtp.x86_64: W: no-manual-page-for-binary xtp_parallel
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_tools
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_overlap
 votca-xtp.x86_64: W: no-manual-page-for-binary xtp_update
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_map
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_testsuite
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_kmc_run
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_parallel
+votca-xtp.x86_64: W: no-manual-page-for-binary xtp_update_exciton
 votca-xtp-libs.x86_64: W: spelling-error %description -l en_US graining -> gaining, raining, training
 votca-xtp-libs.x86_64: W: shared-lib-calls-exit /usr/lib64/libvotca_xtp.so.4 exit@GLIBC_2.2.5
 votca-xtp-libs.x86_64: W: no-documentation
