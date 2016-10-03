@@ -3,7 +3,7 @@
 
 Name:           votca-xtp
 Version:        1.4
-Release:        0.1%{?_rcname}%{?dist}
+Release:        0.2%{?_rcname}%{?dist}
 Summary:        VOTCA excitation and charge properties module
 License:        ASL 2.0
 URL:            http://www.votca.org
@@ -33,7 +33,7 @@ Versatile Object-oriented Toolkit for Coarse-graining Applications (VOTCA) is
 a package intended to reduce the amount of routine work when doing systematic
 coarse-graining of various systems. The core is written in C++.
 
-This package contains libraries for the excitation and charge properties 
+This package contains libraries for the excitation and charge properties
 module of VOTCA package.
 
 %package devel
@@ -63,6 +63,7 @@ This package contains architecture independent data files for VOTCA XTP.
 %package doc
 Summary:        Architecture independent doc files for VOTCA XTP
 BuildArch:      noarch
+Requires:       votca-csg-common = %{version}
 
 %description doc
 Versatile Object-oriented Toolkit for Coarse-graining Applications (VOTCA) is
@@ -73,11 +74,12 @@ This package contains architecture independent documentation for VOTCA XTP.
 
 %prep
 %setup -qn xtp-%{version}%{?_rc}
+chmod -x src/tools/xtp_kmc_run.cc
 
 %build
 mkdir %{_target_platform}
 pushd %{_target_platform}
-#save some memory
+#save some memory using -O1 and -j1
 %{cmake} .. -DLIB=%{_lib} -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS_RELEASE="-DNDEBUG -O1"
 %define _smp_mflags -j1
 %make_build
@@ -96,7 +98,7 @@ cp %{S:1} %{buildroot}%{_docdir}/%{name}
 %{_bindir}/xtp_*
 
 %files doc
-%doc CHANGELOG.md NOTICE README LICENSE.md
+%doc CHANGELOG.md NOTICE README
 %license LICENSE.md
 %{_docdir}/%{name}
 
@@ -114,6 +116,8 @@ cp %{S:1} %{buildroot}%{_docdir}/%{name}
 %{_libdir}/pkgconfig/libvotca_xtp.pc
 
 %changelog
+* Mon Oct 03 2016 Christoph Junghans <junghans@votca.org> - 1.4-0.2rc1
+- Changes from review (bug #1380540)
+
 * Wed Sep 28 2016 Christoph Junghans <junghans@votca.org> - 1.4-0.1rc1
 - Imported 1.4_rc1
-
