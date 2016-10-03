@@ -20,7 +20,7 @@ PID=$!
 spinner "${PID}" &
 wait ${PID}
 RC=$?
-sleep 0.75
+sleep 30
 printf "\r"
 cat /tmp/output
 exit $RC

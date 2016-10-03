@@ -17,7 +17,7 @@ script:
     {
       H="/travis/${PKG}"
       echo "#!/bin/bash -xe"
-      echo "dnf -y install fedora-review"
+      echo "dnf -q -y install fedora-review"
       echo "rpmbuild -D'_sourcedir ${H}' -D'_srcrpmdir ${H}' -bs ${H}/${PKG}.spec"
       echo "useradd -d ${H} -g mock review"
       echo "chown -R review:mock ${H}"
@@ -27,7 +27,7 @@ script:
       echo "cat ${H}/review-${PKG}/review.txt"
     } > review.sh
   - chmod +x review.sh
-  - docker run --privileged -v "${PWD}:/travis:rw" -it fedora:rawhide /travis/review.sh
+  - docker run --privileged -v "${PWD}:/travis:rw" -it fedora:latest /travis/review.sh
 
 after_success:
   - git config --global user.name "Automatic Deployment (Travis CI)"
