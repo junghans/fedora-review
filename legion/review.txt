@@ -24,10 +24,6 @@ Legend:
 [ ] = Manual review needed
 
 
-Issues:
-=======
-- Dist tag is present.
-
 
 ===== MUST items =====
 
@@ -90,6 +86,7 @@ Generic:
 [x]: Package does not run rm -rf %{buildroot} (or $RPM_BUILD_ROOT) at the
      beginning of %install.
 [x]: Macros in Summary, %description expandable at SRPM build time.
+[x]: Dist tag is present.
 [x]: Package does not contain duplicates in %files.
 [x]: Permissions on files are set properly.
 [x]: Package use %makeinstall only when make install DESTDIR=... doesn't
@@ -148,38 +145,33 @@ Generic:
 
 Rpmlint
 -------
-Checking: legion-16.10.0-0.x86_64.rpm
-          legion-devel-16.10.0-0.x86_64.rpm
-          legion-debuginfo-16.10.0-0.x86_64.rpm
-          legion-16.10.0-0.src.rpm
+Checking: legion-16.10.0-1.fc26.x86_64.rpm
+          legion-devel-16.10.0-1.fc26.x86_64.rpm
+          legion-debuginfo-16.10.0-1.fc26.x86_64.rpm
+          legion-16.10.0-1.fc26.src.rpm
 legion.x86_64: W: spelling-error Summary(en_US) centric -> eccentric, centrist, concentric
 legion.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
-legion.x86_64: E: no-changelogname-tag
 legion.x86_64: W: invalid-license Apache-2.0
-legion.x86_64: W: shared-lib-calls-exit /usr/lib64/liblegion.so.1 exit@GLIBC_2.2.5
 legion.x86_64: W: shared-lib-calls-exit /usr/lib64/librealm.so.1 exit@GLIBC_2.2.5
+legion.x86_64: W: shared-lib-calls-exit /usr/lib64/liblegion.so.1 exit@GLIBC_2.2.5
 legion-devel.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
-legion-devel.x86_64: E: no-changelogname-tag
 legion-devel.x86_64: W: invalid-license Apache-2.0
 legion-devel.x86_64: W: only-non-binary-in-usr-lib
 legion-devel.x86_64: W: no-documentation
-legion-debuginfo.x86_64: E: no-changelogname-tag
 legion-debuginfo.x86_64: W: invalid-license Apache-2.0
 legion.src: W: spelling-error Summary(en_US) centric -> eccentric, centrist, concentric
 legion.src: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
-legion.src: E: no-changelogname-tag
 legion.src: W: invalid-license Apache-2.0
-4 packages and 0 specfiles checked; 4 errors, 13 warnings.
+4 packages and 0 specfiles checked; 0 errors, 13 warnings.
 
 
 
 
 Rpmlint (debuginfo)
 -------------------
-Checking: legion-debuginfo-16.10.0-0.x86_64.rpm
-legion-debuginfo.x86_64: E: no-changelogname-tag
+Checking: legion-debuginfo-16.10.0-1.fc26.x86_64.rpm
 legion-debuginfo.x86_64: W: invalid-license Apache-2.0
-1 packages and 0 specfiles checked; 1 errors, 1 warnings.
+1 packages and 0 specfiles checked; 0 errors, 1 warnings.
 
 
 
@@ -190,7 +182,6 @@ Rpmlint (installed packages)
 legion.x86_64: W: spelling-error Summary(en_US) centric -> eccentric, centrist, concentric
 legion.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
 legion.x86_64: W: non-standard-group Productivity/Networking/Other
-legion.x86_64: E: no-changelogname-tag
 legion.x86_64: W: invalid-license Apache-2.0
 legion.x86_64: W: unused-direct-shlib-dependency /usr/lib64/librealm.so.1 /lib64/libamudp-1.26.4.so
 legion.x86_64: W: unused-direct-shlib-dependency /usr/lib64/librealm.so.1 /lib64/libgasnet_tools-par-1.26.4.so
@@ -203,13 +194,11 @@ legion.x86_64: W: unused-direct-shlib-dependency /usr/lib64/liblegion.so.1 /lib6
 legion.x86_64: W: shared-lib-calls-exit /usr/lib64/liblegion.so.1 exit@GLIBC_2.2.5
 legion-devel.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
 legion-devel.x86_64: W: non-standard-group Development/Libraries/C and C++
-legion-devel.x86_64: E: no-changelogname-tag
 legion-devel.x86_64: W: invalid-license Apache-2.0
 legion-devel.x86_64: W: only-non-binary-in-usr-lib
 legion-devel.x86_64: W: no-documentation
-legion-debuginfo.x86_64: E: no-changelogname-tag
 legion-debuginfo.x86_64: W: invalid-license Apache-2.0
-3 packages and 0 specfiles checked; 3 errors, 19 warnings.
+3 packages and 0 specfiles checked; 0 errors, 19 warnings.
 
 
 

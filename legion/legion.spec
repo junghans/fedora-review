@@ -1,6 +1,6 @@
 Name:           legion
 Version:        16.10.0
-Release:        0
+Release:        1%{?dist}
 Summary:        A data-centric parallel programming system
 License:        Apache-2.0
 Group:          Productivity/Networking/Other
@@ -70,3 +70,6 @@ pushd %{_target_platform}
 %{_libdir}/lib*.so.1
 
 %changelog
+* Fri Oct 07 2016 Christoph Junghans <junghans@votca.org> - 16.10.0-1
+- initial import
+
