@@ -1,3 +1,5 @@
+%global _hardened_build 1
+
 Name:		libslz
 Version:	1.1.0
 Release:	1%{?dist}
@@ -5,14 +7,12 @@ Summary:	StateLess Zip
 
 Group:		System Environment/Libraries
 License:	MIT
+URL:		http://1wt.eu/projects/libslz/
+Source:		http://git.1wt.eu/web?p=%{name}.git;a=snapshot;h=v%{version};sf=tgz#/%{name}-%{version}.tar.gz
+Patch:		build.patch
 # TODO when upstream is ready
 # URL:		http://libslz.org/
-URL:		http://1wt.eu/projects/libslz/
-# The tarball is currently generated manually until source tarballs
-# are distributed upstream:
-# V=%%version
-# git archive --format=tgz --prefix=libtgz-$V/ --output=libslz-$V.tar.gz v$V
-Source:		http://git.1wt.eu/web?p=%{name}.git;a=snapshot;h=v%{version};sf=tgz#/%{name}-%{version}.tar.gz
+# Source:	http://libslz.org/path/to/%{name}-%{version}.tar.gz
 
 
 %description
@@ -41,17 +41,16 @@ compress using SLZ and dump the decoding process.
 
 
 %prep
-%setup -q -n %{name}
+%setup -qn %{name}
+%patch -p1
 
 
 %build
-%make_build CFLAGS="%{optflags}" LDFLAGS="%__global_ldflags"
+%make_build CFLAGS="%{optflags}"
 
 
 %install
-strip libslz.so.1
 %make_install PREFIX=%{_prefix} LIBDIR=%{_libdir}
-chmod +x %{buildroot}%{_libdir}/*.so.*
 rm %{buildroot}%{_libdir}/*.a
 
 
