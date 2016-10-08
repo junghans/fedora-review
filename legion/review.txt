@@ -24,6 +24,13 @@ Legend:
 [ ] = Manual review needed
 
 
+Issues:
+=======
+- All build dependencies are listed in BuildRequires, except for any that
+  are listed in the exceptions section of Packaging Guidelines.
+  Note: These BR are not needed: gcc gcc-c++
+  See: http://fedoraproject.org/wiki/Packaging/Guidelines#Exceptions_2
+
 
 ===== MUST items =====
 
@@ -80,8 +87,6 @@ Generic:
 [x]: Package requires other packages for directories it uses.
 [x]: Package must own all directories that it creates.
 [x]: Package does not own files or directories owned by other packages.
-[x]: All build dependencies are listed in BuildRequires, except for any
-     that are listed in the exceptions section of Packaging Guidelines.
 [x]: Package uses either %{buildroot} or $RPM_BUILD_ROOT
 [x]: Package does not run rm -rf %{buildroot} (or $RPM_BUILD_ROOT) at the
      beginning of %install.
@@ -135,7 +140,7 @@ Generic:
 
 Generic:
 [x]: Rpmlint is run on debuginfo package(s).
-     Note: There are rpmlint messages (see attachment).
+     Note: No rpmlint messages.
 [x]: Rpmlint is run on all installed packages.
      Note: There are rpmlint messages (see attachment).
 [x]: Large data in /usr/share should live in a noarch subpackage if package
@@ -151,18 +156,14 @@ Checking: legion-16.10.0-1.fc26.x86_64.rpm
           legion-16.10.0-1.fc26.src.rpm
 legion.x86_64: W: spelling-error Summary(en_US) centric -> eccentric, centrist, concentric
 legion.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
-legion.x86_64: W: invalid-license Apache-2.0
 legion.x86_64: W: shared-lib-calls-exit /usr/lib64/librealm.so.1 exit@GLIBC_2.2.5
 legion.x86_64: W: shared-lib-calls-exit /usr/lib64/liblegion.so.1 exit@GLIBC_2.2.5
 legion-devel.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
-legion-devel.x86_64: W: invalid-license Apache-2.0
 legion-devel.x86_64: W: only-non-binary-in-usr-lib
 legion-devel.x86_64: W: no-documentation
-legion-debuginfo.x86_64: W: invalid-license Apache-2.0
 legion.src: W: spelling-error Summary(en_US) centric -> eccentric, centrist, concentric
 legion.src: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
-legion.src: W: invalid-license Apache-2.0
-4 packages and 0 specfiles checked; 0 errors, 13 warnings.
+4 packages and 0 specfiles checked; 0 errors, 9 warnings.
 
 
 
@@ -170,8 +171,7 @@ legion.src: W: invalid-license Apache-2.0
 Rpmlint (debuginfo)
 -------------------
 Checking: legion-debuginfo-16.10.0-1.fc26.x86_64.rpm
-legion-debuginfo.x86_64: W: invalid-license Apache-2.0
-1 packages and 0 specfiles checked; 0 errors, 1 warnings.
+1 packages and 0 specfiles checked; 0 errors, 0 warnings.
 
 
 
@@ -181,24 +181,19 @@ Rpmlint (installed packages)
 ----------------------------
 legion.x86_64: W: spelling-error Summary(en_US) centric -> eccentric, centrist, concentric
 legion.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
-legion.x86_64: W: non-standard-group Productivity/Networking/Other
-legion.x86_64: W: invalid-license Apache-2.0
-legion.x86_64: W: unused-direct-shlib-dependency /usr/lib64/librealm.so.1 /lib64/libamudp-1.26.4.so
-legion.x86_64: W: unused-direct-shlib-dependency /usr/lib64/librealm.so.1 /lib64/libgasnet_tools-par-1.26.4.so
-legion.x86_64: W: unused-direct-shlib-dependency /usr/lib64/librealm.so.1 /lib64/libm.so.6
-legion.x86_64: W: shared-lib-calls-exit /usr/lib64/librealm.so.1 exit@GLIBC_2.2.5
 legion.x86_64: W: unused-direct-shlib-dependency /usr/lib64/liblegion.so.1 /lib64/libamudp-1.26.4.so
 legion.x86_64: W: unused-direct-shlib-dependency /usr/lib64/liblegion.so.1 /lib64/libpthread.so.0
 legion.x86_64: W: unused-direct-shlib-dependency /usr/lib64/liblegion.so.1 /lib64/libgasnet_tools-par-1.26.4.so
 legion.x86_64: W: unused-direct-shlib-dependency /usr/lib64/liblegion.so.1 /lib64/libm.so.6
 legion.x86_64: W: shared-lib-calls-exit /usr/lib64/liblegion.so.1 exit@GLIBC_2.2.5
+legion.x86_64: W: unused-direct-shlib-dependency /usr/lib64/librealm.so.1 /lib64/libamudp-1.26.4.so
+legion.x86_64: W: unused-direct-shlib-dependency /usr/lib64/librealm.so.1 /lib64/libgasnet_tools-par-1.26.4.so
+legion.x86_64: W: unused-direct-shlib-dependency /usr/lib64/librealm.so.1 /lib64/libm.so.6
+legion.x86_64: W: shared-lib-calls-exit /usr/lib64/librealm.so.1 exit@GLIBC_2.2.5
 legion-devel.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
-legion-devel.x86_64: W: non-standard-group Development/Libraries/C and C++
-legion-devel.x86_64: W: invalid-license Apache-2.0
 legion-devel.x86_64: W: only-non-binary-in-usr-lib
 legion-devel.x86_64: W: no-documentation
-legion-debuginfo.x86_64: W: invalid-license Apache-2.0
-3 packages and 0 specfiles checked; 0 errors, 19 warnings.
+3 packages and 0 specfiles checked; 0 errors, 14 warnings.
 
 
 

@@ -2,11 +2,12 @@ Name:           legion
 Version:        16.10.0
 Release:        1%{?dist}
 Summary:        A data-centric parallel programming system
-License:        Apache-2.0
-Group:          Productivity/Networking/Other
+License:        ASL 2.0
 Url:            http://legion.stanford.edu/
 Source0:        https://github.com/StanfordLegion/legion/archive/%{name}-%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
+BuildRequires:  gcc
+BuildRequires:  gcc-c++
 BuildRequires:  hwloc-devel
 BuildRequires:  gasnet-devel
 BuildRequires:  cmake
@@ -26,7 +27,6 @@ applications to new architectures.
 
 %package devel
 Summary:        Development headers and libraries for %{name} library
-Group:          Development/Libraries/C and C++
 Requires:       %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
@@ -59,15 +59,19 @@ pushd %{_target_platform}
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
-%files devel
-%{_includedir}/*
-%{_libdir}/lib*.so
-%{_datadir}/Legion
-
 %files
 %doc README.md CHANGES.txt
 %license LICENSE.txt
 %{_libdir}/lib*.so.1
+
+%files devel
+%{_includedir}/*.h
+%{_includedir}/*.inl
+%{_includedir}/legion
+%{_includedir}/mappers
+%{_includedir}/realm
+%{_libdir}/lib*.so
+%{_datadir}/Legion
 
 %changelog
 * Fri Oct 07 2016 Christoph Junghans <junghans@votca.org> - 16.10.0-1
