@@ -24,6 +24,13 @@ Legend:
 [ ] = Manual review needed
 
 
+Issues:
+=======
+- All build dependencies are listed in BuildRequires, except for any that
+  are listed in the exceptions section of Packaging Guidelines.
+  Note: These BR are not needed: gcc gcc-c++
+  See: http://fedoraproject.org/wiki/Packaging/Guidelines#Exceptions_2
+
 
 ===== MUST items =====
 
@@ -80,8 +87,6 @@ Generic:
 [x]: Package requires other packages for directories it uses.
 [x]: Package must own all directories that it creates.
 [x]: Package does not own files or directories owned by other packages.
-[x]: All build dependencies are listed in BuildRequires, except for any
-     that are listed in the exceptions section of Packaging Guidelines.
 [x]: Package uses either %{buildroot} or $RPM_BUILD_ROOT
 [x]: Package does not run rm -rf %{buildroot} (or $RPM_BUILD_ROOT) at the
      beginning of %install.
@@ -151,8 +156,8 @@ Checking: legion-16.10.0-1.fc26.x86_64.rpm
           legion-16.10.0-1.fc26.src.rpm
 legion.x86_64: W: spelling-error Summary(en_US) centric -> eccentric, centrist, concentric
 legion.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
-legion.x86_64: W: shared-lib-calls-exit /usr/lib64/liblegion.so.1 exit@GLIBC_2.2.5
 legion.x86_64: W: shared-lib-calls-exit /usr/lib64/librealm.so.1 exit@GLIBC_2.2.5
+legion.x86_64: W: shared-lib-calls-exit /usr/lib64/liblegion.so.1 exit@GLIBC_2.2.5
 legion-devel.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
 legion-devel.x86_64: W: only-non-binary-in-usr-lib
 legion-devel.x86_64: W: no-documentation
@@ -176,8 +181,8 @@ Rpmlint (installed packages)
 ----------------------------
 legion.x86_64: W: spelling-error Summary(en_US) centric -> eccentric, centrist, concentric
 legion.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
-legion.x86_64: W: shared-lib-calls-exit /usr/lib64/librealm.so.1 exit@GLIBC_2.2.5
 legion.x86_64: W: shared-lib-calls-exit /usr/lib64/liblegion.so.1 exit@GLIBC_2.2.5
+legion.x86_64: W: shared-lib-calls-exit /usr/lib64/librealm.so.1 exit@GLIBC_2.2.5
 legion-devel.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
 legion-devel.x86_64: W: only-non-binary-in-usr-lib
 legion-devel.x86_64: W: no-documentation
