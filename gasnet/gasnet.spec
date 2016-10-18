@@ -135,12 +135,13 @@ sed -i '1s@env @@' %{buildroot}/%{_libdir}/*mpi*/bin/*.pl
 
 #Upstream doesn't want to support shared libs: https://bitbucket.org/berkeleylab/gasnet/pull-requests/36
 #mind the order for link deps, libgasnet-smp-par first then libam* then the rest
-for l in %{buildroot}/%{_libdir}/{,*mpi*/lib}/lib{gasnet-smp-par,am*,*}.a; do \
+for l in %{buildroot}/%{_libdir}/{,*mpi*/lib}/lib{gasnet_tools-seq,am*,*}.a; do \
     [[ -f $l ]] || continue; \
     soname=`basename $l .a`; \
     libdir=`dirname $l`; \
     libs= ; \
     [[ ${soname} = libgasnet-*-par* ]] && libs+=" -lpthread"; \
+    [[ ${soname} = libamudp ]] && libs+=" -L${libdir} -lgasnet_tools-seq"; \
     [[ ${soname} = libammpi ]] && libs+=" -L${libdir#%{buildroot}} -lmpi"; \
     [[ ${soname} = libgasnet-udp-* ]] && libs+=" -L${libdir} -lamudp"; \
     [[ ${soname} = libgasnet-mpi-* ]] && libs+=" -L${libdir} -lammpi"; \
