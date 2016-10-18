@@ -1,0 +1,244 @@
+From ef402803a4791dd73792042a886e9c3fb0989d17 Mon Sep 17 00:00:00 2001
+From: "Paul H. Hargrove" <PHHargrove@lbl.gov>
+Date: Sat, 3 Sep 2016 19:06:25 -0700
+Subject: [PATCH] Complete/refine the coverage of MANUAL_x flags
+
++ Absorb MANUAL_LIBxFLAGS into MANUAL_xFLAGS
+
++ Expand use of MANUAL_DEFINES beyond AMX
+
++ Use new MANUAL_MPICFLAGS for all invocations of MPI_CC (to compile).
+  In particular this applies to {ibv,ofi,mxm,psm}-conduit compilation
+  of gasnet_bootstrap_mpi.c (which previously did not use any of the
+  MANUAL_x flags) and to the MPI-based tests (which previously used
+  MANUAL_CFLAGS).
+
++ README: update list of MANUAL_x flags and add a new section with
+  some usage instructions.
+
+(cherry picked from commit ed025204a620b9c539bf5bc024a7a827f3055ff8)
+
+Conflicts:
+	other/gasnet_tools-fragment.mak.in
+---
+ README                             | 44 +++++++++++++++++++++++++++++++++++---
+ ibv-conduit/Makefile.am            |  2 +-
+ mxm-conduit/Makefile.am            |  2 +-
+ ofi-conduit/Makefile.am            |  2 +-
+ other/Makefile-libgasnet.mak.in    |  7 +++---
+ other/ammpi/Makefile.am            |  2 +-
+ other/fragment-body.mak.in         |  2 +-
+ other/gasnet_tools-fragment.mak.in |  2 +-
+ psm-conduit/Makefile.am            |  2 +-
+ tests/Makefile.in                  |  4 ++--
+ 10 files changed, 54 insertions(+), 15 deletions(-)
+
+diff --git a/README b/README
+index d4cfada..ce4fbc0 100644
+--- a/README
++++ b/README
+@@ -148,9 +148,11 @@ normal distribution.  If you think you need it, contact us at upc@lbl.gov]
+       build a script to run the testexit tester and run it
+   Compilation and linker flags for the GASNet libraries and tests can be
+   augmented from the command-line by setting the following variables in the make
+-  command:
+-    make MANUAL_LIBCFLAGS=... Flags to add on the C compile for the GASNet libs
+-    make MANUAL_CFLAGS=...    Flags to add on the C compile for GASNet clients & tests 
++  command, as described in more detail in the next section:
++    make MANUAL_CFLAGS=...    Flags to add on the C compile for GASNet libs, clients & tests
++    make MANUAL_CXXFLAGS=...  Flags to add on the C++ compile for GASNet libs, clients & tests
++    make MANUAL_MPICFLAGS=... Flags to add on the mpicc compile for GASNet libs, clients & tests
++    make MANUAL_DEFINES=...   Flags to add on all compiles for GASNet libs, clients & tests
+     make MANUAL_LDFLAGS=...   Linker flags to add for GASNet clients & tests
+     make MANUAL_LIBS=...      Linker library flags to add for GASNet clients & tests
+   The following misc make variables can also be set to affect GASNet compilation:
+@@ -165,6 +167,42 @@ include directory with a sub-directory for each supported conduit, and a lib
+ directory containing a library file for each supported conduit, as well as any
+ supporting libraries.
+ 
++Manual control over compile and link flags
++===================
++
++As described in the previous section, the recommended mechanism for passing
++flags to the compilers used by GASNet is to include them in the definition of
++the compiler variable itself (e.g. CC='gcc -m64').  These will be followed on
++the command line by flags chosen by GASNet's configure script instead of using
++the standard CFLAGS and CXXFLAGS make variables.  If there is a need to pass
++flags that override ones chosen by configure, then one may set MANUAL_CFLAGS,
++MANUAL_CXXFLAGS and MANUAL_MPICFLAGS on the 'make' command line, and these are
++guaranteed to appear on the compilation command line after the ones chosen by
++configure.  Additionally, MANUAL_DEFINES is provided to pass flags to all
++three compilers, but its order on the command line is not guaranteed (since it
++is intended for position-independent command line options such as '-Dfoo=10').
++
++Note that GASNet does not assume that MPI_CC is the same compiler as CC
++(though that is recommended), and therefore invokes it using a distinct
++MANUAL_MPICFLAGS, instead of MANUAL_CFLAGS.  The MPI C compiler is used to
++compile a portion of mpi-conduit (AMMPI) and the MPI-based spawner code used
++by several conduits; and to link executables for mpi-conduit and any conduit
++in which the MPI-based spawner is enabled.  Similarly, the C++ compiler is
++used to compile a portion of udp-conduit (AMUDP) and to link udp-conduit
++executables.
++
++Finally, the make variables MANUAL_LDFLAGS and MANUAL_LIBS are provided to add
++to the link command lines, after the respective configure-detected settings.
++They are intended for flags such as '-Ldir' and '-lfoo', respectively.  Since
++they do not have compiler-specific variants, their use is limited to
++compiler-independent flags unless special care is taken with the selection of
++the make target to ensure that make only invokes one compiler as a linker.
++
++All of the MANUAL_* make variables described above are honored by the Makefile
++infrastructure used to build GASNet's libraries and tests.  Additionally, the
++makefile fragments (next section) use these variables when compiling client
++code.
++
+ Basic Usage Information
+ =================
+ See the README for each GASNet core implementations for specific usage
+diff --git a/ibv-conduit/Makefile.am b/ibv-conduit/Makefile.am
+index 5b973bb..93ae201 100644
+--- a/ibv-conduit/Makefile.am
++++ b/ibv-conduit/Makefile.am
+@@ -44,7 +44,7 @@ mpi_deps = $(mpi_srcdir)/*.h $(mpi_srcdir)/*.c
+ mpi_special_objs = $(builddir)/gasnet_bootstrap_mpi-$(THREAD_MODEL).o
+ $(builddir)/gasnet_bootstrap_mpi-$(THREAD_MODEL).o: force
+ 	@MPI_CC@ @MPI_CFLAGS@ $(LIBDEFINES) $(CONDUIT_EXTRALIBCFLAGS) $(LIBINCLUDES) \
+-		-o $@ -c $(mpi_srcdir)/gasnet_bootstrap_mpi.c
++		$(MANUAL_MPICFLAGS) -o $@ -c $(mpi_srcdir)/gasnet_bootstrap_mpi.c
+ endif
+ 
+ ##
+diff --git a/mxm-conduit/Makefile.am b/mxm-conduit/Makefile.am
+index 947b4fe..cea515a 100644
+--- a/mxm-conduit/Makefile.am
++++ b/mxm-conduit/Makefile.am
+@@ -33,7 +33,7 @@ mpi_deps = $(mpi_srcdir)/*.h $(mpi_srcdir)/*.c
+ mpi_special_objs = $(builddir)/gasnet_bootstrap_mpi-$(THREAD_MODEL).o
+ $(builddir)/gasnet_bootstrap_mpi-$(THREAD_MODEL).o: force
+ 	@MPI_CC@ @MPI_CFLAGS@ $(LIBDEFINES) $(CONDUIT_EXTRALIBCFLAGS) $(LIBINCLUDES) \
+-		-o $@ -c $(mpi_srcdir)/gasnet_bootstrap_mpi.c
++		$(MANUAL_MPICFLAGS) -o $@ -c $(mpi_srcdir)/gasnet_bootstrap_mpi.c
+ endif
+ ##
+ ## PMI bootstrap support (optional)
+diff --git a/ofi-conduit/Makefile.am b/ofi-conduit/Makefile.am
+index 1a0c2fa..24e51c4 100644
+--- a/ofi-conduit/Makefile.am
++++ b/ofi-conduit/Makefile.am
+@@ -31,7 +31,7 @@ mpi_deps = $(mpi_srcdir)/*.h $(mpi_srcdir)/*.c
+ mpi_special_objs = $(builddir)/gasnet_bootstrap_mpi-$(THREAD_MODEL).o
+ $(builddir)/gasnet_bootstrap_mpi-$(THREAD_MODEL).o: force
+ 	@MPI_CC@ @MPI_CFLAGS@ $(LIBDEFINES) $(CONDUIT_EXTRALIBCFLAGS) $(LIBINCLUDES) \
+-		-o $@ -c $(mpi_srcdir)/gasnet_bootstrap_mpi.c
++		$(MANUAL_MPICFLAGS) -o $@ -c $(mpi_srcdir)/gasnet_bootstrap_mpi.c
+ endif
+ 
+ ##
+diff --git a/other/Makefile-libgasnet.mak.in b/other/Makefile-libgasnet.mak.in
+index 307de47..751627d 100644
+--- a/other/Makefile-libgasnet.mak.in
++++ b/other/Makefile-libgasnet.mak.in
+@@ -31,7 +31,8 @@ LIBINCLUDES = $(TOOLLIBINCLUDES) \
+ 
+ TOOLLIBDEFINES =                    \
+         $(LIBGASNET_THREAD_DEFINES) \
+-        @GASNET_MACHINE_DEFINES@ 
++        @GASNET_MACHINE_DEFINES@    \
++        $(MANUAL_DEFINES)
+ 
+ LIBDEFINES =                        \
+ 	$(TOOLLIBDEFINES)	    \
+@@ -46,7 +47,7 @@ TOOLLIBCFLAGS =                   \
+ 	$(TOOLLIB_DEBUGFLAGS)     \
+ 	$(TOOLLIBINCLUDES)	  \
+ 	$${keeptmps:+@KEEPTMP_CFLAGS@} \
+-	$(MANUAL_LIBCFLAGS)
++	$(MANUAL_CFLAGS)
+ 
+ LIBCFLAGS =                       \
+         @CFLAGS@                  \
+@@ -55,7 +56,7 @@ LIBCFLAGS =                       \
+         $(CONDUIT_EXTRALIBCFLAGS) \
+ 	$(LIBINCLUDES)		  \
+ 	$${keeptmps:+@KEEPTMP_CFLAGS@} \
+-	$(MANUAL_LIBCFLAGS)
++	$(MANUAL_CFLAGS)
+ 
+ libgasnet_tools_sources =            \
+ 	$(top_srcdir)/gasnet_tools.c \
+diff --git a/other/ammpi/Makefile.am b/other/ammpi/Makefile.am
+index 1b654f6..8e8f9f7 100644
+--- a/other/ammpi/Makefile.am
++++ b/other/ammpi/Makefile.am
+@@ -27,7 +27,7 @@ else
+ endif
+ 
+ CC = @MPI_CC@
+-CFLAGS = @MPI_CFLAGS@ $(MANUAL_CFLAGS) $(apputils_flags) $(strict_proto_flags)
++CFLAGS = @MPI_CFLAGS@ $(MANUAL_MPICFLAGS) $(apputils_flags) $(strict_proto_flags)
+ LDFLAGS = @LDFLAGS@ $(MANUAL_LDFLAGS)
+ 
+ PERL = @PERL@
+diff --git a/other/fragment-body.mak.in b/other/fragment-body.mak.in
+index 08938d5..fb71cd0 100644
+--- a/other/fragment-body.mak.in
++++ b/other/fragment-body.mak.in
+@@ -39,7 +39,7 @@ GASNET_EXTRADEFINES_SEQ =
+ GASNET_EXTRADEFINES_PAR = @GASNET_THREAD_DEFINES@
+ GASNET_EXTRADEFINES_PARSYNC = @GASNET_THREAD_DEFINES@
+ 
+-GASNET_DEFINES = -DGASNET_#THREAD_MODEL# $(GASNET_EXTRADEFINES_#THREAD_MODEL#) $(CONDUIT_DEFINES) $(CONDUIT_DEFINES_#THREAD_MODEL#)
++GASNET_DEFINES = -DGASNET_#THREAD_MODEL# $(GASNET_EXTRADEFINES_#THREAD_MODEL#) $(CONDUIT_DEFINES) $(CONDUIT_DEFINES_#THREAD_MODEL#) $(MANUAL_DEFINES)
+ 
+ # ----------------------------------------------------------------------
+ # Documented compilation convenience aliases
+diff --git a/other/gasnet_tools-fragment.mak.in b/other/gasnet_tools-fragment.mak.in
+index 28e84c9..5bd743c 100644
+--- a/other/gasnet_tools-fragment.mak.in
++++ b/other/gasnet_tools-fragment.mak.in
+@@ -42,7 +42,7 @@ GASNETTOOLS_THREADLIBS = $(GASNETTOOLS_THREADLIBS_#THREAD_MODEL#)
+ GASNETTOOLS_TOOLLIB_NAME = gasnet_tools-#thread_model#
+ 
+ GASNETTOOLS_CC = @CC@
+-GASNETTOOLS_CPPFLAGS = $(GASNETTOOLS_DEBUGFLAGS) $(GASNETTOOLS_THREADFLAGS) @MISC_CPPFLAGS@ $(GASNETTOOLS_INCLUDES) $(MANUAL_CPPFLAGS)
++GASNETTOOLS_CPPFLAGS = $(GASNETTOOLS_DEBUGFLAGS) $(GASNETTOOLS_THREADFLAGS) @MISC_CPPFLAGS@ $(GASNETTOOLS_INCLUDES) $(MANUAL_DEFINES)
+ GASNETTOOLS_CFLAGS = @CFLAGS@ @MISC_CFLAGS@ $(KEEPTMP_CFLAGS) $(MANUAL_CFLAGS)
+ GASNETTOOLS_LD = @CC@
+ GASNETTOOLS_LDFLAGS = @CFLAGS@ @MISC_CFLAGS@ -L$(GASNETTOOLS_LIBDIR) $(MANUAL_LDFLAGS)
+diff --git a/psm-conduit/Makefile.am b/psm-conduit/Makefile.am
+index 2489c13..dd825be 100644
+--- a/psm-conduit/Makefile.am
++++ b/psm-conduit/Makefile.am
+@@ -31,7 +31,7 @@ mpi_deps = $(mpi_srcdir)/*.h $(mpi_srcdir)/*.c
+ mpi_special_objs = $(builddir)/gasnet_bootstrap_mpi-$(THREAD_MODEL).o
+ $(builddir)/gasnet_bootstrap_mpi-$(THREAD_MODEL).o: force
+ 	@MPI_CC@ @MPI_CFLAGS@ $(LIBDEFINES) $(CONDUIT_EXTRALIBCFLAGS) $(LIBINCLUDES) \
+-		-o $@ -c $(mpi_srcdir)/gasnet_bootstrap_mpi.c
++		$(MANUAL_MPICFLAGS) -o $@ -c $(mpi_srcdir)/gasnet_bootstrap_mpi.c
+ endif
+ 
+ ##
+diff --git a/tests/Makefile.in b/tests/Makefile.in
+index fa1bb02..d5c24b8 100644
+--- a/tests/Makefile.in
++++ b/tests/Makefile.in
+@@ -378,14 +378,14 @@ mpi-check: force
+ 
+ # testmpi must be compiled like an MPI program with GASNet support
+ testmpi: mpi-check force
+-	$(GASNET_MPI_CC) -I$(srcdir) $(GASNET_CPPFLAGS) @MPI_CFLAGS@ $(KEEPTMP_CFLAGS) $(MANUAL_CFLAGS) -c -o $@.o $(srcdir)/$@.c
++	$(GASNET_MPI_CC) -I$(srcdir) $(GASNET_CPPFLAGS) @MPI_CFLAGS@ $(KEEPTMP_CFLAGS) $(MANUAL_MPICFLAGS) -c -o $@.o $(srcdir)/$@.c
+ 	$(GASNET_MPI_LD) $(GASNET_LDFLAGS) @MPI_CFLAGS@ -o $@ $@.o $(GASNET_LIBS) @MPI_LIBS@ $(MANUAL_LIBS)
+ 	@test -n '$(KEEPTMPS)' || ( cmd="rm -f $@.o"; echo "$$cmd"; eval "$$cmd" )
+ 
+ # the following are just plain MPI programs
+ # testmpinbr requires libm
+ $(MPI_TESTS): mpi-check force
+-	$(GASNET_MPI_CC) -I$(srcdir)/mpi -I@TOP_SRCDIR@/other @MPI_CFLAGS@ $(KEEPTMP_CFLAGS) $(MANUAL_CFLAGS) -c -o $@.o $(srcdir)/mpi/$@.c
++	$(GASNET_MPI_CC) -I$(srcdir)/mpi -I@TOP_SRCDIR@/other @MPI_CFLAGS@ $(KEEPTMP_CFLAGS) $(MANUAL_MPICFLAGS) -c -o $@.o $(srcdir)/mpi/$@.c
+ 	$(GASNET_MPI_LD) $(GASNET_LDFLAGS) @MPI_CFLAGS@ -o $@ $@.o @MPI_LIBS@ @LIBM@ $(MANUAL_LIBS)
+ 	@test -n '$(KEEPTMPS)' || ( cmd="rm -f $@.o"; echo "$$cmd"; eval "$$cmd" )
+ 
+-- 
+2.7.4.1.g5468f9e
+
