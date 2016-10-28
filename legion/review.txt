@@ -156,8 +156,8 @@ Checking: legion-16.10.0-1.fc26.x86_64.rpm
           legion-16.10.0-1.fc26.src.rpm
 legion.x86_64: W: spelling-error Summary(en_US) centric -> eccentric, centrist, concentric
 legion.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
-legion.x86_64: W: shared-lib-calls-exit /usr/lib64/librealm.so.1 exit@GLIBC_2.2.5
 legion.x86_64: W: shared-lib-calls-exit /usr/lib64/liblegion.so.1 exit@GLIBC_2.2.5
+legion.x86_64: W: shared-lib-calls-exit /usr/lib64/librealm.so.1 exit@GLIBC_2.2.5
 legion-devel.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
 legion-devel.x86_64: W: only-non-binary-in-usr-lib
 legion-devel.x86_64: W: no-documentation
@@ -181,8 +181,8 @@ Rpmlint (installed packages)
 ----------------------------
 legion.x86_64: W: spelling-error Summary(en_US) centric -> eccentric, centrist, concentric
 legion.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
-legion.x86_64: W: shared-lib-calls-exit /usr/lib64/liblegion.so.1 exit@GLIBC_2.2.5
 legion.x86_64: W: shared-lib-calls-exit /usr/lib64/librealm.so.1 exit@GLIBC_2.2.5
+legion.x86_64: W: shared-lib-calls-exit /usr/lib64/liblegion.so.1 exit@GLIBC_2.2.5
 legion-devel.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
 legion-devel.x86_64: W: only-non-binary-in-usr-lib
 legion-devel.x86_64: W: no-documentation
@@ -197,7 +197,7 @@ legion (rpmlib, GLIBC filtered):
     ld-linux-x86-64.so.2()(64bit)
     libc.so.6()(64bit)
     libdl.so.2()(64bit)
-    libgasnet-udp-par-1.26.4.so()(64bit)
+    libgasnet-udp-par-1.28.0.so()(64bit)
     libgcc_s.so.1()(64bit)
     libgcc_s.so.1(GCC_3.0)(64bit)
     libhwloc.so.5()(64bit)
