@@ -6,6 +6,9 @@ License:        ASL 2.0
 Url:            http://legion.stanford.edu/
 Source0:        https://github.com/StanfordLegion/legion/archive/%{name}-%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
+#https://github.com/StanfordLegion/legion/issues/202
+ExcludeArch:    aarch64 armv7hl
+
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
 BuildRequires:  hwloc-devel
