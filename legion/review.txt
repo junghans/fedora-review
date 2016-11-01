@@ -118,6 +118,8 @@ Generic:
 [ ]: Package functions as described.
 [ ]: Latest version is packaged.
 [ ]: Package does not include license text files separate from upstream.
+[ ]: Patches link to upstream bugs/comments/lists or are otherwise
+     justified.
 [ ]: Scriptlets must be sane, if used.
 [ ]: Description and summary sections in the package spec file contains
      translations for supported Non-English languages, if available.
