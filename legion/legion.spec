@@ -49,7 +49,7 @@ Legion compiled with Open MPI, package incl. binaries and libraries
 
 %package mpich
 Summary:        Legion MPICH binaries and libraries
-Requires:       %{name}-%{?_isa} = %{version}-%{release}
+Requires:       %{name}%{?_isa} = %{version}-%{release}
 BuildRequires:  mpich-devel
 
 %description mpich
