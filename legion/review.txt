@@ -26,6 +26,9 @@ Legend:
 
 Issues:
 =======
+- Package installs properly.
+  Note: Installation errors (see attachment)
+  See: https://fedoraproject.org/wiki/Packaging:Guidelines
 - All build dependencies are listed in BuildRequires, except for any that
   are listed in the exceptions section of Packaging Guidelines.
   Note: These BR are not needed: gcc gcc-c++
@@ -49,9 +52,9 @@ Generic:
      Guidelines.
 [ ]: License field in the package spec file matches the actual license.
      Note: Checking patched sources after %prep for licenses. Licenses
-     found: "Apache (v2.0)", "Unknown or generated". 40 files have unknown
-     license. Detailed output of licensecheck in /travis/legion/review-
-     legion/licensecheck.txt
+     found: "Apache (v2.0)", "Unknown or generated", "*No copyright* Apache
+     (v2.0)". 89 files have unknown license. Detailed output of
+     licensecheck in /travis/legion/review-legion/licensecheck.txt
 [ ]: License file installed when any subpackage combination is installed.
 [ ]: %build honors applicable compiler flags or justifies otherwise.
 [ ]: Package contains no bundled libraries without FPC exception.
@@ -78,7 +81,6 @@ Generic:
 [ ]: Package complies to the Packaging Guidelines
 [x]: Package successfully compiles and builds into binary rpms on at least
      one supported primary architecture.
-[x]: Package installs properly.
 [x]: Rpmlint is run on all rpms the build produces.
      Note: There are rpmlint messages (see attachment).
 [x]: If (and only if) the source package includes the text of the
@@ -114,7 +116,7 @@ Generic:
 [ ]: Final provides and requires are sane (see attachments).
 [ ]: Fully versioned dependency in subpackages if applicable.
      Note: No Requires: %{name}%{?_isa} = %{version}-%{release} in legion-
-     debuginfo
+     mpich , legion-debuginfo
 [ ]: Package functions as described.
 [ ]: Latest version is packaged.
 [ ]: Package does not include license text files separate from upstream.
@@ -141,54 +143,70 @@ Generic:
 ===== EXTRA items =====
 
 Generic:
-[x]: Rpmlint is run on debuginfo package(s).
-     Note: No rpmlint messages.
-[x]: Rpmlint is run on all installed packages.
-     Note: There are rpmlint messages (see attachment).
+[!]: Rpmlint is run on all installed packages.
+     Note: Mock build failed
+     See: http://fedoraproject.org/wiki/Packaging/Guidelines#rpmlint
 [x]: Large data in /usr/share should live in a noarch subpackage if package
      is arched.
 [x]: Spec file according to URL is the same as in SRPM.
 
 
+Installation errors
+-------------------
+INFO: mock.py version 1.3.2 starting (python version = 3.5.2)...
+Start: init plugins
+INFO: selinux disabled
+Finish: init plugins
+Start: run
+Start: chroot init
+INFO: calling preinit hooks
+INFO: enabled root cache
+INFO: enabled dnf cache
+Start: cleaning dnf metadata
+Finish: cleaning dnf metadata
+Mock Version: 1.3.2
+INFO: Mock Version: 1.3.2
+Finish: chroot init
+INFO: installing package(s): /travis/legion/review-legion/results/legion-16.10.0-1.fc26.x86_64.rpm /travis/legion/review-legion/results/legion-debuginfo-16.10.0-1.fc26.x86_64.rpm /travis/legion/review-legion/results/legion-devel-16.10.0-1.fc26.x86_64.rpm /travis/legion/review-legion/results/legion-mpich-16.10.0-1.fc26.x86_64.rpm /travis/legion/review-legion/results/legion-openmpi-16.10.0-1.fc26.x86_64.rpm
+ERROR: Command failed. See logs for output.
+ # /usr/bin/dnf --installroot /var/lib/mock/fedora-rawhide-x86_64/root/ --releasever 26 --disableplugin=local --setopt=deltarpm=false install /travis/legion/review-legion/results/legion-16.10.0-1.fc26.x86_64.rpm /travis/legion/review-legion/results/legion-debuginfo-16.10.0-1.fc26.x86_64.rpm /travis/legion/review-legion/results/legion-devel-16.10.0-1.fc26.x86_64.rpm /travis/legion/review-legion/results/legion-mpich-16.10.0-1.fc26.x86_64.rpm /travis/legion/review-legion/results/legion-openmpi-16.10.0-1.fc26.x86_64.rpm
+
+
 Rpmlint
 -------
 Checking: legion-16.10.0-1.fc26.x86_64.rpm
+          legion-openmpi-16.10.0-1.fc26.x86_64.rpm
+          legion-mpich-16.10.0-1.fc26.x86_64.rpm
           legion-devel-16.10.0-1.fc26.x86_64.rpm
           legion-debuginfo-16.10.0-1.fc26.x86_64.rpm
           legion-16.10.0-1.fc26.src.rpm
 legion.x86_64: W: spelling-error Summary(en_US) centric -> eccentric, centrist, concentric
 legion.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
-legion.x86_64: W: shared-lib-calls-exit /usr/lib64/librealm.so.1 exit@GLIBC_2.2.5
 legion.x86_64: W: shared-lib-calls-exit /usr/lib64/liblegion.so.1 exit@GLIBC_2.2.5
+legion.x86_64: W: shared-lib-calls-exit /usr/lib64/librealm.so.1 exit@GLIBC_2.2.5
+legion-openmpi.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
+legion-openmpi.x86_64: W: shared-lib-calls-exit /usr/lib64/openmpi/lib/liblegion.so.1 exit@GLIBC_2.2.5
+legion-openmpi.x86_64: W: shared-lib-calls-exit /usr/lib64/openmpi/lib/librealm.so.1 exit@GLIBC_2.2.5
+legion-openmpi.x86_64: W: no-documentation
+legion-openmpi.x86_64: E: library-without-ldconfig-postin /usr/lib64/openmpi/lib/liblegion.so.1
+legion-openmpi.x86_64: E: library-without-ldconfig-postun /usr/lib64/openmpi/lib/liblegion.so.1
+legion-openmpi.x86_64: E: library-without-ldconfig-postin /usr/lib64/openmpi/lib/librealm.so.1
+legion-openmpi.x86_64: E: library-without-ldconfig-postun /usr/lib64/openmpi/lib/librealm.so.1
+legion-mpich.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
+legion-mpich.x86_64: W: shared-lib-calls-exit /usr/lib64/mpich/lib/liblegion.so.1 exit@GLIBC_2.2.5
+legion-mpich.x86_64: W: shared-lib-calls-exit /usr/lib64/mpich/lib/librealm.so.1 exit@GLIBC_2.2.5
+legion-mpich.x86_64: W: no-documentation
+legion-mpich.x86_64: E: library-without-ldconfig-postin /usr/lib64/mpich/lib/liblegion.so.1
+legion-mpich.x86_64: E: library-without-ldconfig-postun /usr/lib64/mpich/lib/liblegion.so.1
+legion-mpich.x86_64: E: library-without-ldconfig-postin /usr/lib64/mpich/lib/librealm.so.1
+legion-mpich.x86_64: E: library-without-ldconfig-postun /usr/lib64/mpich/lib/librealm.so.1
 legion-devel.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
 legion-devel.x86_64: W: only-non-binary-in-usr-lib
 legion-devel.x86_64: W: no-documentation
 legion.src: W: spelling-error Summary(en_US) centric -> eccentric, centrist, concentric
 legion.src: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
-4 packages and 0 specfiles checked; 0 errors, 9 warnings.
+6 packages and 0 specfiles checked; 8 errors, 17 warnings.
 
-
-
-
-Rpmlint (debuginfo)
--------------------
-Checking: legion-debuginfo-16.10.0-1.fc26.x86_64.rpm
-1 packages and 0 specfiles checked; 0 errors, 0 warnings.
-
-
-
-
-
-Rpmlint (installed packages)
-----------------------------
-legion.x86_64: W: spelling-error Summary(en_US) centric -> eccentric, centrist, concentric
-legion.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
-legion.x86_64: W: shared-lib-calls-exit /usr/lib64/liblegion.so.1 exit@GLIBC_2.2.5
-legion.x86_64: W: shared-lib-calls-exit /usr/lib64/librealm.so.1 exit@GLIBC_2.2.5
-legion-devel.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
-legion-devel.x86_64: W: only-non-binary-in-usr-lib
-legion-devel.x86_64: W: no-documentation
-3 packages and 0 specfiles checked; 0 errors, 7 warnings.
 
 
 
@@ -199,12 +217,49 @@ legion (rpmlib, GLIBC filtered):
     ld-linux-x86-64.so.2()(64bit)
     libc.so.6()(64bit)
     libdl.so.2()(64bit)
-    libgasnet-udp-par-1.28.0.so()(64bit)
+    libgcc_s.so.1()(64bit)
+    libgcc_s.so.1(GCC_3.0)(64bit)
+    libgcc_s.so.1(GCC_3.4)(64bit)
+    libhwloc.so.5()(64bit)
+    libpthread.so.0()(64bit)
+    librealm.so.1()(64bit)
+    librt.so.1()(64bit)
+    libstdc++.so.6()(64bit)
+    libstdc++.so.6(CXXABI_1.3)(64bit)
+    libstdc++.so.6(CXXABI_1.3.9)(64bit)
+    rtld(GNU_HASH)
+
+legion-debuginfo (rpmlib, GLIBC filtered):
+
+legion-openmpi (rpmlib, GLIBC filtered):
+    ld-linux-x86-64.so.2()(64bit)
+    legion(x86-64)
+    libc.so.6()(64bit)
+    libdl.so.2()(64bit)
+    libgasnet-mpi-par-1.28.0.so()(64bit)(openmpi-x86_64)
     libgcc_s.so.1()(64bit)
     libgcc_s.so.1(GCC_3.0)(64bit)
     libhwloc.so.5()(64bit)
     libpthread.so.0()(64bit)
-    librealm.so.1()(64bit)
+    librealm.so.1()(64bit)(openmpi-x86_64)
+    librt.so.1()(64bit)
+    libstdc++.so.6()(64bit)
+    libstdc++.so.6(CXXABI_1.3)(64bit)
+    libstdc++.so.6(CXXABI_1.3.8)(64bit)
+    libstdc++.so.6(CXXABI_1.3.9)(64bit)
+    rtld(GNU_HASH)
+
+legion-mpich (rpmlib, GLIBC filtered):
+    ld-linux-x86-64.so.2()(64bit)
+    legion-(x86-64)
+    libc.so.6()(64bit)
+    libdl.so.2()(64bit)
+    libgasnet-mpi-par-1.28.0.so()(64bit)(mpich-x86_64)
+    libgcc_s.so.1()(64bit)
+    libgcc_s.so.1(GCC_3.0)(64bit)
+    libhwloc.so.5()(64bit)
+    libpthread.so.0()(64bit)
+    librealm.so.1()(64bit)(mpich-x86_64)
     librt.so.1()(64bit)
     libstdc++.so.6()(64bit)
     libstdc++.so.6(CXXABI_1.3)(64bit)
@@ -214,10 +269,16 @@ legion (rpmlib, GLIBC filtered):
 
 legion-devel (rpmlib, GLIBC filtered):
     legion(x86-64)
+    legion-mpich(x86-64)
+    legion-openmpi(x86-64)
     liblegion.so.1()(64bit)
+    liblegion.so.1()(64bit)(mpich-x86_64)
+    liblegion.so.1()(64bit)(openmpi-x86_64)
     librealm.so.1()(64bit)
-
-legion-debuginfo (rpmlib, GLIBC filtered):
+    librealm.so.1()(64bit)(mpich-x86_64)
+    librealm.so.1()(64bit)(openmpi-x86_64)
+    mpich-devel
+    openmpi-devel
 
 
 
@@ -229,13 +290,25 @@ legion:
     liblegion.so.1()(64bit)
     librealm.so.1()(64bit)
 
-legion-devel:
-    legion-devel
-    legion-devel(x86-64)
-
 legion-debuginfo:
     legion-debuginfo
     legion-debuginfo(x86-64)
+
+legion-openmpi:
+    legion-openmpi
+    legion-openmpi(x86-64)
+    liblegion.so.1()(64bit)(openmpi-x86_64)
+    librealm.so.1()(64bit)(openmpi-x86_64)
+
+legion-mpich:
+    legion-mpich
+    legion-mpich(x86-64)
+    liblegion.so.1()(64bit)(mpich-x86_64)
+    librealm.so.1()(64bit)(mpich-x86_64)
+
+legion-devel:
+    legion-devel
+    legion-devel(x86-64)
 
 
 
