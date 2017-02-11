@@ -1,5 +1,3 @@
-%global _hardened_build 1
-
 Name:		libslz
 Version:	1.1.0
 Release:	1%{?dist}
@@ -46,7 +44,7 @@ compress using SLZ and dump the decoding process.
 
 
 %build
-%make_build CFLAGS="%{optflags}"
+%make_build CFLAGS="%{optflags}" LDFLAGS='%__global_ldflags'
 
 
 %install
@@ -73,5 +71,5 @@ rm %{buildroot}%{_libdir}/*.a
 
 
 %changelog
-* Sun Sep 25 2016 - Dridi Boukelmoune <dridi.boukelmoune@gmail.com> - 1.1.0-1
+* Sat Feb 11 2017 - Dridi Boukelmoune <dridi@fedoraproject.org> - 1.1.0-1
 - Initial spec.
