@@ -1,0 +1,15 @@
+diff --git i/Makefile w/Makefile
+index e575e10..4f35641 100644
+--- i/Makefile
++++ w/Makefile
+@@ -76,9 +76,9 @@ install-shared: shared
+ 	[ -d "$(DESTDIR)$(LIBDIR)/." ] || mkdir -p -m 0755 $(DESTDIR)$(LIBDIR)
+ 	cp    $(SONAME) $(DESTDIR)$(LIBDIR)/$(SONAME)
+ 	cp -P $(SHARED) $(DESTDIR)$(LIBDIR)/$(SHARED)
+-	chmod 644 $(DESTDIR)$(LIBDIR)/$(SONAME)
+ 
+ install-tools: tools
++	$(STRIP) zdec
+ 	$(STRIP) zenc
+ 	[ -d "$(DESTDIR)$(PREFIX)/bin/." ] || mkdir -p -m 0755 $(DESTDIR)$(PREFIX)/bin
+ 	cp zdec $(DESTDIR)$(PREFIX)/bin/zdec
