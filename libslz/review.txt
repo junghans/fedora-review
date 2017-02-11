@@ -42,7 +42,7 @@ Generic:
      Guidelines.
 [ ]: License field in the package spec file matches the actual license.
      Note: Checking patched sources after %prep for licenses. Licenses
-     found: "MIT/X11 (BSD like)", "Unknown or generated". 9 files have
+     found: "MIT/X11 (BSD like)", "Unknown or generated". 12 files have
      unknown license. Detailed output of licensecheck in /travis/libslz
      /review-libslz/licensecheck.txt
 [ ]: License file installed when any subpackage combination is installed.
@@ -113,6 +113,8 @@ Generic:
 [ ]: Package functions as described.
 [ ]: Latest version is packaged.
 [ ]: Package does not include license text files separate from upstream.
+[ ]: Patches link to upstream bugs/comments/lists or are otherwise
+     justified.
 [ ]: Scriptlets must be sane, if used.
 [ ]: Description and summary sections in the package spec file contains
      translations for supported Non-English languages, if available.
@@ -159,7 +161,9 @@ libslz-devel.x86_64: W: no-manual-page-for-binary zenc
 libslz.src: W: spelling-error %description -l en_US zlib -> lib, glib, z lib
 libslz.src: W: spelling-error %description -l en_US gzip -> zip, grip, g zip
 libslz.src: W: spelling-error %description -l en_US zlib's -> lib's, z lib's, Libby's
-4 packages and 0 specfiles checked; 0 errors, 10 warnings.
+libslz.src:13: W: macro-in-comment %{name}
+libslz.src:13: W: macro-in-comment %{version}
+4 packages and 0 specfiles checked; 0 errors, 12 warnings.
 
 
 
@@ -175,6 +179,7 @@ Checking: libslz-debuginfo-1.1.0-1.fc26.x86_64.rpm
 
 Rpmlint (installed packages)
 ----------------------------
+sh: /usr/bin/python: No such file or directory
 libslz.x86_64: W: spelling-error %description -l en_US zlib -> lib, glib, z lib
 libslz.x86_64: W: spelling-error %description -l en_US gzip -> zip, grip, g zip
 libslz.x86_64: W: spelling-error %description -l en_US zlib's -> lib's, z lib's, Libby's
