@@ -202,11 +202,11 @@ popd
 %{_libdir}/*/lib/lib*.so
 
 %files -n python2-%{name}-openmpi
-%{_libdir}/openmpi/lib*.so.*
+%{_libdir}/openmpi/lib/lib*.so.*
 %{python_sitearch}/openmpi/%{name}md
 
 %files -n python2-%{name}-mpich
-%{_libdir}/mpich/lib*.so.*
+%{_libdir}/mpich/lib/lib*.so.*
 %{python_sitearch}/mpich/%{name}md
 
 %changelog
