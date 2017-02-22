@@ -42,7 +42,6 @@ BuildRequires:  boost-mpich-devel
 BuildRequires:  boost-openmpi-devel
 
 Requires:       numpy
-
 Requires:       %{name}-common = %{version}-%{release}
 
 %description
