@@ -15,8 +15,8 @@
 #
 # * MPICH:     if '1' enable mpich
 # * OPENMPI:   if '1' enable openmpi
-%global MPICH 1
-%global OPENMPI 1
+%global MPICH 0
+%global OPENMPI 0
 
 Name:           espresso
 Version:        4.0
