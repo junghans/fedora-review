@@ -65,8 +65,21 @@ ESPResSo contains a number of advanced algorithms, e.g.
     * DPD thermostat (for hydrodynamics)
     * P3M, MMM2D, MMM1D, ELC for electrostatic interactions
     * Lattice-Boltzmann for hydrodynamics
-This package contains the license file and data files shard between the
+This package contains the license file and data files shared between the
 subpackages of %{name}.
+
+%package devel
+Summary:        Development package for  %{name} packages
+Requires:       python2-%{name}-openmpi = %{version}-%{release}
+Requires:       python2-%{name}-mpich = %{version}-%{release}
+%description devel
+ESPResSo can perform Molecular Dynamics simulations of bead-spring models
+in various ensembles ((N,V,E), (N,V,T), and (N,p,T)).
+ESPResSo contains a number of advanced algorithms, e.g.
+    * DPD thermostat (for hydrodynamics)
+    * P3M, MMM2D, MMM1D, ELC for electrostatic interactions
+    * Lattice-Boltzmann for hydrodynamics
+This package contains the development libraries of %{name}.
 
 %package -n python2-%{name}-openmpi
 Requires:       %{name}-common = %{version}-%{release}
@@ -109,6 +122,7 @@ This package contains %{name} compiled against MPICH2.
 %setup -q
 %endif
 %patch0 -p0
+find . -name "*.[ch]pp" -exec chmod -x {} \;
 mkdir openmpi_build mpich_build
 
 %build
@@ -116,6 +130,7 @@ mkdir openmpi_build mpich_build
  -DWITH_PYTHON=ON \\\
  -DWITH_TESTS=ON \\\
  -DWITH_SCAFACOS=ON \\\
+ -DCMAKE_SKIP_RPATH:BOOL=ON \\\
  -DINSTALL_PYPRESSO=OFF
 
 # Build OpenMPI version
@@ -183,12 +198,15 @@ popd
 %doc AUTHORS README NEWS ChangeLog
 %license COPYING
 
+%files devel
+%{_libdir}/*/lib*.so
+
 %files -n python2-%{name}-openmpi
-%{_libdir}/openmpi/lib*
+%{_libdir}/openmpi/lib*.so.*
 %{python_sitearch}/openmpi/%{name}md
 
 %files -n python2-%{name}-mpich
-%{_libdir}/mpich/lib*
+%{_libdir}/mpich/lib*.so.*
 %{python_sitearch}/mpich/%{name}md
 
 %changelog
