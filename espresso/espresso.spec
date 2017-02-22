@@ -131,6 +131,7 @@ mkdir openmpi_build mpich_build
  -DWITH_TESTS=ON \\\
  -DWITH_SCAFACOS=ON \\\
  -DCMAKE_SKIP_RPATH:BOOL=ON \\\
+ -DCMAKE_SKIP_BUILD_RPATH:BOOL=ON \\\
  -DINSTALL_PYPRESSO=OFF
 
 # Build OpenMPI version
@@ -174,6 +175,7 @@ pushd mpich_build
 %make_install
 popd
 %{_mpich_unload}
+find %{buildroot} -name "*.so" -exec chmod +x {} \;
 
 %check
 # test openmpi?

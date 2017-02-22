@@ -198,100 +198,40 @@ Checking: espresso-common-4.0-0.1.20170220git7a9ac74.fc26.noarch.rpm
           espresso-debuginfo-4.0-0.1.20170220git7a9ac74.fc26.x86_64.rpm
           espresso-4.0-0.1.20170220git7a9ac74.fc26.src.rpm
 espresso-common.noarch: W: spelling-error %description -l en_US subpackages -> sub packages, sub-packages, prepackages
+espresso-common.noarch: W: spurious-executable-perm /usr/share/doc/espresso-common/README
+espresso-common.noarch: W: spurious-executable-perm /usr/share/doc/espresso-common/AUTHORS
+espresso-common.noarch: W: spurious-executable-perm /usr/share/doc/espresso-common/ChangeLog
 espresso-common.noarch: W: spurious-executable-perm /usr/share/doc/espresso-common/NEWS
 espresso-common.noarch: E: script-without-shebang /usr/share/licenses/espresso-common/COPYING
-espresso-common.noarch: W: spurious-executable-perm /usr/share/doc/espresso-common/ChangeLog
-espresso-common.noarch: W: spurious-executable-perm /usr/share/doc/espresso-common/AUTHORS
-espresso-common.noarch: W: spurious-executable-perm /usr/share/doc/espresso-common/README
 espresso-devel.x86_64: W: no-dependency-on espresso/espresso-libs/libespresso
 espresso-devel.x86_64: W: only-non-binary-in-usr-lib
 espresso-devel.x86_64: W: no-documentation
-python2-espresso-openmpi.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/openmpi/espressomd/interactions.so
-python2-espresso-openmpi.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/openmpi/espressomd/analyze.so
-python2-espresso-openmpi.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/openmpi/espressomd/_init.so
-python2-espresso-openmpi.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/openmpi/espressomd/cuda_init.so
-python2-espresso-openmpi.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/openmpi/espressomd/cellsystem.so
-python2-espresso-openmpi.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/openmpi/espressomd/_system.so
-python2-espresso-openmpi.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/openmpi/espressomd/lb.so
-python2-espresso-openmpi.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/openmpi/espressomd/integrate.so
-python2-espresso-openmpi.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/openmpi/espressomd/scafacos.so
-python2-espresso-openmpi.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/openmpi/espressomd/polymer.so
-python2-espresso-openmpi.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/openmpi/espressomd/visualizationOpenGL.so
-python2-espresso-openmpi.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/openmpi/espressomd/visualizationMayavi.so
-python2-espresso-openmpi.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/openmpi/espressomd/electrostatics.so
-python2-espresso-openmpi.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/openmpi/espressomd/thermostat.so
-python2-espresso-openmpi.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/openmpi/espressomd/magnetostatic_extensions.so
-python2-espresso-openmpi.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/openmpi/espressomd/minimize_energy.so
-python2-espresso-openmpi.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/openmpi/espressomd/code_info.so
-python2-espresso-openmpi.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/openmpi/espressomd/reaction.so
-python2-espresso-openmpi.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/openmpi/espressomd/electrokinetics.so
-python2-espresso-openmpi.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/openmpi/espressomd/diamond.so
-python2-espresso-openmpi.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/openmpi/espressomd/visualization.so
-python2-espresso-openmpi.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/openmpi/espressomd/magnetostatics.so
-python2-espresso-openmpi.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/openmpi/espressomd/script_interface.so
-python2-espresso-openmpi.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/openmpi/espressomd/gen_pxiconfig
-python2-espresso-openmpi.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/openmpi/espressomd/utils.so
-python2-espresso-openmpi.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/openmpi/espressomd/electrostatic_extensions.so
-python2-espresso-openmpi.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/openmpi/espressomd/particle_data.so
 python2-espresso-openmpi.x86_64: W: shared-lib-calls-exit /usr/lib64/openmpi/lib/libEspressoCore.so.4 exit@GLIBC_2.2.5
-python2-espresso-openmpi.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/openmpi/espressomd/grand_canonical.so
-python2-espresso-openmpi.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/openmpi/espressomd/actors.so
-python2-espresso-openmpi.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/openmpi/espressomd/galilei.so
-python2-espresso-openmpi.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/openmpi/espressomd/debye_hueckel.so
+python2-espresso-openmpi.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/openmpi/espressomd/gen_pxiconfig
 python2-espresso-openmpi.x86_64: W: no-documentation
-python2-espresso-openmpi.x86_64: E: library-without-ldconfig-postin /usr/lib64/openmpi/lib/libImmersedBoundary.so.4
-python2-espresso-openmpi.x86_64: E: library-without-ldconfig-postun /usr/lib64/openmpi/lib/libImmersedBoundary.so.4
-python2-espresso-openmpi.x86_64: E: zero-length /usr/lib64/python2.7/site-packages/openmpi/espressomd/__cinit__.py
-python2-espresso-openmpi.x86_64: E: library-without-ldconfig-postin /usr/lib64/openmpi/lib/libActor.so.4
-python2-espresso-openmpi.x86_64: E: library-without-ldconfig-postun /usr/lib64/openmpi/lib/libActor.so.4
 python2-espresso-openmpi.x86_64: E: library-without-ldconfig-postin /usr/lib64/openmpi/lib/libObjectInFluid.so.4
 python2-espresso-openmpi.x86_64: E: library-without-ldconfig-postun /usr/lib64/openmpi/lib/libObjectInFluid.so.4
+python2-espresso-openmpi.x86_64: E: zero-length /usr/lib64/python2.7/site-packages/openmpi/espressomd/__cinit__.py
 python2-espresso-openmpi.x86_64: E: library-without-ldconfig-postin /usr/lib64/openmpi/lib/libEspressoCore.so.4
 python2-espresso-openmpi.x86_64: E: library-without-ldconfig-postun /usr/lib64/openmpi/lib/libEspressoCore.so.4
+python2-espresso-openmpi.x86_64: E: library-without-ldconfig-postin /usr/lib64/openmpi/lib/libActor.so.4
+python2-espresso-openmpi.x86_64: E: library-without-ldconfig-postun /usr/lib64/openmpi/lib/libActor.so.4
+python2-espresso-openmpi.x86_64: E: library-without-ldconfig-postin /usr/lib64/openmpi/lib/libImmersedBoundary.so.4
+python2-espresso-openmpi.x86_64: E: library-without-ldconfig-postun /usr/lib64/openmpi/lib/libImmersedBoundary.so.4
 python2-espresso-mpich.x86_64: W: shared-lib-calls-exit /usr/lib64/mpich/lib/libEspressoCore.so.4 exit@GLIBC_2.2.5
-python2-espresso-mpich.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/mpich/espressomd/polymer.so
-python2-espresso-mpich.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/mpich/espressomd/utils.so
-python2-espresso-mpich.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/mpich/espressomd/thermostat.so
-python2-espresso-mpich.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/mpich/espressomd/cellsystem.so
-python2-espresso-mpich.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/mpich/espressomd/diamond.so
-python2-espresso-mpich.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/mpich/espressomd/_init.so
-python2-espresso-mpich.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/mpich/espressomd/analyze.so
-python2-espresso-mpich.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/mpich/espressomd/electrostatics.so
-python2-espresso-mpich.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/mpich/espressomd/visualizationMayavi.so
-python2-espresso-mpich.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/mpich/espressomd/grand_canonical.so
-python2-espresso-mpich.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/mpich/espressomd/magnetostatics.so
-python2-espresso-mpich.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/mpich/espressomd/visualization.so
-python2-espresso-mpich.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/mpich/espressomd/particle_data.so
-python2-espresso-mpich.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/mpich/espressomd/reaction.so
-python2-espresso-mpich.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/mpich/espressomd/integrate.so
-python2-espresso-mpich.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/mpich/espressomd/_system.so
-python2-espresso-mpich.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/mpich/espressomd/electrokinetics.so
-python2-espresso-mpich.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/mpich/espressomd/electrostatic_extensions.so
-python2-espresso-mpich.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/mpich/espressomd/magnetostatic_extensions.so
-python2-espresso-mpich.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/mpich/espressomd/cuda_init.so
-python2-espresso-mpich.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/mpich/espressomd/galilei.so
-python2-espresso-mpich.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/mpich/espressomd/minimize_energy.so
-python2-espresso-mpich.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/mpich/espressomd/scafacos.so
-python2-espresso-mpich.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/mpich/espressomd/debye_hueckel.so
 python2-espresso-mpich.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/mpich/espressomd/gen_pxiconfig
-python2-espresso-mpich.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/mpich/espressomd/actors.so
-python2-espresso-mpich.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/mpich/espressomd/visualizationOpenGL.so
-python2-espresso-mpich.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/mpich/espressomd/script_interface.so
-python2-espresso-mpich.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/mpich/espressomd/interactions.so
-python2-espresso-mpich.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/mpich/espressomd/code_info.so
-python2-espresso-mpich.x86_64: W: unstripped-binary-or-object /usr/lib64/python2.7/site-packages/mpich/espressomd/lb.so
 python2-espresso-mpich.x86_64: W: no-documentation
+python2-espresso-mpich.x86_64: E: zero-length /usr/lib64/python2.7/site-packages/mpich/espressomd/__cinit__.py
 python2-espresso-mpich.x86_64: E: library-without-ldconfig-postin /usr/lib64/mpich/lib/libEspressoCore.so.4
 python2-espresso-mpich.x86_64: E: library-without-ldconfig-postun /usr/lib64/mpich/lib/libEspressoCore.so.4
-python2-espresso-mpich.x86_64: E: library-without-ldconfig-postin /usr/lib64/mpich/lib/libActor.so.4
-python2-espresso-mpich.x86_64: E: library-without-ldconfig-postun /usr/lib64/mpich/lib/libActor.so.4
 python2-espresso-mpich.x86_64: E: library-without-ldconfig-postin /usr/lib64/mpich/lib/libObjectInFluid.so.4
 python2-espresso-mpich.x86_64: E: library-without-ldconfig-postun /usr/lib64/mpich/lib/libObjectInFluid.so.4
 python2-espresso-mpich.x86_64: E: library-without-ldconfig-postin /usr/lib64/mpich/lib/libImmersedBoundary.so.4
 python2-espresso-mpich.x86_64: E: library-without-ldconfig-postun /usr/lib64/mpich/lib/libImmersedBoundary.so.4
-python2-espresso-mpich.x86_64: E: zero-length /usr/lib64/python2.7/site-packages/mpich/espressomd/__cinit__.py
+python2-espresso-mpich.x86_64: E: library-without-ldconfig-postin /usr/lib64/mpich/lib/libActor.so.4
+python2-espresso-mpich.x86_64: E: library-without-ldconfig-postun /usr/lib64/mpich/lib/libActor.so.4
 espresso.src:29: W: mixed-use-of-spaces-and-tabs (spaces: line 21, tab: line 29)
-6 packages and 0 specfiles checked; 19 errors, 75 warnings.
+6 packages and 0 specfiles checked; 19 errors, 15 warnings.
 
 
 
@@ -308,6 +248,8 @@ python2-espresso-mpich (rpmlib, GLIBC filtered):
     libActor.so.4()(64bit)(mpich-x86_64)
     libConstraints.so()(64bit)
     libCorrelators.so()(64bit)
+    libEspressoCore.so.4()(64bit)(mpich-x86_64)
+    libEspressoScriptInterface.so()(64bit)
     libEspressoUtils.so()(64bit)
     libImmersedBoundary.so.4()(64bit)(mpich-x86_64)
     libObjectInFluid.so.4()(64bit)(mpich-x86_64)
@@ -337,6 +279,8 @@ python2-espresso-openmpi (rpmlib, GLIBC filtered):
     libActor.so.4()(64bit)(openmpi-x86_64)
     libConstraints.so()(64bit)
     libCorrelators.so()(64bit)
+    libEspressoCore.so.4()(64bit)(openmpi-x86_64)
+    libEspressoScriptInterface.so()(64bit)
     libEspressoUtils.so()(64bit)
     libImmersedBoundary.so.4()(64bit)(openmpi-x86_64)
     libObjectInFluid.so.4()(64bit)(openmpi-x86_64)
