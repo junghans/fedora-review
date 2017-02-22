@@ -38,7 +38,9 @@ BuildRequires:  fftw-devel
 BuildRequires:  numpy
 BuildRequires:  python-devel
 BuildRequires:  boost-devel
+BuildRequires:  mpich-devel
 BuildRequires:  boost-mpich-devel
+BuildRequires:  openmpi-devel
 BuildRequires:  boost-openmpi-devel
 
 Requires:       numpy
