@@ -1,6 +1,17 @@
---- CMakeLists.txt.orig	2017-02-21 13:53:45.796675455 -0700
-+++ CMakeLists.txt	2017-02-21 14:18:21.398030293 -0700
-@@ -128,9 +128,11 @@
+From cf4a369485736b7a901fa02bbc911f8d5dddab6a Mon Sep 17 00:00:00 2001
+From: Christoph Junghans <junghans@votca.org>
+Date: Tue, 21 Feb 2017 17:56:55 -0700
+Subject: [PATCH] cmake: allow user to override PYTHON_INSTDIR
+
+---
+ CMakeLists.txt | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index c6ba209..88de171 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -115,9 +115,11 @@ if (WITH_PYTHON)
                  -c "import distutils.sysconfig as cg; print(cg.get_python_inc())"
                  OUTPUT_VARIABLE PYTHON_INCLUDE_DIRS OUTPUT_STRIP_TRAILING_WHITESPACE)
    find_package(NumPy REQUIRED)
