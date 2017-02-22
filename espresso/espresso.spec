@@ -199,7 +199,7 @@ popd
 %license COPYING
 
 %files devel
-%{_libdir}/*/lib*.so
+%{_libdir}/*/lib/lib*.so
 
 %files -n python2-%{name}-openmpi
 %{_libdir}/openmpi/lib*.so.*
