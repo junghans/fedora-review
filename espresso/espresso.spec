@@ -30,7 +30,9 @@ Source0:	https://github.com/%{name}md/%{name}/archive/%{commit}/%{name}-%{commit
 %else
 Source0:        http://download.savannah.gnu.org/releases/espressomd/espresso-%{version}.tar.gz
 %endif
-Patch0:         python_instdir.patch
+# PATCH-FIX-UPSTREAM - 1042.patch -  allow user to override PYTHON_INSTDIR
+Patch0:         https://patch-diff.githubusercontent.com/raw/espressomd/espresso/pull/1042.patch
+
 
 BuildRequires:  cmake
 BuildRequires:  Cython
@@ -121,8 +123,9 @@ This package contains %{name} compiled against MPICH2.
 %else
 %setup -q
 %endif
-%patch0 -p0
+%patch0 -p1
 find . -name "*.[ch]pp" -exec chmod -x {} \;
+chmod -x AUTHORS COPYING README NEWS ChangeLog 
 mkdir openmpi_build mpich_build
 
 %build
@@ -176,6 +179,7 @@ pushd mpich_build
 popd
 %{_mpich_unload}
 find %{buildroot}%{_prefix} -name "*.so" -exec chmod +x {} \;
+find %{buildroot}%{_prefix} -name "gen_pxiconfig" -exec chmod +x {} \;
 
 %check
 # test openmpi?
@@ -215,6 +219,7 @@ popd
 * Thu Feb 16 2017 Christoph Junghans <junghans@votca.org> - 4.0-0.1.20170220git7a9ac74
 - Bump to version 4.0 git version
 - Drop cypthon patch, incl. upstream
+- Add 1042.patch from upstream
 
 * Fri Feb 10 2017 Fedora Release Engineering <releng@fedoraproject.org> - 3.3.0-11
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
