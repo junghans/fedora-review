@@ -175,7 +175,7 @@ pushd mpich_build
 %make_install
 popd
 %{_mpich_unload}
-find %{buildroot} -name "*.so" -exec chmod +x {} \;
+find %{buildroot}%{_prefix} -name "*.so" -exec chmod +x {} \;
 
 %check
 # test openmpi?
