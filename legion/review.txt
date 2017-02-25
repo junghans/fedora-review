@@ -50,7 +50,7 @@ Generic:
 [ ]: License field in the package spec file matches the actual license.
      Note: Checking patched sources after %prep for licenses. Licenses
      found: "Apache (v2.0)", "Unknown or generated", "*No copyright* Apache
-     (v2.0)". 89 files have unknown license. Detailed output of
+     (v2.0)". 93 files have unknown license. Detailed output of
      licensecheck in /travis/legion/review-legion/licensecheck.txt
 [ ]: License file installed when any subpackage combination is installed.
 [ ]: %build honors applicable compiler flags or justifies otherwise.
@@ -74,7 +74,7 @@ Generic:
 [ ]: Package is not known to require an ExcludeArch tag.
 [ ]: Large documentation must go in a -doc subpackage. Large could be size
      (~1MB) or number of files.
-     Note: Documentation size is 20480 bytes in 2 files.
+     Note: Documentation size is 30720 bytes in 2 files.
 [ ]: Package complies to the Packaging Guidelines
 [x]: Package successfully compiles and builds into binary rpms on at least
      one supported primary architecture.
@@ -118,8 +118,6 @@ Generic:
 [ ]: Package functions as described.
 [ ]: Latest version is packaged.
 [ ]: Package does not include license text files separate from upstream.
-[ ]: Patches link to upstream bugs/comments/lists or are otherwise
-     justified.
 [ ]: Scriptlets must be sane, if used.
 [ ]: Description and summary sections in the package spec file contains
      translations for supported Non-English languages, if available.
@@ -152,24 +150,24 @@ Generic:
 
 Rpmlint
 -------
-Checking: legion-16.10.0-1.fc26.x86_64.rpm
-          legion-openmpi-16.10.0-1.fc26.x86_64.rpm
-          legion-mpich-16.10.0-1.fc26.x86_64.rpm
-          legion-devel-16.10.0-1.fc26.x86_64.rpm
-          legion-debuginfo-16.10.0-1.fc26.x86_64.rpm
-          legion-16.10.0-1.fc26.src.rpm
+Checking: legion-17.02.0-1.fc26.x86_64.rpm
+          legion-openmpi-17.02.0-1.fc26.x86_64.rpm
+          legion-mpich-17.02.0-1.fc26.x86_64.rpm
+          legion-devel-17.02.0-1.fc26.x86_64.rpm
+          legion-debuginfo-17.02.0-1.fc26.x86_64.rpm
+          legion-17.02.0-1.fc26.src.rpm
 legion.x86_64: W: spelling-error Summary(en_US) centric -> eccentric, centrist, concentric
 legion.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
-legion.x86_64: W: shared-lib-calls-exit /usr/lib64/liblegion.so.1 exit@GLIBC_2.2.5
 legion.x86_64: W: shared-lib-calls-exit /usr/lib64/librealm.so.1 exit@GLIBC_2.2.5
+legion.x86_64: W: shared-lib-calls-exit /usr/lib64/liblegion.so.1 exit@GLIBC_2.2.5
 legion-openmpi.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
-legion-openmpi.x86_64: W: shared-lib-calls-exit /usr/lib64/openmpi/lib/liblegion.so.1 exit@GLIBC_2.2.5
 legion-openmpi.x86_64: W: shared-lib-calls-exit /usr/lib64/openmpi/lib/librealm.so.1 exit@GLIBC_2.2.5
+legion-openmpi.x86_64: W: shared-lib-calls-exit /usr/lib64/openmpi/lib/liblegion.so.1 exit@GLIBC_2.2.5
 legion-openmpi.x86_64: W: no-documentation
-legion-openmpi.x86_64: E: library-without-ldconfig-postin /usr/lib64/openmpi/lib/liblegion.so.1
-legion-openmpi.x86_64: E: library-without-ldconfig-postun /usr/lib64/openmpi/lib/liblegion.so.1
 legion-openmpi.x86_64: E: library-without-ldconfig-postin /usr/lib64/openmpi/lib/librealm.so.1
 legion-openmpi.x86_64: E: library-without-ldconfig-postun /usr/lib64/openmpi/lib/librealm.so.1
+legion-openmpi.x86_64: E: library-without-ldconfig-postin /usr/lib64/openmpi/lib/liblegion.so.1
+legion-openmpi.x86_64: E: library-without-ldconfig-postun /usr/lib64/openmpi/lib/liblegion.so.1
 legion-mpich.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
 legion-mpich.x86_64: W: shared-lib-calls-exit /usr/lib64/mpich/lib/liblegion.so.1 exit@GLIBC_2.2.5
 legion-mpich.x86_64: W: shared-lib-calls-exit /usr/lib64/mpich/lib/librealm.so.1 exit@GLIBC_2.2.5
@@ -190,7 +188,7 @@ legion.src: W: spelling-error %description -l en_US centric -> eccentric, centri
 
 Rpmlint (debuginfo)
 -------------------
-Checking: legion-debuginfo-16.10.0-1.fc26.x86_64.rpm
+Checking: legion-debuginfo-17.02.0-1.fc26.x86_64.rpm
 1 packages and 0 specfiles checked; 0 errors, 0 warnings.
 
 
@@ -199,6 +197,7 @@ Checking: legion-debuginfo-16.10.0-1.fc26.x86_64.rpm
 
 Rpmlint (installed packages)
 ----------------------------
+sh: /usr/bin/python: No such file or directory
 legion.x86_64: W: spelling-error Summary(en_US) centric -> eccentric, centrist, concentric
 legion.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
 legion.x86_64: W: shared-lib-calls-exit /usr/lib64/liblegion.so.1 exit@GLIBC_2.2.5
@@ -540,9 +539,9 @@ legion-devel:
 
 Source checksums
 ----------------
-https://github.com/StanfordLegion/legion/archive/legion-16.10.0.tar.gz#/legion-16.10.0.tar.gz :
-  CHECKSUM(SHA256) this package     : 92190ae5ff0a1f6356890446e026479ed715230d4761a40d4834af256a722099
-  CHECKSUM(SHA256) upstream package : 92190ae5ff0a1f6356890446e026479ed715230d4761a40d4834af256a722099
+https://github.com/StanfordLegion/legion/archive/legion-17.02.0.tar.gz#/legion-17.02.0.tar.gz :
+  CHECKSUM(SHA256) this package     : c5413fe8990c33a087c9a567671756c8267e050f5285f75ee33b84911b00c355
+  CHECKSUM(SHA256) upstream package : c5413fe8990c33a087c9a567671756c8267e050f5285f75ee33b84911b00c355
 
 
 Generated by fedora-review 0.6.1 (f03e4e7) last change: 2016-05-02
