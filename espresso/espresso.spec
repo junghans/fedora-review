@@ -1,5 +1,5 @@
 %global git 1
-%global commit 7a9ac7414721b40d7d4eaf286b5ae6c18e28f325
+%global commit 8a021f5e8b1d508f356f4419d360bd9dfb7fec2c 
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 
 %if 0%{?fedora} > 12 || 0%{?rhel} > 6
@@ -20,7 +20,7 @@
 
 Name:           espresso
 Version:        4.0
-Release:        0.1.20170220git%{shortcommit}%{?dist}
+Release:        0.2.20170228git%{shortcommit}%{?dist}
 Summary:        Extensible Simulation Package for Research on Soft matter
 
 License:        GPLv3+
@@ -30,8 +30,8 @@ Source0:	https://github.com/%{name}md/%{name}/archive/%{commit}/%{name}-%{commit
 %else
 Source0:        http://download.savannah.gnu.org/releases/espressomd/espresso-%{version}.tar.gz
 %endif
-# PATCH-FIX-UPSTREAM - 1042.patch -  allow user to override PYTHON_INSTDIR
-Patch0:         https://patch-diff.githubusercontent.com/raw/espressomd/espresso/pull/1042.patch
+# PATCH-FIX-UPSTREAM - 1056.patch -  fix install
+Patch0:         https://patch-diff.githubusercontent.com/raw/espressomd/espresso/pull/1056.patch
 
 
 BuildRequires:  cmake
@@ -70,24 +70,13 @@ ESPResSo contains a number of advanced algorithms, e.g.
 This package contains the license file and data files shared between the
 subpackages of %{name}.
 
-%package devel
-Summary:        Development package for  %{name} packages
-Requires:       python2-%{name}-openmpi = %{version}-%{release}
-Requires:       python2-%{name}-mpich = %{version}-%{release}
-%description devel
-ESPResSo can perform Molecular Dynamics simulations of bead-spring models
-in various ensembles ((N,V,E), (N,V,T), and (N,p,T)).
-ESPResSo contains a number of advanced algorithms, e.g.
-    * DPD thermostat (for hydrodynamics)
-    * P3M, MMM2D, MMM1D, ELC for electrostatic interactions
-    * Lattice-Boltzmann for hydrodynamics
-This package contains the development libraries of %{name}.
-
 %package -n python2-%{name}-openmpi
 Requires:       %{name}-common = %{version}-%{release}
 Summary:        Extensible Simulation Package for Research on Soft matter
 Provides:       %{name}-openmpi = %{version}-%{release}
 Obsoletes:      %{name}-openmpi < 3.3.0-12
+Provides:       %{name}-devel = %{version}-%{release}
+Obsoletes:      %{name}-devel < 4.0-0.2
 %description -n python2-%{name}-openmpi
 ESPResSo can perform Molecular Dynamics simulations of bead-spring models
 in various ensembles ((N,V,E), (N,V,T), and (N,p,T)).
@@ -106,6 +95,8 @@ Provides:       %{name}-mpich2 = %{version}-%{release}
 Obsoletes:      %{name}-mpich2 < 3.1.1-3
 Provides:       %{name}-mpich = %{version}-%{release}
 Obsoletes:      %{name}-mpich < 3.3.0-12
+Provides:       %{name}-devel = %{version}-%{release}
+Obsoletes:      %{name}-devel < 4.0-0.2
 %description -n python2-%{name}-mpich
 ESPResSo can perform Molecular Dynamics simulations of bead-spring models
 in various ensembles ((N,V,E), (N,V,T), and (N,p,T)).
@@ -204,18 +195,18 @@ popd
 %doc AUTHORS README NEWS ChangeLog
 %license COPYING
 
-%files devel
-%{_libdir}/*/lib/lib*.so
-
 %files -n python2-%{name}-openmpi
-%{_libdir}/openmpi/lib/lib*.so.*
 %{python_sitearch}/openmpi/%{name}md
 
 %files -n python2-%{name}-mpich
-%{_libdir}/mpich/lib/lib*.so.*
 %{python_sitearch}/mpich/%{name}md
 
 %changelog
+* Thu Mar 05 2017 Christoph Junghans <junghans@votca.org> - 4.0-0.2.20170228git8a021f5
+- Dropped 1042.patch, merged upstream
+- Add 1056.patch to fix install
+- Dropped devel package, no libs in %{_libdir} anymore
+
 * Thu Feb 16 2017 Christoph Junghans <junghans@votca.org> - 4.0-0.1.20170220git7a9ac74
 - Bump to version 4.0 git version
 - Drop cypthon patch, incl. upstream

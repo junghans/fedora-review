@@ -1,0 +1,75 @@
+From 6eaa18a0ff53430266bee3d8bf99a58ff8571ab0 Mon Sep 17 00:00:00 2001
+From: Christoph Junghans <junghans@votca.org>
+Date: Fri, 3 Mar 2017 16:05:45 -0700
+Subject: [PATCH] cmake: install all shared libraries
+
+---
+ src/core/constraints/CMakeLists.txt | 1 +
+ src/core/correlators/CMakeLists.txt | 1 +
+ src/core/observables/CMakeLists.txt | 1 +
+ src/core/shapes/CMakeLists.txt      | 1 +
+ src/core/utils/CMakeLists.txt       | 1 +
+ src/script_interface/CMakeLists.txt | 1 +
+ 6 files changed, 6 insertions(+)
+
+diff --git a/src/core/constraints/CMakeLists.txt b/src/core/constraints/CMakeLists.txt
+index 0f5c043..0f34745 100644
+--- a/src/core/constraints/CMakeLists.txt
++++ b/src/core/constraints/CMakeLists.txt
+@@ -1,4 +1,5 @@
+ file(GLOB Constraints_SRC Constraint.cpp)
+ add_library(Constraints SHARED ${Constraints_SRC})
++install(TARGETS Constraints LIBRARY DESTINATION ${PYTHON_INSTDIR})
+ add_dependencies(Constraints EspressoConfig)
+ set_target_properties(Constraints PROPERTIES MACOSX_RPATH TRUE)
+diff --git a/src/core/correlators/CMakeLists.txt b/src/core/correlators/CMakeLists.txt
+index c5ff02f..a8d426e 100644
+--- a/src/core/correlators/CMakeLists.txt
++++ b/src/core/correlators/CMakeLists.txt
+@@ -1,4 +1,5 @@
+ file(GLOB Correlators_SRC *.?pp)
+ add_library(Correlators SHARED ${Correlators_SRC})
++install(TARGETS Correlators LIBRARY DESTINATION ${PYTHON_INSTDIR})
+ add_dependencies(Correlators EspressoConfig)
+ set_target_properties(Correlators PROPERTIES MACOSX_RPATH TRUE)
+diff --git a/src/core/observables/CMakeLists.txt b/src/core/observables/CMakeLists.txt
+index 9813d86..2b1a29a 100644
+--- a/src/core/observables/CMakeLists.txt
++++ b/src/core/observables/CMakeLists.txt
+@@ -1,4 +1,5 @@
+ file(GLOB Observables_SRC *.?pp)
+ add_library(Observables SHARED ${Observables_SRC})
++install(TARGETS Observables LIBRARY DESTINATION ${PYTHON_INSTDIR})
+ add_dependencies(Observables EspressoConfig)
+ set_target_properties(Observables PROPERTIES MACOSX_RPATH TRUE)
+diff --git a/src/core/shapes/CMakeLists.txt b/src/core/shapes/CMakeLists.txt
+index 0e5ecaa..de10452 100644
+--- a/src/core/shapes/CMakeLists.txt
++++ b/src/core/shapes/CMakeLists.txt
+@@ -1,4 +1,5 @@
+ file(GLOB Shapes_SRC *.cpp)
+ add_library(Shapes SHARED ${Shapes_SRC})
++install(TARGETS Shapes LIBRARY DESTINATION ${PYTHON_INSTDIR})
+ add_dependencies(Shapes EspressoConfig)
+ set_target_properties(Shapes PROPERTIES MACOSX_RPATH TRUE)
+diff --git a/src/core/utils/CMakeLists.txt b/src/core/utils/CMakeLists.txt
+index ec0f6f7..071c23b 100644
+--- a/src/core/utils/CMakeLists.txt
++++ b/src/core/utils/CMakeLists.txt
+@@ -1,3 +1,4 @@
+ file(GLOB EspressoUtils_SRC *.cpp)
+ add_library(EspressoUtils SHARED ${EspressoUtils_SRC})
++install(TARGETS EspressoUtils LIBRARY DESTINATION ${PYTHON_INSTDIR})
+ set_target_properties(EspressoUtils PROPERTIES MACOSX_RPATH TRUE)
+diff --git a/src/script_interface/CMakeLists.txt b/src/script_interface/CMakeLists.txt
+index 8aff034..9b099fe 100644
+--- a/src/script_interface/CMakeLists.txt
++++ b/src/script_interface/CMakeLists.txt
+@@ -28,6 +28,7 @@ if(H5MD)
+         )
+ endif(H5MD)
+ add_library(EspressoScriptInterface SHARED ${EspressoScriptInterface_SRC})
++install(TARGETS EspressoScriptInterface LIBRARY DESTINATION ${PYTHON_INSTDIR})
+ add_dependencies(EspressoScriptInterface EspressoConfig EspressoConfig)
+ set_target_properties(EspressoScriptInterface PROPERTIES MACOSX_RPATH TRUE)
+ target_link_libraries(EspressoScriptInterface EspressoCore)
