@@ -196,13 +196,15 @@ popd
 %license COPYING
 
 %files -n python2-%{name}-openmpi
+%{python_sitearch}/openmpi/lib*.so
 %{python_sitearch}/openmpi/%{name}md
 
 %files -n python2-%{name}-mpich
+%{python_sitearch}/mpich/lib*.so
 %{python_sitearch}/mpich/%{name}md
 
 %changelog
-* Thu Mar 05 2017 Christoph Junghans <junghans@votca.org> - 4.0-0.2.20170228git8a021f5
+* Sun Mar 05 2017 Christoph Junghans <junghans@votca.org> - 4.0-0.2.20170228git8a021f5
 - Dropped 1042.patch, merged upstream
 - Add 1056.patch to fix install
 - Dropped devel package, no libs in %{_libdir} anymore
