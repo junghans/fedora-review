@@ -62,9 +62,8 @@ Generic:
      espresso/licensecheck.txt
 [ ]: License file installed when any subpackage combination is installed.
 [ ]: Package must own all directories that it creates.
-     Note: Directories without known owners: /usr/lib64/mpich,
-     /usr/lib64/openmpi/lib, /usr/lib64/openmpi, /usr/lib64/mpich/lib,
-     /usr/lib64/python2.7/site-packages/openmpi
+     Note: Directories without known owners: /usr/lib64/python2.7/site-
+     packages/openmpi
 [ ]: %build honors applicable compiler flags or justifies otherwise.
 [ ]: Package contains no bundled libraries without FPC exception.
 [ ]: Changelog in prescribed format.
@@ -133,8 +132,8 @@ Generic:
 [ ]: Final provides and requires are sane (see attachments).
 [ ]: Fully versioned dependency in subpackages if applicable.
      Note: No Requires: %{name}%{?_isa} = %{version}-%{release} in
-     espresso-common , espresso-devel , python2-espresso-openmpi , python2
-     -espresso-mpich , espresso-debuginfo
+     espresso-common , python2-espresso-openmpi , python2-espresso-mpich ,
+     espresso-debuginfo
 [ ]: Package functions as described.
 [ ]: Latest version is packaged.
 [ ]: Package does not include license text files separate from upstream.
@@ -170,7 +169,7 @@ Generic:
 
 Installation errors
 -------------------
-INFO: mock.py version 1.3.3 starting (python version = 3.5.2)...
+INFO: mock.py version 1.3.4 starting (python version = 3.5.2)...
 Start: init plugins
 INFO: selinux disabled
 Finish: init plugins
@@ -181,50 +180,50 @@ INFO: enabled root cache
 INFO: enabled dnf cache
 Start: cleaning dnf metadata
 Finish: cleaning dnf metadata
-Mock Version: 1.3.3
-INFO: Mock Version: 1.3.3
+INFO: enabled HW Info plugin
+Mock Version: 1.3.4
+INFO: Mock Version: 1.3.4
 Finish: chroot init
-INFO: installing package(s): /travis/espresso/review-espresso/results/espresso-common-4.0-0.1.20170220git7a9ac74.fc26.noarch.rpm /travis/espresso/review-espresso/results/espresso-debuginfo-4.0-0.1.20170220git7a9ac74.fc26.x86_64.rpm /travis/espresso/review-espresso/results/python2-espresso-mpich-4.0-0.1.20170220git7a9ac74.fc26.x86_64.rpm /travis/espresso/review-espresso/results/espresso-devel-4.0-0.1.20170220git7a9ac74.fc26.x86_64.rpm /travis/espresso/review-espresso/results/python2-espresso-openmpi-4.0-0.1.20170220git7a9ac74.fc26.x86_64.rpm
+INFO: installing package(s): /travis/espresso/review-espresso/results/python2-espresso-openmpi-4.0-0.2.20170228git8a021f5.fc27.x86_64.rpm /travis/espresso/review-espresso/results/python2-espresso-mpich-4.0-0.2.20170228git8a021f5.fc27.x86_64.rpm /travis/espresso/review-espresso/results/espresso-debuginfo-4.0-0.2.20170228git8a021f5.fc27.x86_64.rpm /travis/espresso/review-espresso/results/espresso-common-4.0-0.2.20170228git8a021f5.fc27.noarch.rpm
 ERROR: Command failed. See logs for output.
- # /usr/bin/dnf --installroot /var/lib/mock/fedora-rawhide-x86_64/root/ --releasever 26 --disableplugin=local --setopt=deltarpm=false install /travis/espresso/review-espresso/results/espresso-common-4.0-0.1.20170220git7a9ac74.fc26.noarch.rpm /travis/espresso/review-espresso/results/espresso-debuginfo-4.0-0.1.20170220git7a9ac74.fc26.x86_64.rpm /travis/espresso/review-espresso/results/python2-espresso-mpich-4.0-0.1.20170220git7a9ac74.fc26.x86_64.rpm /travis/espresso/review-espresso/results/espresso-devel-4.0-0.1.20170220git7a9ac74.fc26.x86_64.rpm /travis/espresso/review-espresso/results/python2-espresso-openmpi-4.0-0.1.20170220git7a9ac74.fc26.x86_64.rpm
+ # /usr/bin/dnf --installroot /var/lib/mock/fedora-rawhide-x86_64/root/ --releasever 27 --disableplugin=local --setopt=deltarpm=false install /travis/espresso/review-espresso/results/python2-espresso-openmpi-4.0-0.2.20170228git8a021f5.fc27.x86_64.rpm /travis/espresso/review-espresso/results/python2-espresso-mpich-4.0-0.2.20170228git8a021f5.fc27.x86_64.rpm /travis/espresso/review-espresso/results/espresso-debuginfo-4.0-0.2.20170228git8a021f5.fc27.x86_64.rpm /travis/espresso/review-espresso/results/espresso-common-4.0-0.2.20170228git8a021f5.fc27.noarch.rpm
 
 
 Rpmlint
 -------
-Checking: espresso-common-4.0-0.1.20170220git7a9ac74.fc26.noarch.rpm
-          espresso-devel-4.0-0.1.20170220git7a9ac74.fc26.x86_64.rpm
-          python2-espresso-openmpi-4.0-0.1.20170220git7a9ac74.fc26.x86_64.rpm
-          python2-espresso-mpich-4.0-0.1.20170220git7a9ac74.fc26.x86_64.rpm
-          espresso-debuginfo-4.0-0.1.20170220git7a9ac74.fc26.x86_64.rpm
-          espresso-4.0-0.1.20170220git7a9ac74.fc26.src.rpm
+Checking: espresso-common-4.0-0.2.20170228git8a021f5.fc27.noarch.rpm
+          python2-espresso-openmpi-4.0-0.2.20170228git8a021f5.fc27.x86_64.rpm
+          python2-espresso-mpich-4.0-0.2.20170228git8a021f5.fc27.x86_64.rpm
+          espresso-debuginfo-4.0-0.2.20170228git8a021f5.fc27.x86_64.rpm
+          espresso-4.0-0.2.20170228git8a021f5.fc27.src.rpm
 espresso-common.noarch: W: spelling-error %description -l en_US subpackages -> sub packages, sub-packages, prepackages
-espresso-devel.x86_64: W: no-dependency-on espresso/espresso-libs/libespresso
-espresso-devel.x86_64: W: only-non-binary-in-usr-lib
-espresso-devel.x86_64: W: no-documentation
-python2-espresso-openmpi.x86_64: W: shared-lib-calls-exit /usr/lib64/openmpi/lib/libEspressoCore.so.4 exit@GLIBC_2.2.5
+python2-espresso-openmpi.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/openmpi/libImmersedBoundary.so libImmersedBoundary.so()(64bit)(openmpi-x86_64)
+python2-espresso-openmpi.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/openmpi/libObservables.so libObservables.so()(64bit)(openmpi-x86_64)
+python2-espresso-openmpi.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/openmpi/libEspressoScriptInterface.so libEspressoScriptInterface.so()(64bit)(openmpi-x86_64)
+python2-espresso-openmpi.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/openmpi/libObjectInFluid.so libObjectInFluid.so()(64bit)(openmpi-x86_64)
+python2-espresso-openmpi.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/openmpi/libActor.so libActor.so()(64bit)(openmpi-x86_64)
+python2-espresso-openmpi.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/openmpi/libEspressoCore.so libEspressoCore.so()(64bit)(openmpi-x86_64)
+python2-espresso-openmpi.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/openmpi/libShapes.so libShapes.so()(64bit)(openmpi-x86_64)
+python2-espresso-openmpi.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/openmpi/libEspressoUtils.so libEspressoUtils.so()(64bit)(openmpi-x86_64)
+python2-espresso-openmpi.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/openmpi/libCorrelators.so libCorrelators.so()(64bit)(openmpi-x86_64)
+python2-espresso-openmpi.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/openmpi/libConstraints.so libConstraints.so()(64bit)(openmpi-x86_64)
 python2-espresso-openmpi.x86_64: W: no-documentation
-python2-espresso-openmpi.x86_64: E: library-without-ldconfig-postin /usr/lib64/openmpi/lib/libEspressoCore.so.4
-python2-espresso-openmpi.x86_64: E: library-without-ldconfig-postun /usr/lib64/openmpi/lib/libEspressoCore.so.4
-python2-espresso-openmpi.x86_64: E: library-without-ldconfig-postin /usr/lib64/openmpi/lib/libActor.so.4
-python2-espresso-openmpi.x86_64: E: library-without-ldconfig-postun /usr/lib64/openmpi/lib/libActor.so.4
 python2-espresso-openmpi.x86_64: E: zero-length /usr/lib64/python2.7/site-packages/openmpi/espressomd/__cinit__.py
-python2-espresso-openmpi.x86_64: E: library-without-ldconfig-postin /usr/lib64/openmpi/lib/libObjectInFluid.so.4
-python2-espresso-openmpi.x86_64: E: library-without-ldconfig-postun /usr/lib64/openmpi/lib/libObjectInFluid.so.4
-python2-espresso-openmpi.x86_64: E: library-without-ldconfig-postin /usr/lib64/openmpi/lib/libImmersedBoundary.so.4
-python2-espresso-openmpi.x86_64: E: library-without-ldconfig-postun /usr/lib64/openmpi/lib/libImmersedBoundary.so.4
-python2-espresso-mpich.x86_64: W: shared-lib-calls-exit /usr/lib64/mpich/lib/libEspressoCore.so.4 exit@GLIBC_2.2.5
+python2-espresso-mpich.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/mpich/libObservables.so libObservables.so()(64bit)(mpich-x86_64)
+python2-espresso-mpich.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/mpich/libConstraints.so libConstraints.so()(64bit)(mpich-x86_64)
+python2-espresso-mpich.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/mpich/libImmersedBoundary.so libImmersedBoundary.so()(64bit)(mpich-x86_64)
+python2-espresso-mpich.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/mpich/libShapes.so libShapes.so()(64bit)(mpich-x86_64)
+python2-espresso-mpich.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/mpich/libEspressoCore.so libEspressoCore.so()(64bit)(mpich-x86_64)
+python2-espresso-mpich.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/mpich/libEspressoUtils.so libEspressoUtils.so()(64bit)(mpich-x86_64)
+python2-espresso-mpich.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/mpich/libCorrelators.so libCorrelators.so()(64bit)(mpich-x86_64)
+python2-espresso-mpich.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/mpich/libEspressoScriptInterface.so libEspressoScriptInterface.so()(64bit)(mpich-x86_64)
+python2-espresso-mpich.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/mpich/libActor.so libActor.so()(64bit)(mpich-x86_64)
+python2-espresso-mpich.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/mpich/libObjectInFluid.so libObjectInFluid.so()(64bit)(mpich-x86_64)
 python2-espresso-mpich.x86_64: W: no-documentation
 python2-espresso-mpich.x86_64: E: zero-length /usr/lib64/python2.7/site-packages/mpich/espressomd/__cinit__.py
-python2-espresso-mpich.x86_64: E: library-without-ldconfig-postin /usr/lib64/mpich/lib/libImmersedBoundary.so.4
-python2-espresso-mpich.x86_64: E: library-without-ldconfig-postun /usr/lib64/mpich/lib/libImmersedBoundary.so.4
-python2-espresso-mpich.x86_64: E: library-without-ldconfig-postin /usr/lib64/mpich/lib/libObjectInFluid.so.4
-python2-espresso-mpich.x86_64: E: library-without-ldconfig-postun /usr/lib64/mpich/lib/libObjectInFluid.so.4
-python2-espresso-mpich.x86_64: E: library-without-ldconfig-postin /usr/lib64/mpich/lib/libEspressoCore.so.4
-python2-espresso-mpich.x86_64: E: library-without-ldconfig-postun /usr/lib64/mpich/lib/libEspressoCore.so.4
-python2-espresso-mpich.x86_64: E: library-without-ldconfig-postin /usr/lib64/mpich/lib/libActor.so.4
-python2-espresso-mpich.x86_64: E: library-without-ldconfig-postun /usr/lib64/mpich/lib/libActor.so.4
+espresso.src:210: W: macro-in-%changelog %{_libdir}
 espresso.src:29: W: mixed-use-of-spaces-and-tabs (spaces: line 21, tab: line 29)
-6 packages and 0 specfiles checked; 18 errors, 9 warnings.
+5 packages and 0 specfiles checked; 2 errors, 25 warnings.
 
 
 
@@ -238,14 +237,14 @@ espresso-debuginfo (rpmlib, GLIBC filtered):
 
 python2-espresso-mpich (rpmlib, GLIBC filtered):
     espresso-common
-    libActor.so.4()(64bit)(mpich-x86_64)
+    libActor.so()(64bit)
     libConstraints.so()(64bit)
     libCorrelators.so()(64bit)
-    libEspressoCore.so.4()(64bit)(mpich-x86_64)
+    libEspressoCore.so()(64bit)
     libEspressoScriptInterface.so()(64bit)
     libEspressoUtils.so()(64bit)
-    libImmersedBoundary.so.4()(64bit)(mpich-x86_64)
-    libObjectInFluid.so.4()(64bit)(mpich-x86_64)
+    libImmersedBoundary.so()(64bit)
+    libObjectInFluid.so()(64bit)
     libObservables.so()(64bit)
     libShapes.so()(64bit)
     libboost_filesystem.so.1.63.0()(64bit)
@@ -269,14 +268,14 @@ python2-espresso-mpich (rpmlib, GLIBC filtered):
 
 python2-espresso-openmpi (rpmlib, GLIBC filtered):
     espresso-common
-    libActor.so.4()(64bit)(openmpi-x86_64)
+    libActor.so()(64bit)
     libConstraints.so()(64bit)
     libCorrelators.so()(64bit)
-    libEspressoCore.so.4()(64bit)(openmpi-x86_64)
+    libEspressoCore.so()(64bit)
     libEspressoScriptInterface.so()(64bit)
     libEspressoUtils.so()(64bit)
-    libImmersedBoundary.so.4()(64bit)(openmpi-x86_64)
-    libObjectInFluid.so.4()(64bit)(openmpi-x86_64)
+    libImmersedBoundary.so()(64bit)
+    libObjectInFluid.so()(64bit)
     libObservables.so()(64bit)
     libShapes.so()(64bit)
     libboost_filesystem.so.1.63.0()(64bit)
@@ -298,18 +297,6 @@ python2-espresso-openmpi (rpmlib, GLIBC filtered):
     python(abi)
     rtld(GNU_HASH)
 
-espresso-devel (rpmlib, GLIBC filtered):
-    libActor.so.4()(64bit)(mpich-x86_64)
-    libActor.so.4()(64bit)(openmpi-x86_64)
-    libEspressoCore.so.4()(64bit)(mpich-x86_64)
-    libEspressoCore.so.4()(64bit)(openmpi-x86_64)
-    libImmersedBoundary.so.4()(64bit)(mpich-x86_64)
-    libImmersedBoundary.so.4()(64bit)(openmpi-x86_64)
-    libObjectInFluid.so.4()(64bit)(mpich-x86_64)
-    libObjectInFluid.so.4()(64bit)(openmpi-x86_64)
-    python2-espresso-mpich
-    python2-espresso-openmpi
-
 
 
 Provides
@@ -322,27 +309,37 @@ espresso-debuginfo:
     espresso-debuginfo(x86-64)
 
 python2-espresso-mpich:
+    espresso-devel
     espresso-mpich
     espresso-mpich2
-    libActor.so.4()(64bit)(mpich-x86_64)
-    libEspressoCore.so.4()(64bit)(mpich-x86_64)
-    libImmersedBoundary.so.4()(64bit)(mpich-x86_64)
-    libObjectInFluid.so.4()(64bit)(mpich-x86_64)
+    libActor.so()(64bit)(mpich-x86_64)
+    libConstraints.so()(64bit)(mpich-x86_64)
+    libCorrelators.so()(64bit)(mpich-x86_64)
+    libEspressoCore.so()(64bit)(mpich-x86_64)
+    libEspressoScriptInterface.so()(64bit)(mpich-x86_64)
+    libEspressoUtils.so()(64bit)(mpich-x86_64)
+    libImmersedBoundary.so()(64bit)(mpich-x86_64)
+    libObjectInFluid.so()(64bit)(mpich-x86_64)
+    libObservables.so()(64bit)(mpich-x86_64)
+    libShapes.so()(64bit)(mpich-x86_64)
     python2-espresso-mpich
     python2-espresso-mpich(x86-64)
 
 python2-espresso-openmpi:
+    espresso-devel
     espresso-openmpi
-    libActor.so.4()(64bit)(openmpi-x86_64)
-    libEspressoCore.so.4()(64bit)(openmpi-x86_64)
-    libImmersedBoundary.so.4()(64bit)(openmpi-x86_64)
-    libObjectInFluid.so.4()(64bit)(openmpi-x86_64)
+    libActor.so()(64bit)(openmpi-x86_64)
+    libConstraints.so()(64bit)(openmpi-x86_64)
+    libCorrelators.so()(64bit)(openmpi-x86_64)
+    libEspressoCore.so()(64bit)(openmpi-x86_64)
+    libEspressoScriptInterface.so()(64bit)(openmpi-x86_64)
+    libEspressoUtils.so()(64bit)(openmpi-x86_64)
+    libImmersedBoundary.so()(64bit)(openmpi-x86_64)
+    libObjectInFluid.so()(64bit)(openmpi-x86_64)
+    libObservables.so()(64bit)(openmpi-x86_64)
+    libShapes.so()(64bit)(openmpi-x86_64)
     python2-espresso-openmpi
     python2-espresso-openmpi(x86-64)
-
-espresso-devel:
-    espresso-devel
-    espresso-devel(x86-64)
 
 
 
@@ -378,6 +375,16 @@ python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/espressomd/
 python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/espressomd/visualization.so
 python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/espressomd/visualizationMayavi.so
 python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/espressomd/visualizationOpenGL.so
+python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/libActor.so
+python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/libConstraints.so
+python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/libCorrelators.so
+python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/libEspressoCore.so
+python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/libEspressoScriptInterface.so
+python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/libEspressoUtils.so
+python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/libImmersedBoundary.so
+python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/libObjectInFluid.so
+python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/libObservables.so
+python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/libShapes.so
 python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/espressomd/_init.so
 python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/espressomd/_system.so
 python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/espressomd/actors.so
@@ -408,12 +415,22 @@ python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/espressomd/util
 python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/espressomd/visualization.so
 python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/espressomd/visualizationMayavi.so
 python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/espressomd/visualizationOpenGL.so
+python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/libActor.so
+python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/libConstraints.so
+python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/libCorrelators.so
+python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/libEspressoCore.so
+python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/libEspressoScriptInterface.so
+python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/libEspressoUtils.so
+python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/libImmersedBoundary.so
+python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/libObjectInFluid.so
+python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/libObservables.so
+python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/libShapes.so
 
 Source checksums
 ----------------
-https://github.com/espressomd/espresso/archive/7a9ac7414721b40d7d4eaf286b5ae6c18e28f325/espresso-7a9ac7414721b40d7d4eaf286b5ae6c18e28f325.tar.gz :
-  CHECKSUM(SHA256) this package     : 5ab54a899b2c6f85aa03ed3b28a5840a304259ea1119a584f29fe3eb00d8e321
-  CHECKSUM(SHA256) upstream package : 5ab54a899b2c6f85aa03ed3b28a5840a304259ea1119a584f29fe3eb00d8e321
+https://github.com/espressomd/espresso/archive/8a021f5e8b1d508f356f4419d360bd9dfb7fec2c/espresso-8a021f5e8b1d508f356f4419d360bd9dfb7fec2c.tar.gz :
+  CHECKSUM(SHA256) this package     : 01e6770949db7bfad9dba3776a644dd0c0758e3781edf23363d7d2671ee14b01
+  CHECKSUM(SHA256) upstream package : 01e6770949db7bfad9dba3776a644dd0c0758e3781edf23363d7d2671ee14b01
 
 
 Generated by fedora-review 0.6.1 (f03e4e7) last change: 2016-05-02
