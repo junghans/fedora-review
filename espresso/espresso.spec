@@ -8,6 +8,9 @@
 %{!?python_sitearch: %global python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
 %endif
 
+# Do not check .so files in the python2_sitearch directory
+%global __provides_exclude_from ^%{python2_sitearch}/.*\\.so$
+
 ### TESTSUITE ###
 # The testsuite currently fails only on the buildsystem, but works localy.
 # So to easy enable/disable the testsuite, I introduce the following
@@ -26,7 +29,7 @@ Summary:        Extensible Simulation Package for Research on Soft matter
 License:        GPLv3+
 URL:            http://espressomd.org
 %if %{git}
-Source0:	https://github.com/%{name}md/%{name}/archive/%{commit}/%{name}-%{commit}.tar.gz
+Source0:        https://github.com/%{name}md/%{name}/archive/%{commit}/%{name}-%{commit}.tar.gz
 %else
 Source0:        http://download.savannah.gnu.org/releases/espressomd/espresso-%{version}.tar.gz
 %endif
@@ -68,7 +71,7 @@ ESPResSo contains a number of advanced algorithms, e.g.
     * P3M, MMM2D, MMM1D, ELC for electrostatic interactions
     * Lattice-Boltzmann for hydrodynamics
 This package contains the license file and data files shared between the
-subpackages of %{name}.
+sub-packages of %{name}.
 
 %package -n python2-%{name}-openmpi
 Requires:       %{name}-common = %{version}-%{release}
@@ -205,7 +208,7 @@ popd
 * Sun Mar 05 2017 Christoph Junghans <junghans@votca.org> - 4.0-0.2.20170228git8a021f5
 - Dropped 1042.patch, merged upstream
 - Add 1056.patch to fix install
-- Dropped devel package, no libs in %{_libdir} anymore
+- Dropped devel package, no libs in libdir anymore
 
 * Thu Feb 16 2017 Christoph Junghans <junghans@votca.org> - 4.0-0.1.20170220git7a9ac74
 - Bump to version 4.0 git version
