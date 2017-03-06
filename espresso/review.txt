@@ -26,9 +26,6 @@ Legend:
 
 Issues:
 =======
-- Package installs properly.
-  Note: Installation errors (see attachment)
-  See: https://fedoraproject.org/wiki/Packaging:Guidelines
 - Package contains BR: python2-devel or python3-devel
 - Package does not use a name that already exists.
   Note: A package with this name already exists. Please check
@@ -61,9 +58,6 @@ Generic:
      license. Detailed output of licensecheck in /travis/espresso/review-
      espresso/licensecheck.txt
 [ ]: License file installed when any subpackage combination is installed.
-[ ]: Package must own all directories that it creates.
-     Note: Directories without known owners: /usr/lib64/python2.7/site-
-     packages/openmpi
 [ ]: %build honors applicable compiler flags or justifies otherwise.
 [ ]: Package contains no bundled libraries without FPC exception.
 [ ]: Changelog in prescribed format.
@@ -89,12 +83,14 @@ Generic:
 [ ]: Package complies to the Packaging Guidelines
 [x]: Package successfully compiles and builds into binary rpms on at least
      one supported primary architecture.
+[x]: Package installs properly.
 [x]: Rpmlint is run on all rpms the build produces.
      Note: There are rpmlint messages (see attachment).
 [x]: If (and only if) the source package includes the text of the
      license(s) in its own file, then that file, containing the text of the
      license(s) for the package is included in %license.
 [x]: Package requires other packages for directories it uses.
+[x]: Package must own all directories that it creates.
 [x]: Package does not own files or directories owned by other packages.
 [x]: All build dependencies are listed in BuildRequires, except for any
      that are listed in the exceptions section of Packaging Guidelines.
@@ -159,34 +155,13 @@ Generic:
 ===== EXTRA items =====
 
 Generic:
-[!]: Rpmlint is run on all installed packages.
-     Note: Mock build failed
-     See: http://fedoraproject.org/wiki/Packaging/Guidelines#rpmlint
+[x]: Rpmlint is run on debuginfo package(s).
+     Note: No rpmlint messages.
+[x]: Rpmlint is run on all installed packages.
+     Note: There are rpmlint messages (see attachment).
 [x]: Large data in /usr/share should live in a noarch subpackage if package
      is arched.
 [x]: Spec file according to URL is the same as in SRPM.
-
-
-Installation errors
--------------------
-INFO: mock.py version 1.3.4 starting (python version = 3.5.2)...
-Start: init plugins
-INFO: selinux disabled
-Finish: init plugins
-Start: run
-Start: chroot init
-INFO: calling preinit hooks
-INFO: enabled root cache
-INFO: enabled dnf cache
-Start: cleaning dnf metadata
-Finish: cleaning dnf metadata
-INFO: enabled HW Info plugin
-Mock Version: 1.3.4
-INFO: Mock Version: 1.3.4
-Finish: chroot init
-INFO: installing package(s): /travis/espresso/review-espresso/results/python2-espresso-openmpi-4.0-0.2.20170228git8a021f5.fc27.x86_64.rpm /travis/espresso/review-espresso/results/python2-espresso-mpich-4.0-0.2.20170228git8a021f5.fc27.x86_64.rpm /travis/espresso/review-espresso/results/espresso-debuginfo-4.0-0.2.20170228git8a021f5.fc27.x86_64.rpm /travis/espresso/review-espresso/results/espresso-common-4.0-0.2.20170228git8a021f5.fc27.noarch.rpm
-ERROR: Command failed. See logs for output.
- # /usr/bin/dnf --installroot /var/lib/mock/fedora-rawhide-x86_64/root/ --releasever 27 --disableplugin=local --setopt=deltarpm=false install /travis/espresso/review-espresso/results/python2-espresso-openmpi-4.0-0.2.20170228git8a021f5.fc27.x86_64.rpm /travis/espresso/review-espresso/results/python2-espresso-mpich-4.0-0.2.20170228git8a021f5.fc27.x86_64.rpm /travis/espresso/review-espresso/results/espresso-debuginfo-4.0-0.2.20170228git8a021f5.fc27.x86_64.rpm /travis/espresso/review-espresso/results/espresso-common-4.0-0.2.20170228git8a021f5.fc27.noarch.rpm
 
 
 Rpmlint
@@ -196,32 +171,1447 @@ Checking: espresso-common-4.0-0.2.20170228git8a021f5.fc27.noarch.rpm
           python2-espresso-mpich-4.0-0.2.20170228git8a021f5.fc27.x86_64.rpm
           espresso-debuginfo-4.0-0.2.20170228git8a021f5.fc27.x86_64.rpm
           espresso-4.0-0.2.20170228git8a021f5.fc27.src.rpm
-python2-espresso-openmpi.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/openmpi/espressomd/libShapes.so libShapes.so()(64bit)(openmpi-x86_64)
-python2-espresso-openmpi.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/openmpi/espressomd/libImmersedBoundary.so libImmersedBoundary.so()(64bit)(openmpi-x86_64)
-python2-espresso-openmpi.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/openmpi/espressomd/libObjectInFluid.so libObjectInFluid.so()(64bit)(openmpi-x86_64)
-python2-espresso-openmpi.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/openmpi/espressomd/libConstraints.so libConstraints.so()(64bit)(openmpi-x86_64)
-python2-espresso-openmpi.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/openmpi/espressomd/libEspressoScriptInterface.so libEspressoScriptInterface.so()(64bit)(openmpi-x86_64)
-python2-espresso-openmpi.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/openmpi/espressomd/libCorrelators.so libCorrelators.so()(64bit)(openmpi-x86_64)
-python2-espresso-openmpi.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/openmpi/espressomd/libEspressoCore.so libEspressoCore.so()(64bit)(openmpi-x86_64)
-python2-espresso-openmpi.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/openmpi/espressomd/libObservables.so libObservables.so()(64bit)(openmpi-x86_64)
-python2-espresso-openmpi.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/openmpi/espressomd/libActor.so libActor.so()(64bit)(openmpi-x86_64)
-python2-espresso-openmpi.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/openmpi/espressomd/libEspressoUtils.so libEspressoUtils.so()(64bit)(openmpi-x86_64)
+python2-espresso-openmpi.x86_64: E: invalid-soname /usr/lib64/openmpi/lib/libActor.so libActor.so
+python2-espresso-openmpi.x86_64: E: invalid-soname /usr/lib64/openmpi/lib/libImmersedBoundary.so libImmersedBoundary.so
+python2-espresso-openmpi.x86_64: E: invalid-soname /usr/lib64/openmpi/lib/libCorrelators.so libCorrelators.so
+python2-espresso-openmpi.x86_64: E: invalid-soname /usr/lib64/openmpi/lib/libEspressoCore.so libEspressoCore.so
+python2-espresso-openmpi.x86_64: W: shared-lib-calls-exit /usr/lib64/openmpi/lib/libEspressoCore.so exit@GLIBC_2.2.5
+python2-espresso-openmpi.x86_64: E: invalid-soname /usr/lib64/openmpi/lib/libConstraints.so libConstraints.so
+python2-espresso-openmpi.x86_64: E: invalid-soname /usr/lib64/openmpi/lib/libEspressoUtils.so libEspressoUtils.so
+python2-espresso-openmpi.x86_64: E: invalid-soname /usr/lib64/openmpi/lib/libObservables.so libObservables.so
+python2-espresso-openmpi.x86_64: E: invalid-soname /usr/lib64/openmpi/lib/libObjectInFluid.so libObjectInFluid.so
+python2-espresso-openmpi.x86_64: E: invalid-soname /usr/lib64/openmpi/lib/libShapes.so libShapes.so
+python2-espresso-openmpi.x86_64: E: invalid-soname /usr/lib64/openmpi/lib/libEspressoScriptInterface.so libEspressoScriptInterface.so
 python2-espresso-openmpi.x86_64: W: no-documentation
 python2-espresso-openmpi.x86_64: E: zero-length /usr/lib64/python2.7/site-packages/openmpi/espressomd/__cinit__.py
-python2-espresso-mpich.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/mpich/espressomd/libShapes.so libShapes.so()(64bit)(mpich-x86_64)
-python2-espresso-mpich.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/mpich/espressomd/libObservables.so libObservables.so()(64bit)(mpich-x86_64)
-python2-espresso-mpich.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/mpich/espressomd/libConstraints.so libConstraints.so()(64bit)(mpich-x86_64)
-python2-espresso-mpich.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/mpich/espressomd/libCorrelators.so libCorrelators.so()(64bit)(mpich-x86_64)
-python2-espresso-mpich.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/mpich/espressomd/libEspressoUtils.so libEspressoUtils.so()(64bit)(mpich-x86_64)
-python2-espresso-mpich.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/mpich/espressomd/libEspressoScriptInterface.so libEspressoScriptInterface.so()(64bit)(mpich-x86_64)
-python2-espresso-mpich.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/mpich/espressomd/libObjectInFluid.so libObjectInFluid.so()(64bit)(mpich-x86_64)
-python2-espresso-mpich.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/mpich/espressomd/libEspressoCore.so libEspressoCore.so()(64bit)(mpich-x86_64)
-python2-espresso-mpich.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/mpich/espressomd/libActor.so libActor.so()(64bit)(mpich-x86_64)
-python2-espresso-mpich.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/mpich/espressomd/libImmersedBoundary.so libImmersedBoundary.so()(64bit)(mpich-x86_64)
+python2-espresso-mpich.x86_64: E: invalid-soname /usr/lib64/mpich/lib/libImmersedBoundary.so libImmersedBoundary.so
+python2-espresso-mpich.x86_64: E: invalid-soname /usr/lib64/mpich/lib/libEspressoUtils.so libEspressoUtils.so
+python2-espresso-mpich.x86_64: E: invalid-soname /usr/lib64/mpich/lib/libCorrelators.so libCorrelators.so
+python2-espresso-mpich.x86_64: E: invalid-soname /usr/lib64/mpich/lib/libShapes.so libShapes.so
+python2-espresso-mpich.x86_64: E: invalid-soname /usr/lib64/mpich/lib/libObservables.so libObservables.so
+python2-espresso-mpich.x86_64: E: invalid-soname /usr/lib64/mpich/lib/libEspressoScriptInterface.so libEspressoScriptInterface.so
+python2-espresso-mpich.x86_64: E: invalid-soname /usr/lib64/mpich/lib/libObjectInFluid.so libObjectInFluid.so
+python2-espresso-mpich.x86_64: E: invalid-soname /usr/lib64/mpich/lib/libConstraints.so libConstraints.so
+python2-espresso-mpich.x86_64: E: invalid-soname /usr/lib64/mpich/lib/libActor.so libActor.so
+python2-espresso-mpich.x86_64: E: invalid-soname /usr/lib64/mpich/lib/libEspressoCore.so libEspressoCore.so
+python2-espresso-mpich.x86_64: W: shared-lib-calls-exit /usr/lib64/mpich/lib/libEspressoCore.so exit@GLIBC_2.2.5
 python2-espresso-mpich.x86_64: W: no-documentation
 python2-espresso-mpich.x86_64: E: zero-length /usr/lib64/python2.7/site-packages/mpich/espressomd/__cinit__.py
-5 packages and 0 specfiles checked; 2 errors, 22 warnings.
+5 packages and 0 specfiles checked; 22 errors, 4 warnings.
 
+
+
+
+Rpmlint (debuginfo)
+-------------------
+Checking: espresso-debuginfo-4.0-0.2.20170228git8a021f5.fc27.x86_64.rpm
+1 packages and 0 specfiles checked; 0 errors, 0 warnings.
+
+
+
+
+
+Rpmlint (installed packages)
+----------------------------
+sh: /usr/bin/python: No such file or directory
+python2-espresso-mpich.x86_64: E: invalid-soname /usr/lib64/mpich/lib/libActor.so libActor.so
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libActor.so /lib64/libm.so.6
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libActor.so /lib64/libgcc_s.so.1
+python2-espresso-mpich.x86_64: E: invalid-soname /usr/lib64/mpich/lib/libConstraints.so libConstraints.so
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libConstraints.so ErrorHandling::RuntimeErrorStream::~RuntimeErrorStream()
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libConstraints.so force_cap
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libConstraints.so n_particle_types
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libConstraints.so ia_params
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libConstraints.so ErrorHandling::_runtimeMessageStream(ErrorHandling::RuntimeError::ErrorLevel, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libConstraints.so tabulated_forces
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libConstraints.so tabulated_energies
+python2-espresso-mpich.x86_64: E: invalid-soname /usr/lib64/mpich/lib/libCorrelators.so libCorrelators.so
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libCorrelators.so time_step
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libCorrelators.so errexit()
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libCorrelators.so sim_time
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libCorrelators.so Observables::Observable::calculate()
+python2-espresso-mpich.x86_64: E: invalid-soname /usr/lib64/mpich/lib/libEspressoCore.so libEspressoCore.so
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so typeinfo for boost::mpi::exception
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Allgather
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so boost::mpi::communicator::communicator(int const&, boost::mpi::comm_create_kind)
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Cart_create
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Bcast
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Op_create
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Type_create_hvector
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Send
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so boost::mpi::detail::mpi_datatype_cache()
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so boost::mpi::environment::collectives_tag()
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Isend
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so boost::mpi::communicator::abort(int) const
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so Correlators::Correlator::get_data()
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Wtick
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Cart_shift
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_File_write_all
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Type_contiguous
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so boost::mpi::communicator::operator int() const
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Scatter
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_File_open
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Type_free
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Barrier
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Finalize
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Gather
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Recv
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so boost::mpi::communicator::size() const
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Finalized
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Exscan
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so boost::mpi::exception::exception(char const*, int)
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so vtable for boost::mpi::exception
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so boost::mpi::communicator::communicator()
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Abort
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Cart_coords
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so boost::mpi::exception::~exception()
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_File_set_view
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Comm_size
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Waitall
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so boost::mpi::exception::~exception()
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Error_string
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Allreduce
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so boost::mpi::communicator::rank() const
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Type_commit
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Wtime
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Reduce
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Alloc_mem
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Irecv
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so void boost::mpi::communicator::send<boost::mpi::packed_oarchive>(int, int, boost::mpi::packed_oarchive const&) const
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Free_mem
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Comm_rank
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Init
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Dims_create
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_File_close
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so Constraints::Constraint::add_force(Particle*, double*)
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so Observables::Observable::writable() const
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so boost::mpi::status boost::mpi::communicator::recv<boost::mpi::packed_iarchive>(int, int, boost::mpi::packed_iarchive&) const
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so Observables::Observable::write() const
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Comm_free
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Comm_split
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so Observables::Observable::calculate()
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Type_vector
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_File_read_all
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so MPI_Cart_rank
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoCore.so Constraints::Constraint::add_energy(Particle*, double*, Observable_stat&) const
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libEspressoCore.so libboost_mpi.so.1.63.0
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libEspressoCore.so /lib64/libboost_filesystem.so.1.63.0
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libEspressoCore.so /lib64/libboost_system.so.1.63.0
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libEspressoCore.so /lib64/libboost_unit_test_framework.so.1.63.0
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libEspressoCore.so libmpicxx.so.12
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libEspressoCore.so libmpi.so.12
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libEspressoCore.so libActor.so
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libEspressoCore.so libObjectInFluid.so
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libEspressoCore.so libImmersedBoundary.so
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libEspressoCore.so libShapes.so
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libEspressoCore.so libConstraints.so
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libEspressoCore.so libEspressoUtils.so
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libEspressoCore.so libCorrelators.so
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libEspressoCore.so libObservables.so
+python2-espresso-mpich.x86_64: W: shared-lib-calls-exit /usr/lib64/mpich/lib/libEspressoCore.so exit@GLIBC_2.2.5
+python2-espresso-mpich.x86_64: E: invalid-soname /usr/lib64/mpich/lib/libEspressoScriptInterface.so libEspressoScriptInterface.so
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so typeinfo for Observables::Observable
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so Observables::Observable::do_write() const
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so typeinfo for boost::mpi::exception
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so Correlators::Correlator::stop_auto_update()
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so Observables::Observable::update()
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so vtable for Shapes::Slitpore
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so box_l
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so vtable for Observables::Observable
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so Constraints::constraints
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so ErrorHandling::_runtimeMessageStream(ErrorHandling::RuntimeError::ErrorLevel, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so Correlators::Correlator::get_data()
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so vtable for Shapes::Cylinder
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so boost::mpi::communicator::operator int() const
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so vtable for Shapes::Pore
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so Communication::MpiCallbacks::call(int, int, int) const
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so partCfg
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so Observables::auto_update_observables
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so Correlators::Correlator::start_auto_update()
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so Observables::Observable::set_filename(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, bool)
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so vtable for Shapes::Sphere
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so void boost::mpi::broadcast<boost::mpi::packed_oarchive>(boost::mpi::communicator const&, boost::mpi::packed_oarchive&, int)
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so vtable for Shapes::SpheroCylinder
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so boost::mpi::exception::exception(char const*, int)
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so vtable for boost::mpi::exception
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so sortPartCfg()
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so vtable for Shapes::HollowCone
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so Communication::MpiCallbacks::call(void (*)(int, int), int, int) const
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so vtable for Shapes::Maze
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so boost::mpi::exception::~exception()
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so Correlators::auto_update_correlators
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so time_step
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so boost::mpi::exception::~exception()
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so boost::mpi::communicator::rank() const
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so box_l_i
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so Communication::MpiCallbacks::add(std::function<void (int, int)> const&)
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so Correlators::Correlator::initialize()
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so LBBoundaries::lbboundaries
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so MPI_Alloc_mem
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so Correlators::Correlator::finalize()
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so periodic
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so MPI_Free_mem
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so n_part
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so Observables::Observable::Observable()
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so Correlators::Correlator::Correlator()
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so Correlators::Correlator::get_correlation()
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so Communication::MpiCallbacks::add(void (*)(int, int))
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so Observables::Observable::calculate()
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so Communication::mpiCallbacks()
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so vtable for Shapes::Stomatocyte
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so ErrorHandling::RuntimeErrorStream::~RuntimeErrorStream()
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so observable_compute_stress_tensor(int, double*)
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so void boost::mpi::broadcast<boost::mpi::packed_iarchive>(boost::mpi::communicator const&, boost::mpi::packed_iarchive&, int)
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so vtable for Shapes::Rhomboid
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoScriptInterface.so vtable for Shapes::Wall
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libEspressoScriptInterface.so libEspressoCore.so
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libEspressoScriptInterface.so /lib64/libfftw3.so.3
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libEspressoScriptInterface.so libboost_mpi.so.1.63.0
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libEspressoScriptInterface.so /lib64/libboost_filesystem.so.1.63.0
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libEspressoScriptInterface.so /lib64/libboost_system.so.1.63.0
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libEspressoScriptInterface.so /lib64/libboost_unit_test_framework.so.1.63.0
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libEspressoScriptInterface.so libmpicxx.so.12
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libEspressoScriptInterface.so libmpi.so.12
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libEspressoScriptInterface.so libActor.so
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libEspressoScriptInterface.so libObjectInFluid.so
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libEspressoScriptInterface.so libImmersedBoundary.so
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libEspressoScriptInterface.so libShapes.so
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libEspressoScriptInterface.so libConstraints.so
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libEspressoScriptInterface.so libEspressoUtils.so
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libEspressoScriptInterface.so libCorrelators.so
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libEspressoScriptInterface.so libObservables.so
+python2-espresso-mpich.x86_64: E: invalid-soname /usr/lib64/mpich/lib/libEspressoUtils.so libEspressoUtils.so
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so typeinfo for boost::archive::detail::basic_iarchive
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so typeinfo for boost::archive::detail::basic_oarchive
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so typeinfo for boost::mpi::exception
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so typeinfo for boost::archive::detail::basic_iserializer
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so typeinfo for boost::archive::detail::basic_oserializer
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so typeinfo for boost::serialization::typeid_system::extended_type_info_typeid_0
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so boost::serialization::typeid_system::extended_type_info_typeid_0::is_less_than(boost::serialization::extended_type_info const&) const
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so boost::serialization::typeid_system::extended_type_info_typeid_0::is_equal(boost::serialization::extended_type_info const&) const
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so boost::archive::detail::basic_iserializer::basic_iserializer(boost::serialization::extended_type_info const&)
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so boost::archive::detail::basic_oarchive::save_object(void const*, boost::archive::detail::basic_oserializer const&)
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so boost::archive::detail::basic_iarchive::basic_iarchive(unsigned int)
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so boost::archive::detail::basic_iarchive::get_library_version() const
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so boost::archive::detail::basic_iarchive::load_object(void*, boost::archive::detail::basic_iserializer const&)
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so boost::mpi::communicator::operator int() const
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so boost::serialization::typeid_system::extended_type_info_typeid_0::type_unregister()
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so boost::serialization::typeid_system::extended_type_info_typeid_0::type_register(std::type_info const&)
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so boost::archive::detail::basic_iarchive::reset_object_address(void const*, void const*)
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so boost::archive::detail::basic_iserializer::~basic_iserializer()
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so boost::mpi::communicator::size() const
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so boost::archive::detail::basic_oserializer::basic_oserializer(boost::serialization::extended_type_info const&)
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so boost::serialization::typeid_system::extended_type_info_typeid_0::~extended_type_info_typeid_0()
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so boost::serialization::extended_type_info::key_register() const
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so boost::mpi::exception::exception(char const*, int)
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so vtable for boost::mpi::exception
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so Communication::MpiCallbacks::call(void (*)(int, int), int, int) const
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so boost::mpi::exception::~exception()
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so boost::mpi::exception::~exception()
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so boost::archive::detail::basic_oserializer::~basic_oserializer()
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so boost::archive::detail::basic_oarchive::basic_oarchive(unsigned int)
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so boost::archive::detail::basic_oarchive::end_preamble()
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so MPI_Alloc_mem
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so void boost::mpi::communicator::send<boost::mpi::packed_oarchive>(int, int, boost::mpi::packed_oarchive const&) const
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so MPI_Free_mem
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so boost::mpi::status boost::mpi::communicator::recv<boost::mpi::packed_iarchive>(int, int, boost::mpi::packed_iarchive&) const
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so boost::archive::detail::basic_iarchive::~basic_iarchive()
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so Communication::MpiCallbacks::add(void (*)(int, int))
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so Communication::mpiCallbacks()
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so boost::serialization::extended_type_info::key_unregister() const
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so boost::serialization::typeid_system::extended_type_info_typeid_0::extended_type_info_typeid_0(char const*)
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libEspressoUtils.so boost::archive::detail::basic_oarchive::~basic_oarchive()
+python2-espresso-mpich.x86_64: E: invalid-soname /usr/lib64/mpich/lib/libImmersedBoundary.so libImmersedBoundary.so
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libImmersedBoundary.so /lib64/libstdc++.so.6
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libImmersedBoundary.so /lib64/libm.so.6
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libImmersedBoundary.so /lib64/libgcc_s.so.1
+python2-espresso-mpich.x86_64: E: invalid-soname /usr/lib64/mpich/lib/libObjectInFluid.so libObjectInFluid.so
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libObjectInFluid.so make_bond_type_exist(int)
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libObjectInFluid.so bonded_ia_params
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libObjectInFluid.so mpi_bcast_ia_params(int, int)
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libObjectInFluid.so /lib64/libm.so.6
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libObjectInFluid.so /lib64/libgcc_s.so.1
+python2-espresso-mpich.x86_64: E: invalid-soname /usr/lib64/mpich/lib/libObservables.so libObservables.so
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libObservables.so sim_time
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libObservables.so /lib64/libm.so.6
+python2-espresso-mpich.x86_64: E: invalid-soname /usr/lib64/mpich/lib/libShapes.so libShapes.so
+python2-espresso-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/libShapes.so box_l
+python2-espresso-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/libShapes.so /lib64/libgcc_s.so.1
+python2-espresso-mpich.x86_64: W: no-documentation
+python2-espresso-mpich.x86_64: E: zero-length /usr/lib64/python2.7/site-packages/mpich/espressomd/__cinit__.py
+python2-espresso-openmpi.x86_64: E: invalid-soname /usr/lib64/openmpi/lib/libActor.so libActor.so
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libActor.so /lib64/libm.so.6
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libActor.so /lib64/libgcc_s.so.1
+python2-espresso-openmpi.x86_64: E: invalid-soname /usr/lib64/openmpi/lib/libConstraints.so libConstraints.so
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI::Datatype::Free()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI::Win::Free()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so force_cap
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so ompi_mpi_cxx_op_intercept
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Win_unlock
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Group_excl
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Allgather
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Recv_init
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Cart_create
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Comm_get_name
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Info_dup
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Irsend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Bcast
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Ssend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Group_range_incl
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Op_create
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Group_size
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Comm_disconnect
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Win_get_name
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Pack_size
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Request_get_status
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Graph_neighbors
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Type_create_hvector
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Unpack_external
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Probe
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Send
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Info_set
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Type_get_extent
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Win_post
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Isend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Unpack
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so ErrorHandling::_runtimeMessageStream(ErrorHandling::RuntimeError::ErrorLevel, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Iprobe
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Comm_set_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Type_get_envelope
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Alltoall
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Cancel
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Initialized
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Scatterv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Issend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI::Comm::Comm()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Graphdims_get
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Info_get
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Cart_shift
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Type_get_true_extent
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Get
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Type_contiguous
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Cart_sub
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Scatter
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Win_get_group
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Ssend_init
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Comm_spawn
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Barrier
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Win_start
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Pack_external
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Rsend_init
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Group_incl
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so ia_params
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Bsend_init
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Sendrecv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Request_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Gather
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Grequest_complete
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Type_create_darray
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Win_wait
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Rsend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Recv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Graph_get
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Comm_group
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Comm_create
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Cart_get
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so tabulated_energies
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Type_get_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Op_commutative
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Graph_map
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Win_set_name
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Test_cancelled
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Cart_map
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Exscan
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Pack
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Errhandler_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so n_particle_types
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Abort
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Intercomm_create
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Cartdim_get
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Cart_coords
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so ompi_op_set_cxx_callback
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Get_elements
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Comm_delete_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Send_init
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Info_get_nkeys
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Bsend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Scan
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Comm_size
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Type_create_hindexed
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Reduce_local
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Reduce_scatter
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Win_lock
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Allreduce
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Allgatherv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Group_range_excl
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so ompi_mpi_comm_null
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Type_commit
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Put
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Type_size
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Status_set_elements
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Comm_get_errhandler
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Reduce
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Comm_remote_group
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Wait
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Comm_dup
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Sendrecv_replace
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Irecv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Alltoallw
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Type_get_name
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Type_create_indexed_block
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Type_get_contents
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Comm_get_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Comm_rank
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Info_delete
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Topo_test
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Get_count
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Info_get_nthkey
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Win_set_errhandler
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Comm_remote_size
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Type_dup
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Comm_set_errhandler
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Ibsend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Alltoallv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Op_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Comm_connect
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Comm_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Comm_split
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Type_create_subarray
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Comm_spawn_multiple
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Test
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Info_get_valuelen
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Win_test
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Type_vector
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Start
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Win_call_errhandler
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Type_indexed
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Comm_set_name
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Win_fence
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Win_complete
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Group_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Type_create_resized
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so ErrorHandling::RuntimeErrorStream::~RuntimeErrorStream()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Cart_rank
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Comm_accept
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Win_set_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Win_delete_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Type_delete_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Gatherv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Group_rank
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Intercomm_merge
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Win_get_errhandler
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Accumulate
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Type_set_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Status_set_cancelled
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Graph_neighbors_count
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Info_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Pack_external_size
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Type_set_name
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so tabulated_forces
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Graph_create
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libConstraints.so MPI_Comm_test_inter
+python2-espresso-openmpi.x86_64: E: invalid-soname /usr/lib64/openmpi/lib/libCorrelators.so libCorrelators.so
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libCorrelators.so time_step
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libCorrelators.so errexit()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libCorrelators.so sim_time
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libCorrelators.so Observables::Observable::calculate()
+python2-espresso-openmpi.x86_64: E: invalid-soname /usr/lib64/openmpi/lib/libEspressoCore.so libEspressoCore.so
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so typeinfo for boost::mpi::exception
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI::Datatype::Free()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI::Win::Free()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so ompi_mpi_cxx_op_intercept
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so ompi_mpi_op_sum
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so ompi_mpi_byte
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Win_unlock
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Group_excl
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Allgather
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Recv_init
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Cart_create
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Comm_get_name
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so ompi_mpi_char
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Info_dup
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Irsend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Bcast
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Ssend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Group_range_incl
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Op_create
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so boost::mpi::communicator::communicator(ompi_communicator_t* const&, boost::mpi::comm_create_kind)
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Group_size
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Comm_disconnect
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Win_get_name
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Pack_size
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Request_get_status
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Graph_neighbors
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Type_create_hvector
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Unpack_external
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Probe
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Send
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so boost::mpi::detail::mpi_datatype_cache()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so boost::mpi::environment::collectives_tag()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Info_set
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Type_get_extent
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Win_post
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Isend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Unpack
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so boost::mpi::communicator::abort(int) const
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Iprobe
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so ompi_mpi_comm_world
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so Correlators::Correlator::get_data()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Comm_set_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Type_get_envelope
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Alltoall
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Cancel
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Initialized
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so ompi_mpi_op_max
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Scatterv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Issend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI::Comm::Comm()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so boost::mpi::communicator::operator ompi_communicator_t*() const
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Graphdims_get
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Wtick
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Info_get
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Cart_shift
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Type_get_true_extent
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Get
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_File_write_all
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Type_contiguous
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so dladdr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Cart_sub
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so ompi_mpi_unsigned
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Scatter
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_File_open
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Win_get_group
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Ssend_init
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Type_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Comm_spawn
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Barrier
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Win_start
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Pack_external
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so dlopen
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Rsend_init
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Group_incl
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Bsend_init
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Sendrecv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Finalize
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Request_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Gather
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Grequest_complete
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Type_create_darray
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Win_wait
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Rsend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Recv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Graph_get
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Comm_group
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Comm_create
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so ompi_mpi_double
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Cart_get
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so boost::mpi::communicator::size() const
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Finalized
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Type_get_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Op_commutative
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Graph_map
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Win_set_name
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Test_cancelled
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Cart_map
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Exscan
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Pack
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so boost::mpi::exception::exception(char const*, int)
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so vtable for boost::mpi::exception
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Errhandler_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so boost::mpi::communicator::communicator()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Abort
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Intercomm_create
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Cartdim_get
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Cart_coords
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so ompi_op_set_cxx_callback
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Get_elements
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Comm_delete_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Send_init
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Info_get_nkeys
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Bsend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Scan
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so boost::mpi::exception::~exception()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_File_set_view
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Comm_size
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Type_create_hindexed
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Waitall
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so boost::mpi::exception::~exception()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Reduce_local
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Reduce_scatter
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Error_string
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Win_lock
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Allreduce
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Allgatherv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so boost::mpi::communicator::rank() const
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Group_range_excl
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so ompi_mpi_comm_null
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Type_commit
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Wtime
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Put
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Type_size
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Status_set_elements
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Comm_get_errhandler
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Reduce
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Comm_remote_group
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so ompi_mpi_int
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Wait
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Comm_dup
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Sendrecv_replace
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Alloc_mem
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Irecv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Alltoallw
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Type_get_name
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Type_create_indexed_block
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so void boost::mpi::communicator::send<boost::mpi::packed_oarchive>(int, int, boost::mpi::packed_oarchive const&) const
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Type_get_contents
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Free_mem
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Comm_get_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Comm_rank
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Init
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Info_delete
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Topo_test
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Get_count
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Dims_create
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_File_close
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Info_get_nthkey
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so dlsym
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so Constraints::Constraint::add_force(Particle*, double*)
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Win_set_errhandler
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Comm_remote_size
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so ompi_request_null
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so Observables::Observable::writable() const
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Type_dup
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so boost::mpi::status boost::mpi::communicator::recv<boost::mpi::packed_iarchive>(int, int, boost::mpi::packed_iarchive&) const
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Comm_set_errhandler
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Ibsend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Alltoallv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so Observables::Observable::write() const
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Op_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Comm_connect
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Comm_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Comm_split
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Type_create_subarray
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Comm_spawn_multiple
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Test
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so Observables::Observable::calculate()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Info_get_valuelen
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so ompi_mpi_info_null
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Win_test
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Type_vector
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_File_read_all
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Start
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Win_call_errhandler
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Type_indexed
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Comm_set_name
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Win_fence
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Win_complete
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Group_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Type_create_resized
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Cart_rank
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Comm_accept
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Win_set_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Win_delete_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Type_delete_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Gatherv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Group_rank
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Intercomm_merge
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Win_get_errhandler
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so Constraints::Constraint::add_energy(Particle*, double*, Observable_stat&) const
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Accumulate
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Type_set_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Status_set_cancelled
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Graph_neighbors_count
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Info_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Pack_external_size
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Type_set_name
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Graph_create
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoCore.so MPI_Comm_test_inter
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libEspressoCore.so libboost_mpi.so.1.63.0
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libEspressoCore.so /lib64/libboost_filesystem.so.1.63.0
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libEspressoCore.so /lib64/libboost_system.so.1.63.0
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libEspressoCore.so /lib64/libboost_unit_test_framework.so.1.63.0
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libEspressoCore.so libmpi_cxx.so.20
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libEspressoCore.so libmpi.so.20
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libEspressoCore.so libActor.so
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libEspressoCore.so libObjectInFluid.so
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libEspressoCore.so libImmersedBoundary.so
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libEspressoCore.so libShapes.so
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libEspressoCore.so libConstraints.so
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libEspressoCore.so libEspressoUtils.so
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libEspressoCore.so libCorrelators.so
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libEspressoCore.so libObservables.so
+python2-espresso-openmpi.x86_64: W: shared-lib-calls-exit /usr/lib64/openmpi/lib/libEspressoCore.so exit@GLIBC_2.2.5
+python2-espresso-openmpi.x86_64: E: invalid-soname /usr/lib64/openmpi/lib/libEspressoScriptInterface.so libEspressoScriptInterface.so
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so typeinfo for Observables::Observable
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so Observables::Observable::do_write() const
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI::Datatype::Free()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI::Win::Free()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so typeinfo for boost::mpi::exception
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so ompi_mpi_cxx_op_intercept
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Win_unlock
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so Correlators::Correlator::stop_auto_update()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Group_excl
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Allgather
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Recv_init
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Cart_create
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Comm_get_name
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Info_dup
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Irsend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Bcast
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Ssend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Group_range_incl
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Op_create
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Group_size
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Comm_disconnect
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so Observables::Observable::update()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Win_get_name
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Pack_size
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Request_get_status
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Graph_neighbors
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Type_create_hvector
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Unpack_external
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Probe
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so vtable for Shapes::Slitpore
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Send
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so box_l
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Info_set
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so vtable for Observables::Observable
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Type_get_extent
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Win_post
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Isend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Unpack
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so Constraints::constraints
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so ErrorHandling::_runtimeMessageStream(ErrorHandling::RuntimeError::ErrorLevel, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Iprobe
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so Correlators::Correlator::get_data()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Comm_set_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Type_get_envelope
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Alltoall
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Cancel
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Initialized
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Scatterv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Issend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI::Comm::Comm()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so boost::mpi::communicator::operator ompi_communicator_t*() const
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so vtable for Shapes::Cylinder
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Graphdims_get
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Info_get
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Cart_shift
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Type_get_true_extent
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Get
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Type_contiguous
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Cart_sub
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Scatter
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Win_get_group
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Ssend_init
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Comm_spawn
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Barrier
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Win_start
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so vtable for Shapes::Pore
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Pack_external
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so Communication::MpiCallbacks::call(int, int, int) const
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Rsend_init
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Group_incl
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so partCfg
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Bsend_init
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so Observables::auto_update_observables
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Sendrecv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Request_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Gather
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Grequest_complete
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Type_create_darray
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Win_wait
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Rsend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Recv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Graph_get
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Comm_group
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Comm_create
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so Correlators::Correlator::start_auto_update()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Cart_get
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so Observables::Observable::set_filename(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, bool)
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Type_get_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Op_commutative
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so vtable for Shapes::Sphere
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Graph_map
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Win_set_name
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so void boost::mpi::broadcast<boost::mpi::packed_oarchive>(boost::mpi::communicator const&, boost::mpi::packed_oarchive&, int)
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Test_cancelled
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so vtable for Shapes::SpheroCylinder
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Cart_map
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Exscan
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Pack
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so boost::mpi::exception::exception(char const*, int)
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so vtable for boost::mpi::exception
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so sortPartCfg()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Errhandler_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so vtable for Shapes::HollowCone
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Abort
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Intercomm_create
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Cartdim_get
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Cart_coords
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so ompi_op_set_cxx_callback
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so Communication::MpiCallbacks::call(void (*)(int, int), int, int) const
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Get_elements
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so vtable for Shapes::Maze
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Comm_delete_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Send_init
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Info_get_nkeys
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Bsend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Scan
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so boost::mpi::exception::~exception()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so Correlators::auto_update_correlators
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so time_step
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Comm_size
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Type_create_hindexed
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so boost::mpi::exception::~exception()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Reduce_local
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Reduce_scatter
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Win_lock
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Allreduce
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Allgatherv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so boost::mpi::communicator::rank() const
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Group_range_excl
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so box_l_i
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so ompi_mpi_comm_null
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so Communication::MpiCallbacks::add(std::function<void (int, int)> const&)
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Type_commit
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Put
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Type_size
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Status_set_elements
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Comm_get_errhandler
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Reduce
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Comm_remote_group
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so Correlators::Correlator::initialize()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so LBBoundaries::lbboundaries
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Wait
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Comm_dup
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Sendrecv_replace
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Alloc_mem
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Irecv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Alltoallw
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so Correlators::Correlator::finalize()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Type_get_name
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Type_create_indexed_block
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so periodic
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Type_get_contents
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Free_mem
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Comm_get_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Comm_rank
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Info_delete
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Topo_test
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Get_count
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so n_part
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so Observables::Observable::Observable()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Info_get_nthkey
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Win_set_errhandler
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Comm_remote_size
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Type_dup
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Comm_set_errhandler
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Ibsend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Alltoallv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so Correlators::Correlator::Correlator()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Op_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Comm_connect
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Comm_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so Correlators::Correlator::get_correlation()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so Communication::MpiCallbacks::add(void (*)(int, int))
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Comm_split
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Type_create_subarray
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Comm_spawn_multiple
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Test
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so Observables::Observable::calculate()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Info_get_valuelen
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so ompi_mpi_info_null
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so Communication::mpiCallbacks()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Win_test
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Type_vector
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Start
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Win_call_errhandler
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Type_indexed
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Comm_set_name
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Win_fence
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Win_complete
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Group_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Type_create_resized
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so vtable for Shapes::Stomatocyte
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so ErrorHandling::RuntimeErrorStream::~RuntimeErrorStream()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Cart_rank
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Comm_accept
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Win_set_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Win_delete_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Type_delete_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Gatherv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Group_rank
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Intercomm_merge
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Win_get_errhandler
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Accumulate
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Type_set_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Status_set_cancelled
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Graph_neighbors_count
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Info_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Pack_external_size
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so observable_compute_stress_tensor(int, double*)
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Type_set_name
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so void boost::mpi::broadcast<boost::mpi::packed_iarchive>(boost::mpi::communicator const&, boost::mpi::packed_iarchive&, int)
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so vtable for Shapes::Rhomboid
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Graph_create
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so MPI_Comm_test_inter
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoScriptInterface.so vtable for Shapes::Wall
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libEspressoScriptInterface.so libEspressoCore.so
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libEspressoScriptInterface.so /lib64/libfftw3.so.3
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libEspressoScriptInterface.so libboost_mpi.so.1.63.0
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libEspressoScriptInterface.so /lib64/libboost_filesystem.so.1.63.0
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libEspressoScriptInterface.so /lib64/libboost_system.so.1.63.0
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libEspressoScriptInterface.so /lib64/libboost_unit_test_framework.so.1.63.0
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libEspressoScriptInterface.so libmpi_cxx.so.20
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libEspressoScriptInterface.so libmpi.so.20
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libEspressoScriptInterface.so libActor.so
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libEspressoScriptInterface.so libObjectInFluid.so
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libEspressoScriptInterface.so libImmersedBoundary.so
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libEspressoScriptInterface.so libShapes.so
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libEspressoScriptInterface.so libConstraints.so
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libEspressoScriptInterface.so libEspressoUtils.so
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libEspressoScriptInterface.so libCorrelators.so
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libEspressoScriptInterface.so libObservables.so
+python2-espresso-openmpi.x86_64: E: invalid-soname /usr/lib64/openmpi/lib/libEspressoUtils.so libEspressoUtils.so
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so typeinfo for boost::archive::detail::basic_iarchive
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so typeinfo for boost::archive::detail::basic_oarchive
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so typeinfo for boost::mpi::exception
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so typeinfo for boost::archive::detail::basic_iserializer
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so typeinfo for boost::archive::detail::basic_oserializer
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so typeinfo for boost::serialization::typeid_system::extended_type_info_typeid_0
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI::Datatype::Free()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI::Win::Free()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so boost::serialization::typeid_system::extended_type_info_typeid_0::is_less_than(boost::serialization::extended_type_info const&) const
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so boost::serialization::typeid_system::extended_type_info_typeid_0::is_equal(boost::serialization::extended_type_info const&) const
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so ompi_mpi_cxx_op_intercept
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Win_unlock
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Group_excl
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Allgather
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Recv_init
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Cart_create
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Comm_get_name
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Info_dup
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Irsend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Bcast
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Ssend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Group_range_incl
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Op_create
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Group_size
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Comm_disconnect
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Win_get_name
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Pack_size
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so boost::archive::detail::basic_iserializer::basic_iserializer(boost::serialization::extended_type_info const&)
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Request_get_status
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Graph_neighbors
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Type_create_hvector
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Unpack_external
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Probe
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Send
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Info_set
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so boost::archive::detail::basic_oarchive::save_object(void const*, boost::archive::detail::basic_oserializer const&)
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Type_get_extent
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Win_post
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Isend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Unpack
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so boost::archive::detail::basic_iarchive::basic_iarchive(unsigned int)
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so boost::archive::detail::basic_iarchive::get_library_version() const
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so boost::archive::detail::basic_iarchive::load_object(void*, boost::archive::detail::basic_iserializer const&)
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Iprobe
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Comm_set_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Type_get_envelope
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Alltoall
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Cancel
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Initialized
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Scatterv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Issend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI::Comm::Comm()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so boost::mpi::communicator::operator ompi_communicator_t*() const
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Graphdims_get
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Info_get
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Cart_shift
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Type_get_true_extent
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Get
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Type_contiguous
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Cart_sub
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Scatter
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Win_get_group
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so boost::serialization::typeid_system::extended_type_info_typeid_0::type_unregister()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Ssend_init
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so boost::serialization::typeid_system::extended_type_info_typeid_0::type_register(std::type_info const&)
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Comm_spawn
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Barrier
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Win_start
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Pack_external
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Rsend_init
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Group_incl
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so boost::archive::detail::basic_iarchive::reset_object_address(void const*, void const*)
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Bsend_init
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Sendrecv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so boost::archive::detail::basic_iserializer::~basic_iserializer()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Request_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Gather
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Grequest_complete
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Type_create_darray
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Win_wait
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Rsend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Recv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Graph_get
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Comm_group
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Comm_create
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Cart_get
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so boost::mpi::communicator::size() const
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so boost::archive::detail::basic_oserializer::basic_oserializer(boost::serialization::extended_type_info const&)
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Type_get_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Op_commutative
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Graph_map
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so boost::serialization::typeid_system::extended_type_info_typeid_0::~extended_type_info_typeid_0()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Win_set_name
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so boost::serialization::extended_type_info::key_register() const
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Test_cancelled
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Cart_map
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Exscan
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Pack
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so boost::mpi::exception::exception(char const*, int)
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so vtable for boost::mpi::exception
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Errhandler_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Abort
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Intercomm_create
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Cartdim_get
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Cart_coords
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so ompi_op_set_cxx_callback
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so Communication::MpiCallbacks::call(void (*)(int, int), int, int) const
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Get_elements
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Comm_delete_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Send_init
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Info_get_nkeys
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Bsend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Scan
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so boost::mpi::exception::~exception()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Comm_size
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Type_create_hindexed
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so boost::mpi::exception::~exception()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Reduce_local
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Reduce_scatter
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Win_lock
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Allreduce
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Allgatherv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Group_range_excl
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so ompi_mpi_comm_null
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so boost::archive::detail::basic_oserializer::~basic_oserializer()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Type_commit
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Put
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Type_size
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Status_set_elements
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Comm_get_errhandler
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Reduce
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Comm_remote_group
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so boost::archive::detail::basic_oarchive::basic_oarchive(unsigned int)
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Wait
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Comm_dup
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Sendrecv_replace
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so boost::archive::detail::basic_oarchive::end_preamble()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Alloc_mem
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Irecv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Alltoallw
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Type_get_name
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Type_create_indexed_block
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so void boost::mpi::communicator::send<boost::mpi::packed_oarchive>(int, int, boost::mpi::packed_oarchive const&) const
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Type_get_contents
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Free_mem
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Comm_get_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Comm_rank
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Info_delete
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Topo_test
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Get_count
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Info_get_nthkey
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Win_set_errhandler
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Comm_remote_size
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Type_dup
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so boost::mpi::status boost::mpi::communicator::recv<boost::mpi::packed_iarchive>(int, int, boost::mpi::packed_iarchive&) const
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Comm_set_errhandler
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Ibsend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Alltoallv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Op_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Comm_connect
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Comm_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so boost::archive::detail::basic_iarchive::~basic_iarchive()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so Communication::MpiCallbacks::add(void (*)(int, int))
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Comm_split
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Type_create_subarray
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Comm_spawn_multiple
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Test
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Info_get_valuelen
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so ompi_mpi_info_null
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so Communication::mpiCallbacks()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Win_test
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Type_vector
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Start
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Win_call_errhandler
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so boost::serialization::extended_type_info::key_unregister() const
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Type_indexed
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Comm_set_name
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Win_fence
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Win_complete
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Group_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Type_create_resized
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Cart_rank
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Comm_accept
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Win_set_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Win_delete_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Type_delete_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Gatherv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Group_rank
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Intercomm_merge
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Win_get_errhandler
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Accumulate
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Type_set_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Status_set_cancelled
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Graph_neighbors_count
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Info_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Pack_external_size
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Type_set_name
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Graph_create
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so MPI_Comm_test_inter
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so boost::serialization::typeid_system::extended_type_info_typeid_0::extended_type_info_typeid_0(char const*)
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libEspressoUtils.so boost::archive::detail::basic_oarchive::~basic_oarchive()
+python2-espresso-openmpi.x86_64: E: invalid-soname /usr/lib64/openmpi/lib/libImmersedBoundary.so libImmersedBoundary.so
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libImmersedBoundary.so /lib64/libstdc++.so.6
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libImmersedBoundary.so /lib64/libm.so.6
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libImmersedBoundary.so /lib64/libgcc_s.so.1
+python2-espresso-openmpi.x86_64: E: invalid-soname /usr/lib64/openmpi/lib/libObjectInFluid.so libObjectInFluid.so
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI::Datatype::Free()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI::Win::Free()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so ompi_mpi_cxx_op_intercept
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Win_unlock
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Group_excl
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Allgather
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Recv_init
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Cart_create
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Comm_get_name
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Info_dup
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Irsend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Bcast
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Ssend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Group_range_incl
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Op_create
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Group_size
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Comm_disconnect
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Win_get_name
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Pack_size
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Request_get_status
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Graph_neighbors
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Type_create_hvector
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Unpack_external
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Probe
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Send
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Info_set
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Type_get_extent
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Win_post
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Isend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Unpack
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Iprobe
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Comm_set_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Type_get_envelope
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Alltoall
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Cancel
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Initialized
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Scatterv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Issend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI::Comm::Comm()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Graphdims_get
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Info_get
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Cart_shift
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Type_get_true_extent
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Get
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Type_contiguous
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Cart_sub
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Scatter
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Win_get_group
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Ssend_init
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Comm_spawn
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Barrier
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Win_start
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Pack_external
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Rsend_init
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Group_incl
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Bsend_init
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Sendrecv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Request_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Gather
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Grequest_complete
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Type_create_darray
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Win_wait
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Rsend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Recv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Graph_get
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Comm_group
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Comm_create
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Cart_get
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Type_get_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Op_commutative
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Graph_map
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Win_set_name
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Test_cancelled
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Cart_map
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Exscan
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Pack
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Errhandler_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Abort
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Intercomm_create
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Cartdim_get
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Cart_coords
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so ompi_op_set_cxx_callback
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Get_elements
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Comm_delete_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Send_init
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Info_get_nkeys
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Bsend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Scan
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Comm_size
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Type_create_hindexed
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Reduce_local
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Reduce_scatter
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Win_lock
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Allreduce
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Allgatherv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Group_range_excl
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so ompi_mpi_comm_null
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so bonded_ia_params
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Type_commit
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Put
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Type_size
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Status_set_elements
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Comm_get_errhandler
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Reduce
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Comm_remote_group
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so make_bond_type_exist(int)
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Wait
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Comm_dup
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Sendrecv_replace
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Irecv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Alltoallw
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Type_get_name
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Type_create_indexed_block
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Type_get_contents
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Comm_get_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Comm_rank
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Info_delete
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Topo_test
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Get_count
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Info_get_nthkey
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Win_set_errhandler
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Comm_remote_size
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Type_dup
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Comm_set_errhandler
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Ibsend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Alltoallv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Op_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Comm_connect
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Comm_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Comm_split
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Type_create_subarray
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Comm_spawn_multiple
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Test
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Info_get_valuelen
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so mpi_bcast_ia_params(int, int)
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Win_test
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Type_vector
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Start
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Win_call_errhandler
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Type_indexed
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Comm_set_name
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Win_fence
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Win_complete
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Group_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Type_create_resized
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Cart_rank
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Comm_accept
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Win_set_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Win_delete_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Type_delete_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Gatherv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Group_rank
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Intercomm_merge
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Win_get_errhandler
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Accumulate
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Type_set_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Status_set_cancelled
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Graph_neighbors_count
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Info_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Pack_external_size
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Type_set_name
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Graph_create
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObjectInFluid.so MPI_Comm_test_inter
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libObjectInFluid.so /lib64/libm.so.6
+python2-espresso-openmpi.x86_64: E: invalid-soname /usr/lib64/openmpi/lib/libObservables.so libObservables.so
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libObservables.so sim_time
+python2-espresso-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/libObservables.so /lib64/libm.so.6
+python2-espresso-openmpi.x86_64: E: invalid-soname /usr/lib64/openmpi/lib/libShapes.so libShapes.so
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI::Datatype::Free()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI::Win::Free()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so ompi_mpi_cxx_op_intercept
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Win_unlock
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Group_excl
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Allgather
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Recv_init
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Cart_create
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Comm_get_name
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Info_dup
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Irsend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Bcast
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Ssend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Group_range_incl
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Op_create
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Group_size
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Comm_disconnect
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Win_get_name
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Pack_size
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Request_get_status
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Graph_neighbors
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Type_create_hvector
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Unpack_external
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Probe
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Send
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so box_l
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Info_set
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Type_get_extent
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Win_post
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Isend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Unpack
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Iprobe
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Comm_set_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Type_get_envelope
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Alltoall
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Cancel
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Initialized
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Scatterv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Issend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI::Comm::Comm()
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Graphdims_get
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Info_get
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Cart_shift
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Type_get_true_extent
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Get
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Type_contiguous
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Cart_sub
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Scatter
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Win_get_group
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Ssend_init
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Comm_spawn
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Barrier
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Win_start
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Pack_external
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Rsend_init
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Group_incl
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Bsend_init
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Sendrecv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Request_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Gather
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Grequest_complete
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Type_create_darray
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Win_wait
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Rsend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Recv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Graph_get
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Comm_group
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Comm_create
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Cart_get
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Type_get_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Op_commutative
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Graph_map
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Win_set_name
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Test_cancelled
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Cart_map
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Exscan
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Pack
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Errhandler_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Abort
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Intercomm_create
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Cartdim_get
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Cart_coords
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so ompi_op_set_cxx_callback
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Get_elements
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Comm_delete_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Send_init
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Info_get_nkeys
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Bsend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Scan
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Comm_size
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Type_create_hindexed
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Reduce_local
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Reduce_scatter
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Win_lock
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Allreduce
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Allgatherv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Group_range_excl
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so ompi_mpi_comm_null
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Type_commit
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Put
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Type_size
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Status_set_elements
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Comm_get_errhandler
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Reduce
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Comm_remote_group
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Wait
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Comm_dup
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Sendrecv_replace
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Irecv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Alltoallw
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Type_get_name
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Type_create_indexed_block
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Type_get_contents
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Comm_get_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Comm_rank
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Info_delete
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Topo_test
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Get_count
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Info_get_nthkey
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Win_set_errhandler
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Comm_remote_size
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Type_dup
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Comm_set_errhandler
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Ibsend
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Alltoallv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Op_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Comm_connect
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Comm_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Comm_split
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Type_create_subarray
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Comm_spawn_multiple
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Test
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Info_get_valuelen
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Win_test
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Type_vector
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Start
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Win_call_errhandler
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Type_indexed
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Comm_set_name
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Win_fence
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Win_complete
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Group_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Type_create_resized
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Cart_rank
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Comm_accept
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Win_set_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Win_delete_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Type_delete_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Gatherv
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Group_rank
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Intercomm_merge
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Win_get_errhandler
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Accumulate
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Type_set_attr
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Status_set_cancelled
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Graph_neighbors_count
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Info_free
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Pack_external_size
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Type_set_name
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Graph_create
+python2-espresso-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libShapes.so MPI_Comm_test_inter
+python2-espresso-openmpi.x86_64: W: no-documentation
+python2-espresso-openmpi.x86_64: E: zero-length /usr/lib64/python2.7/site-packages/openmpi/espressomd/__cinit__.py
+4 packages and 0 specfiles checked; 22 errors, 1375 warnings.
 
 
 
@@ -234,16 +1624,16 @@ espresso-debuginfo (rpmlib, GLIBC filtered):
 
 python2-espresso-mpich (rpmlib, GLIBC filtered):
     espresso-common
-    libActor.so()(64bit)
-    libConstraints.so()(64bit)
-    libCorrelators.so()(64bit)
-    libEspressoCore.so()(64bit)
-    libEspressoScriptInterface.so()(64bit)
-    libEspressoUtils.so()(64bit)
-    libImmersedBoundary.so()(64bit)
-    libObjectInFluid.so()(64bit)
-    libObservables.so()(64bit)
-    libShapes.so()(64bit)
+    libActor.so()(64bit)(mpich-x86_64)
+    libConstraints.so()(64bit)(mpich-x86_64)
+    libCorrelators.so()(64bit)(mpich-x86_64)
+    libEspressoCore.so()(64bit)(mpich-x86_64)
+    libEspressoScriptInterface.so()(64bit)(mpich-x86_64)
+    libEspressoUtils.so()(64bit)(mpich-x86_64)
+    libImmersedBoundary.so()(64bit)(mpich-x86_64)
+    libObjectInFluid.so()(64bit)(mpich-x86_64)
+    libObservables.so()(64bit)(mpich-x86_64)
+    libShapes.so()(64bit)(mpich-x86_64)
     libboost_filesystem.so.1.63.0()(64bit)
     libboost_mpi.so.1.63.0()(64bit)(mpich-x86_64)
     libboost_serialization.so.1.63.0()(64bit)
@@ -265,16 +1655,16 @@ python2-espresso-mpich (rpmlib, GLIBC filtered):
 
 python2-espresso-openmpi (rpmlib, GLIBC filtered):
     espresso-common
-    libActor.so()(64bit)
-    libConstraints.so()(64bit)
-    libCorrelators.so()(64bit)
-    libEspressoCore.so()(64bit)
-    libEspressoScriptInterface.so()(64bit)
-    libEspressoUtils.so()(64bit)
-    libImmersedBoundary.so()(64bit)
-    libObjectInFluid.so()(64bit)
-    libObservables.so()(64bit)
-    libShapes.so()(64bit)
+    libActor.so()(64bit)(openmpi-x86_64)
+    libConstraints.so()(64bit)(openmpi-x86_64)
+    libCorrelators.so()(64bit)(openmpi-x86_64)
+    libEspressoCore.so()(64bit)(openmpi-x86_64)
+    libEspressoScriptInterface.so()(64bit)(openmpi-x86_64)
+    libEspressoUtils.so()(64bit)(openmpi-x86_64)
+    libImmersedBoundary.so()(64bit)(openmpi-x86_64)
+    libObjectInFluid.so()(64bit)(openmpi-x86_64)
+    libObservables.so()(64bit)(openmpi-x86_64)
+    libShapes.so()(64bit)(openmpi-x86_64)
     libboost_filesystem.so.1.63.0()(64bit)
     libboost_mpi.so.1.63.0()(64bit)(openmpi-x86_64)
     libboost_serialization.so.1.63.0()(64bit)
@@ -342,6 +1732,16 @@ python2-espresso-openmpi:
 
 Unversioned so-files
 --------------------
+python2-espresso-openmpi: /usr/lib64/openmpi/lib/libActor.so
+python2-espresso-openmpi: /usr/lib64/openmpi/lib/libConstraints.so
+python2-espresso-openmpi: /usr/lib64/openmpi/lib/libCorrelators.so
+python2-espresso-openmpi: /usr/lib64/openmpi/lib/libEspressoCore.so
+python2-espresso-openmpi: /usr/lib64/openmpi/lib/libEspressoScriptInterface.so
+python2-espresso-openmpi: /usr/lib64/openmpi/lib/libEspressoUtils.so
+python2-espresso-openmpi: /usr/lib64/openmpi/lib/libImmersedBoundary.so
+python2-espresso-openmpi: /usr/lib64/openmpi/lib/libObjectInFluid.so
+python2-espresso-openmpi: /usr/lib64/openmpi/lib/libObservables.so
+python2-espresso-openmpi: /usr/lib64/openmpi/lib/libShapes.so
 python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/espressomd/_init.so
 python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/espressomd/_system.so
 python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/espressomd/actors.so
@@ -359,16 +1759,6 @@ python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/espressomd/
 python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/espressomd/integrate.so
 python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/espressomd/interactions.so
 python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/espressomd/lb.so
-python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/espressomd/libActor.so
-python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/espressomd/libConstraints.so
-python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/espressomd/libCorrelators.so
-python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/espressomd/libEspressoCore.so
-python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/espressomd/libEspressoScriptInterface.so
-python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/espressomd/libEspressoUtils.so
-python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/espressomd/libImmersedBoundary.so
-python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/espressomd/libObjectInFluid.so
-python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/espressomd/libObservables.so
-python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/espressomd/libShapes.so
 python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/espressomd/magnetostatic_extensions.so
 python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/espressomd/magnetostatics.so
 python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/espressomd/minimize_energy.so
@@ -382,6 +1772,16 @@ python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/espressomd/
 python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/espressomd/visualization.so
 python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/espressomd/visualizationMayavi.so
 python2-espresso-openmpi: /usr/lib64/python2.7/site-packages/openmpi/espressomd/visualizationOpenGL.so
+python2-espresso-mpich: /usr/lib64/mpich/lib/libActor.so
+python2-espresso-mpich: /usr/lib64/mpich/lib/libConstraints.so
+python2-espresso-mpich: /usr/lib64/mpich/lib/libCorrelators.so
+python2-espresso-mpich: /usr/lib64/mpich/lib/libEspressoCore.so
+python2-espresso-mpich: /usr/lib64/mpich/lib/libEspressoScriptInterface.so
+python2-espresso-mpich: /usr/lib64/mpich/lib/libEspressoUtils.so
+python2-espresso-mpich: /usr/lib64/mpich/lib/libImmersedBoundary.so
+python2-espresso-mpich: /usr/lib64/mpich/lib/libObjectInFluid.so
+python2-espresso-mpich: /usr/lib64/mpich/lib/libObservables.so
+python2-espresso-mpich: /usr/lib64/mpich/lib/libShapes.so
 python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/espressomd/_init.so
 python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/espressomd/_system.so
 python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/espressomd/actors.so
@@ -399,16 +1799,6 @@ python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/espressomd/gran
 python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/espressomd/integrate.so
 python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/espressomd/interactions.so
 python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/espressomd/lb.so
-python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/espressomd/libActor.so
-python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/espressomd/libConstraints.so
-python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/espressomd/libCorrelators.so
-python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/espressomd/libEspressoCore.so
-python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/espressomd/libEspressoScriptInterface.so
-python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/espressomd/libEspressoUtils.so
-python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/espressomd/libImmersedBoundary.so
-python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/espressomd/libObjectInFluid.so
-python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/espressomd/libObservables.so
-python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/espressomd/libShapes.so
 python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/espressomd/magnetostatic_extensions.so
 python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/espressomd/magnetostatics.so
 python2-espresso-mpich: /usr/lib64/python2.7/site-packages/mpich/espressomd/minimize_energy.so
