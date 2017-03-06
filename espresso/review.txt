@@ -196,11 +196,31 @@ Checking: espresso-common-4.0-0.2.20170228git8a021f5.fc27.noarch.rpm
           python2-espresso-mpich-4.0-0.2.20170228git8a021f5.fc27.x86_64.rpm
           espresso-debuginfo-4.0-0.2.20170228git8a021f5.fc27.x86_64.rpm
           espresso-4.0-0.2.20170228git8a021f5.fc27.src.rpm
+python2-espresso-openmpi.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/openmpi/espressomd/libShapes.so libShapes.so()(64bit)(openmpi-x86_64)
+python2-espresso-openmpi.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/openmpi/espressomd/libImmersedBoundary.so libImmersedBoundary.so()(64bit)(openmpi-x86_64)
+python2-espresso-openmpi.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/openmpi/espressomd/libObjectInFluid.so libObjectInFluid.so()(64bit)(openmpi-x86_64)
+python2-espresso-openmpi.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/openmpi/espressomd/libConstraints.so libConstraints.so()(64bit)(openmpi-x86_64)
+python2-espresso-openmpi.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/openmpi/espressomd/libEspressoScriptInterface.so libEspressoScriptInterface.so()(64bit)(openmpi-x86_64)
+python2-espresso-openmpi.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/openmpi/espressomd/libCorrelators.so libCorrelators.so()(64bit)(openmpi-x86_64)
+python2-espresso-openmpi.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/openmpi/espressomd/libEspressoCore.so libEspressoCore.so()(64bit)(openmpi-x86_64)
+python2-espresso-openmpi.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/openmpi/espressomd/libObservables.so libObservables.so()(64bit)(openmpi-x86_64)
+python2-espresso-openmpi.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/openmpi/espressomd/libActor.so libActor.so()(64bit)(openmpi-x86_64)
+python2-espresso-openmpi.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/openmpi/espressomd/libEspressoUtils.so libEspressoUtils.so()(64bit)(openmpi-x86_64)
 python2-espresso-openmpi.x86_64: W: no-documentation
 python2-espresso-openmpi.x86_64: E: zero-length /usr/lib64/python2.7/site-packages/openmpi/espressomd/__cinit__.py
+python2-espresso-mpich.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/mpich/espressomd/libShapes.so libShapes.so()(64bit)(mpich-x86_64)
+python2-espresso-mpich.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/mpich/espressomd/libObservables.so libObservables.so()(64bit)(mpich-x86_64)
+python2-espresso-mpich.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/mpich/espressomd/libConstraints.so libConstraints.so()(64bit)(mpich-x86_64)
+python2-espresso-mpich.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/mpich/espressomd/libCorrelators.so libCorrelators.so()(64bit)(mpich-x86_64)
+python2-espresso-mpich.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/mpich/espressomd/libEspressoUtils.so libEspressoUtils.so()(64bit)(mpich-x86_64)
+python2-espresso-mpich.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/mpich/espressomd/libEspressoScriptInterface.so libEspressoScriptInterface.so()(64bit)(mpich-x86_64)
+python2-espresso-mpich.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/mpich/espressomd/libObjectInFluid.so libObjectInFluid.so()(64bit)(mpich-x86_64)
+python2-espresso-mpich.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/mpich/espressomd/libEspressoCore.so libEspressoCore.so()(64bit)(mpich-x86_64)
+python2-espresso-mpich.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/mpich/espressomd/libActor.so libActor.so()(64bit)(mpich-x86_64)
+python2-espresso-mpich.x86_64: W: private-shared-object-provides /usr/lib64/python2.7/site-packages/mpich/espressomd/libImmersedBoundary.so libImmersedBoundary.so()(64bit)(mpich-x86_64)
 python2-espresso-mpich.x86_64: W: no-documentation
 python2-espresso-mpich.x86_64: E: zero-length /usr/lib64/python2.7/site-packages/mpich/espressomd/__cinit__.py
-5 packages and 0 specfiles checked; 2 errors, 2 warnings.
+5 packages and 0 specfiles checked; 2 errors, 22 warnings.
 
 
 
@@ -289,12 +309,32 @@ python2-espresso-mpich:
     espresso-devel
     espresso-mpich
     espresso-mpich2
+    libActor.so()(64bit)(mpich-x86_64)
+    libConstraints.so()(64bit)(mpich-x86_64)
+    libCorrelators.so()(64bit)(mpich-x86_64)
+    libEspressoCore.so()(64bit)(mpich-x86_64)
+    libEspressoScriptInterface.so()(64bit)(mpich-x86_64)
+    libEspressoUtils.so()(64bit)(mpich-x86_64)
+    libImmersedBoundary.so()(64bit)(mpich-x86_64)
+    libObjectInFluid.so()(64bit)(mpich-x86_64)
+    libObservables.so()(64bit)(mpich-x86_64)
+    libShapes.so()(64bit)(mpich-x86_64)
     python2-espresso-mpich
     python2-espresso-mpich(x86-64)
 
 python2-espresso-openmpi:
     espresso-devel
     espresso-openmpi
+    libActor.so()(64bit)(openmpi-x86_64)
+    libConstraints.so()(64bit)(openmpi-x86_64)
+    libCorrelators.so()(64bit)(openmpi-x86_64)
+    libEspressoCore.so()(64bit)(openmpi-x86_64)
+    libEspressoScriptInterface.so()(64bit)(openmpi-x86_64)
+    libEspressoUtils.so()(64bit)(openmpi-x86_64)
+    libImmersedBoundary.so()(64bit)(openmpi-x86_64)
+    libObjectInFluid.so()(64bit)(openmpi-x86_64)
+    libObservables.so()(64bit)(openmpi-x86_64)
+    libShapes.so()(64bit)(openmpi-x86_64)
     python2-espresso-openmpi
     python2-espresso-openmpi(x86-64)
 
