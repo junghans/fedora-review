@@ -70,13 +70,24 @@ ESPResSo contains a number of advanced algorithms, e.g.
 This package contains the license file and data files shared between the
 sub-packages of %{name}.
 
+%package devel
+Summary:        Development package for  %{name} packages
+Requires:       python2-%{name}-openmpi = %{version}-%{release}
+Requires:       python2-%{name}-mpich = %{version}-%{release}
+%description devel
+ESPResSo can perform Molecular Dynamics simulations of bead-spring models
+in various ensembles ((N,V,E), (N,V,T), and (N,p,T)).
+ESPResSo contains a number of advanced algorithms, e.g.
+    * DPD thermostat (for hydrodynamics)
+    * P3M, MMM2D, MMM1D, ELC for electrostatic interactions
+    * Lattice-Boltzmann for hydrodynamics
+This package contains the development libraries of %{name}.
+
 %package -n python2-%{name}-openmpi
 Requires:       %{name}-common = %{version}-%{release}
 Summary:        Extensible Simulation Package for Research on Soft matter
 Provides:       %{name}-openmpi = %{version}-%{release}
 Obsoletes:      %{name}-openmpi < 3.3.0-12
-Provides:       %{name}-devel = %{version}-%{release}
-Obsoletes:      %{name}-devel < 4.0-0.2
 %description -n python2-%{name}-openmpi
 ESPResSo can perform Molecular Dynamics simulations of bead-spring models
 in various ensembles ((N,V,E), (N,V,T), and (N,p,T)).
@@ -95,8 +106,6 @@ Provides:       %{name}-mpich2 = %{version}-%{release}
 Obsoletes:      %{name}-mpich2 < 3.1.1-3
 Provides:       %{name}-mpich = %{version}-%{release}
 Obsoletes:      %{name}-mpich < 3.3.0-12
-Provides:       %{name}-devel = %{version}-%{release}
-Obsoletes:      %{name}-devel < 4.0-0.2
 %description -n python2-%{name}-mpich
 ESPResSo can perform Molecular Dynamics simulations of bead-spring models
 in various ensembles ((N,V,E), (N,V,T), and (N,p,T)).
@@ -195,19 +204,21 @@ popd
 %doc AUTHORS README NEWS ChangeLog
 %license COPYING
 
+%files devel
+%{_libdir}/*/lib/lib*.so
+
 %files -n python2-%{name}-openmpi
-%{_libdir}/openmpi/lib/lib*.so
+%{_libdir}/openmpi/lib/lib*.so.*
 %{python_sitearch}/openmpi/%{name}md
 
 %files -n python2-%{name}-mpich
-%{_libdir}/mpich/lib/lib*.so
+%{_libdir}/mpich/lib/lib*.so.*
 %{python_sitearch}/mpich/%{name}md
 
 %changelog
 * Sun Mar 05 2017 Christoph Junghans <junghans@votca.org> - 4.0-0.2.20170228git8a021f5
 - Dropped 1042.patch, merged upstream
 - Add 1056.patch to fix install
-- Dropped devel package, no libs in libdir anymore
 
 * Thu Feb 16 2017 Christoph Junghans <junghans@votca.org> - 4.0-0.1.20170220git7a9ac74
 - Bump to version 4.0 git version
