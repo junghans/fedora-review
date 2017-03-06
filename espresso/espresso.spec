@@ -196,9 +196,11 @@ popd
 %license COPYING
 
 %files -n python2-%{name}-openmpi
+%{_libdir}/openmpi/lib/lib*.so.*
 %{python_sitearch}/openmpi/%{name}md
 
 %files -n python2-%{name}-mpich
+%{_libdir}/mpich/lib/lib*.so.*
 %{python_sitearch}/mpich/%{name}md
 
 %changelog
