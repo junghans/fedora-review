@@ -8,9 +8,6 @@
 %{!?python_sitearch: %global python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
 %endif
 
-# Do not check .so files in the python2_sitearch directory
-%global __provides_exclude_from ^%{python2_sitearch}/.*\\.so$
-
 ### TESTSUITE ###
 # The testsuite currently fails only on the buildsystem, but works localy.
 # So to easy enable/disable the testsuite, I introduce the following
