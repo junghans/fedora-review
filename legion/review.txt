@@ -53,6 +53,8 @@ Generic:
      (v2.0)". 93 files have unknown license. Detailed output of
      licensecheck in /travis/legion/review-legion/licensecheck.txt
 [ ]: License file installed when any subpackage combination is installed.
+[ ]: Package must own all directories that it creates.
+     Note: Directories without known owners: /usr/lib64/cmake
 [ ]: %build honors applicable compiler flags or justifies otherwise.
 [ ]: Package contains no bundled libraries without FPC exception.
 [ ]: Changelog in prescribed format.
@@ -85,7 +87,6 @@ Generic:
      license(s) in its own file, then that file, containing the text of the
      license(s) for the package is included in %license.
 [x]: Package requires other packages for directories it uses.
-[x]: Package must own all directories that it creates.
 [x]: Package does not own files or directories owned by other packages.
 [x]: Package uses either %{buildroot} or $RPM_BUILD_ROOT
 [x]: Package does not run rm -rf %{buildroot} (or $RPM_BUILD_ROOT) at the
@@ -118,6 +119,8 @@ Generic:
 [ ]: Package functions as described.
 [ ]: Latest version is packaged.
 [ ]: Package does not include license text files separate from upstream.
+[ ]: Patches link to upstream bugs/comments/lists or are otherwise
+     justified.
 [ ]: Scriptlets must be sane, if used.
 [ ]: Description and summary sections in the package spec file contains
      translations for supported Non-English languages, if available.
@@ -150,45 +153,51 @@ Generic:
 
 Rpmlint
 -------
-Checking: legion-17.02.0-1.fc26.x86_64.rpm
-          legion-openmpi-17.02.0-1.fc26.x86_64.rpm
-          legion-mpich-17.02.0-1.fc26.x86_64.rpm
-          legion-devel-17.02.0-1.fc26.x86_64.rpm
-          legion-debuginfo-17.02.0-1.fc26.x86_64.rpm
-          legion-17.02.0-1.fc26.src.rpm
+Checking: legion-17.02.0-1.fc27.x86_64.rpm
+          legion-openmpi-17.02.0-1.fc27.x86_64.rpm
+          legion-mpich-17.02.0-1.fc27.x86_64.rpm
+          legion-devel-17.02.0-1.fc27.x86_64.rpm
+          legion-debuginfo-17.02.0-1.fc27.x86_64.rpm
+          legion-17.02.0-1.fc27.src.rpm
 legion.x86_64: W: spelling-error Summary(en_US) centric -> eccentric, centrist, concentric
 legion.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
-legion.x86_64: W: shared-lib-calls-exit /usr/lib64/librealm.so.1 exit@GLIBC_2.2.5
 legion.x86_64: W: shared-lib-calls-exit /usr/lib64/liblegion.so.1 exit@GLIBC_2.2.5
+legion.x86_64: W: shared-lib-calls-exit /usr/lib64/librealm.so.1 exit@GLIBC_2.2.5
+legion.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
+legion.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
 legion-openmpi.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
 legion-openmpi.x86_64: W: shared-lib-calls-exit /usr/lib64/openmpi/lib/librealm.so.1 exit@GLIBC_2.2.5
 legion-openmpi.x86_64: W: shared-lib-calls-exit /usr/lib64/openmpi/lib/liblegion.so.1 exit@GLIBC_2.2.5
 legion-openmpi.x86_64: W: no-documentation
+legion-openmpi.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
+legion-openmpi.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
 legion-openmpi.x86_64: E: library-without-ldconfig-postin /usr/lib64/openmpi/lib/librealm.so.1
 legion-openmpi.x86_64: E: library-without-ldconfig-postun /usr/lib64/openmpi/lib/librealm.so.1
 legion-openmpi.x86_64: E: library-without-ldconfig-postin /usr/lib64/openmpi/lib/liblegion.so.1
 legion-openmpi.x86_64: E: library-without-ldconfig-postun /usr/lib64/openmpi/lib/liblegion.so.1
 legion-mpich.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
-legion-mpich.x86_64: W: shared-lib-calls-exit /usr/lib64/mpich/lib/liblegion.so.1 exit@GLIBC_2.2.5
 legion-mpich.x86_64: W: shared-lib-calls-exit /usr/lib64/mpich/lib/librealm.so.1 exit@GLIBC_2.2.5
+legion-mpich.x86_64: W: shared-lib-calls-exit /usr/lib64/mpich/lib/liblegion.so.1 exit@GLIBC_2.2.5
 legion-mpich.x86_64: W: no-documentation
-legion-mpich.x86_64: E: library-without-ldconfig-postin /usr/lib64/mpich/lib/liblegion.so.1
-legion-mpich.x86_64: E: library-without-ldconfig-postun /usr/lib64/mpich/lib/liblegion.so.1
 legion-mpich.x86_64: E: library-without-ldconfig-postin /usr/lib64/mpich/lib/librealm.so.1
 legion-mpich.x86_64: E: library-without-ldconfig-postun /usr/lib64/mpich/lib/librealm.so.1
+legion-mpich.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
+legion-mpich.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
+legion-mpich.x86_64: E: library-without-ldconfig-postin /usr/lib64/mpich/lib/liblegion.so.1
+legion-mpich.x86_64: E: library-without-ldconfig-postun /usr/lib64/mpich/lib/liblegion.so.1
 legion-devel.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
 legion-devel.x86_64: W: only-non-binary-in-usr-lib
 legion-devel.x86_64: W: no-documentation
 legion.src: W: spelling-error Summary(en_US) centric -> eccentric, centrist, concentric
 legion.src: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
-6 packages and 0 specfiles checked; 8 errors, 17 warnings.
+6 packages and 0 specfiles checked; 8 errors, 23 warnings.
 
 
 
 
 Rpmlint (debuginfo)
 -------------------
-Checking: legion-debuginfo-17.02.0-1.fc26.x86_64.rpm
+Checking: legion-debuginfo-17.02.0-1.fc27.x86_64.rpm
 1 packages and 0 specfiles checked; 0 errors, 0 warnings.
 
 
@@ -202,6 +211,8 @@ legion.x86_64: W: spelling-error Summary(en_US) centric -> eccentric, centrist, 
 legion.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
 legion.x86_64: W: shared-lib-calls-exit /usr/lib64/liblegion.so.1 exit@GLIBC_2.2.5
 legion.x86_64: W: shared-lib-calls-exit /usr/lib64/librealm.so.1 exit@GLIBC_2.2.5
+legion.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
+legion.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
 legion-openmpi.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_RELEASE_MAJOR_1
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_timers_native
@@ -311,6 +322,8 @@ legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libre
 legion-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/librealm.so.1 libgasnet-mpi-par-1.28.0.so
 legion-openmpi.x86_64: W: shared-lib-calls-exit /usr/lib64/openmpi/lib/librealm.so.1 exit@GLIBC_2.2.5
 legion-openmpi.x86_64: W: no-documentation
+legion-openmpi.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
+legion-openmpi.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
 legion-openmpi.x86_64: E: library-without-ldconfig-postin /usr/lib64/openmpi/lib/liblegion.so.1
 legion-openmpi.x86_64: E: library-without-ldconfig-postun /usr/lib64/openmpi/lib/liblegion.so.1
 legion-openmpi.x86_64: E: library-without-ldconfig-postin /usr/lib64/openmpi/lib/librealm.so.1
@@ -424,6 +437,8 @@ legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.
 legion-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/librealm.so.1 libgasnet-mpi-par-1.28.0.so
 legion-mpich.x86_64: W: shared-lib-calls-exit /usr/lib64/mpich/lib/librealm.so.1 exit@GLIBC_2.2.5
 legion-mpich.x86_64: W: no-documentation
+legion-mpich.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
+legion-mpich.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
 legion-mpich.x86_64: E: library-without-ldconfig-postin /usr/lib64/mpich/lib/liblegion.so.1
 legion-mpich.x86_64: E: library-without-ldconfig-postun /usr/lib64/mpich/lib/liblegion.so.1
 legion-mpich.x86_64: E: library-without-ldconfig-postin /usr/lib64/mpich/lib/librealm.so.1
@@ -431,7 +446,7 @@ legion-mpich.x86_64: E: library-without-ldconfig-postun /usr/lib64/mpich/lib/lib
 legion-devel.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
 legion-devel.x86_64: W: only-non-binary-in-usr-lib
 legion-devel.x86_64: W: no-documentation
-5 packages and 0 specfiles checked; 8 errors, 225 warnings.
+5 packages and 0 specfiles checked; 8 errors, 231 warnings.
 
 
 
@@ -446,6 +461,7 @@ legion (rpmlib, GLIBC filtered):
     libgcc_s.so.1(GCC_3.0)(64bit)
     libgcc_s.so.1(GCC_3.4)(64bit)
     libhwloc.so.5()(64bit)
+    liblegion.so.1()(64bit)
     libpthread.so.0()(64bit)
     librealm.so.1()(64bit)
     librt.so.1()(64bit)
@@ -465,7 +481,9 @@ legion-openmpi (rpmlib, GLIBC filtered):
     libgcc_s.so.1()(64bit)
     libgcc_s.so.1(GCC_3.0)(64bit)
     libhwloc.so.5()(64bit)
+    liblegion.so.1()(64bit)
     libpthread.so.0()(64bit)
+    librealm.so.1()(64bit)
     librealm.so.1()(64bit)(openmpi-x86_64)
     librt.so.1()(64bit)
     libstdc++.so.6()(64bit)
@@ -483,7 +501,9 @@ legion-mpich (rpmlib, GLIBC filtered):
     libgcc_s.so.1()(64bit)
     libgcc_s.so.1(GCC_3.0)(64bit)
     libhwloc.so.5()(64bit)
+    liblegion.so.1()(64bit)
     libpthread.so.0()(64bit)
+    librealm.so.1()(64bit)
     librealm.so.1()(64bit)(mpich-x86_64)
     librt.so.1()(64bit)
     libstdc++.so.6()(64bit)
@@ -532,6 +552,7 @@ legion-mpich:
     librealm.so.1()(64bit)(mpich-x86_64)
 
 legion-devel:
+    cmake(Legion)
     legion-devel
     legion-devel(x86-64)
 
