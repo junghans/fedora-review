@@ -1,6 +1,6 @@
 Name:           legion
 Version:        17.02.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A data-centric parallel programming system
 License:        ASL 2.0
 Url:            http://legion.stanford.edu/
@@ -144,7 +144,7 @@ make -C mpich test
 
 #move cmake files in a place where cmake can find them
 mkdir -p %{buildroot}%{_libdir}/cmake
-mv %{buildroot}{%{_datadir}/Legion,%{_libdir}/cmake/legion}
+mv %{buildroot}{%{_datadir}/Legion,%{_libdir}/cmake/%{name}}
 
 # MPI subpackages don't need the ldconfig magic.  They are hidden by
 # default, in MPI back-end-specific directory, and only show to the
@@ -161,13 +161,13 @@ mv %{buildroot}{%{_datadir}/Legion,%{_libdir}/cmake/legion}
 %files devel
 %{_includedir}/*.h
 %{_includedir}/*.inl
-%{_includedir}/legion
+%{_includedir}/%{name}
 %{_includedir}/mappers
 %{_includedir}/realm
 %{_libdir}/lib*.so
 %{_libdir}/openmpi*/lib/lib*.so
 %{_libdir}/mpich*/lib/lib*.so
-%{_libdir}/cmake/legion
+%{_libdir}/cmake/%{name}
 
 %files openmpi
 %{_libdir}/openmpi*/lib/lib*.so.1
@@ -176,6 +176,10 @@ mv %{buildroot}{%{_datadir}/Legion,%{_libdir}/cmake/legion}
 %{_libdir}/mpich*/lib/lib*.so.1
 
 %changelog
+* Mon Mar 13 2017 Christoph Junghans <junghans@votca.org> - 17.02.0-2
+- Added 229.patch to  support "make check" in cmake
+- Minor changes from review (bug #1382755)
+
 * Fri Feb 24 2017 Christoph Junghans <junghans@votca.org> - 17.02.0-1
 - initial import
 

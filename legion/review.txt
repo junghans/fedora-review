@@ -153,26 +153,26 @@ Generic:
 
 Rpmlint
 -------
-Checking: legion-17.02.0-1.fc27.x86_64.rpm
-          legion-openmpi-17.02.0-1.fc27.x86_64.rpm
-          legion-mpich-17.02.0-1.fc27.x86_64.rpm
-          legion-devel-17.02.0-1.fc27.x86_64.rpm
-          legion-debuginfo-17.02.0-1.fc27.x86_64.rpm
-          legion-17.02.0-1.fc27.src.rpm
+Checking: legion-17.02.0-2.fc27.x86_64.rpm
+          legion-openmpi-17.02.0-2.fc27.x86_64.rpm
+          legion-mpich-17.02.0-2.fc27.x86_64.rpm
+          legion-devel-17.02.0-2.fc27.x86_64.rpm
+          legion-debuginfo-17.02.0-2.fc27.x86_64.rpm
+          legion-17.02.0-2.fc27.src.rpm
 legion.x86_64: W: spelling-error Summary(en_US) centric -> eccentric, centrist, concentric
 legion.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
-legion.x86_64: W: shared-lib-calls-exit /usr/lib64/liblegion.so.1 exit@GLIBC_2.2.5
 legion.x86_64: W: shared-lib-calls-exit /usr/lib64/librealm.so.1 exit@GLIBC_2.2.5
+legion.x86_64: W: shared-lib-calls-exit /usr/lib64/liblegion.so.1 exit@GLIBC_2.2.5
 legion.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
 legion.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
 legion-openmpi.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
 legion-openmpi.x86_64: W: shared-lib-calls-exit /usr/lib64/openmpi/lib/librealm.so.1 exit@GLIBC_2.2.5
 legion-openmpi.x86_64: W: shared-lib-calls-exit /usr/lib64/openmpi/lib/liblegion.so.1 exit@GLIBC_2.2.5
 legion-openmpi.x86_64: W: no-documentation
-legion-openmpi.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
-legion-openmpi.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
 legion-openmpi.x86_64: E: library-without-ldconfig-postin /usr/lib64/openmpi/lib/librealm.so.1
 legion-openmpi.x86_64: E: library-without-ldconfig-postun /usr/lib64/openmpi/lib/librealm.so.1
+legion-openmpi.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
+legion-openmpi.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
 legion-openmpi.x86_64: E: library-without-ldconfig-postin /usr/lib64/openmpi/lib/liblegion.so.1
 legion-openmpi.x86_64: E: library-without-ldconfig-postun /usr/lib64/openmpi/lib/liblegion.so.1
 legion-mpich.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
@@ -197,7 +197,7 @@ legion.src: W: spelling-error %description -l en_US centric -> eccentric, centri
 
 Rpmlint (debuginfo)
 -------------------
-Checking: legion-debuginfo-17.02.0-1.fc27.x86_64.rpm
+Checking: legion-debuginfo-17.02.0-2.fc27.x86_64.rpm
 1 packages and 0 specfiles checked; 0 errors, 0 warnings.
 
 
