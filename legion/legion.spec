@@ -143,6 +143,7 @@ make -C mpich test
 %{_mpich_unload}
 
 #move cmake files in a place where cmake can find them
+mkdir -p %{buildroot}%{_libdir}/cmake
 mv %{buildroot}{%{_datadir}/Legion,%{_libdir}/cmake/legion}
 
 # MPI subpackages don't need the ldconfig magic.  They are hidden by
@@ -166,7 +167,7 @@ mv %{buildroot}{%{_datadir}/Legion,%{_libdir}/cmake/legion}
 %{_libdir}/lib*.so
 %{_libdir}/openmpi*/lib/lib*.so
 %{_libdir}/mpich*/lib/lib*.so
-%{_datadir}/Legion
+%{_libdir}/cmake/legion
 
 %files openmpi
 %{_libdir}/openmpi*/lib/lib*.so.1
