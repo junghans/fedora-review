@@ -1,0 +1,240 @@
+From ac1a14f39dd424da3a5a9d62f02c0a581a460c3f Mon Sep 17 00:00:00 2001
+From: Christoph Junghans <junghans@lanl.gov>
+Date: Mon, 13 Mar 2017 11:57:33 -0600
+Subject: [PATCH] cmake: enable testing
+
+---
+ CMakeLists.txt                                 | 4 ++++
+ examples/attach_file/CMakeLists.txt            | 3 +++
+ examples/circuit/CMakeLists.txt                | 3 +++
+ examples/dynamic_registration/CMakeLists.txt   | 3 +++
+ examples/ghost/CMakeLists.txt                  | 3 +++
+ examples/ghost_pull/CMakeLists.txt             | 3 +++
+ examples/realm_saxpy/CMakeLists.txt            | 3 +++
+ examples/spmd_cgsolver/CMakeLists.txt          | 3 +++
+ test/attach_file_mini/CMakeLists.txt           | 3 +++
+ tutorial/00_hello_world/CMakeLists.txt         | 3 +++
+ tutorial/01_tasks_and_futures/CMakeLists.txt   | 3 +++
+ tutorial/02_index_tasks/CMakeLists.txt         | 3 +++
+ tutorial/03_global_vars/CMakeLists.txt         | 3 +++
+ tutorial/04_logical_regions/CMakeLists.txt     | 3 +++
+ tutorial/05_physical_regions/CMakeLists.txt    | 3 +++
+ tutorial/06_privileges/CMakeLists.txt          | 3 +++
+ tutorial/07_partitioning/CMakeLists.txt        | 3 +++
+ tutorial/08_multiple_partitions/CMakeLists.txt | 3 +++
+ tutorial/09_custom_mapper/CMakeLists.txt       | 3 +++
+ 19 files changed, 58 insertions(+)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index afd0b97..51e18c9 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -213,6 +213,10 @@ option(Legion_BUILD_APPS "Build Legion sample applications" OFF)
+ option(Legion_BUILD_EXAMPLES "Build Legion examples" OFF)
+ option(Legion_BUILD_TUTORIAL "Build Legion tutorial" OFF)
+ option(Legion_BUILD_TESTS "Build Legion tests" OFF)
++option(Legion_ENABLE_TESTING "Build and copy testing stuff" OFF)
++if(Legion_ENABLE_TESTING)
++  enable_testing()
++endif()
+ if(Legion_BUILD_APPS OR Legion_BUILD_EXAMPLES OR Legion_BUILD_TUTORIAL OR Legion_BUILD_TESTS)
+   # Make a namespaced alias so in-build examples can use it the same way as if
+   # it were imported
+diff --git a/examples/attach_file/CMakeLists.txt b/examples/attach_file/CMakeLists.txt
+index 6cef9f7..0beb900 100644
+--- a/examples/attach_file/CMakeLists.txt
++++ b/examples/attach_file/CMakeLists.txt
+@@ -24,3 +24,6 @@ endif()
+ 
+ add_executable(attach_file attach_file.cc)
+ target_link_libraries(attach_file Legion::Legion)
++if(Legion_ENABLE_TESTING)
++  add_test(NAME attach_file COMMAND $<TARGET_FILE:attach_file>) 
++endif()
+diff --git a/examples/circuit/CMakeLists.txt b/examples/circuit/CMakeLists.txt
+index 0dbac5a..eaf97ae 100644
+--- a/examples/circuit/CMakeLists.txt
++++ b/examples/circuit/CMakeLists.txt
+@@ -34,3 +34,6 @@ else()
+   add_executable(circuit ${CPU_SOURCES})
+ endif()
+ target_link_libraries(circuit Legion::Legion)
++if(Legion_ENABLE_TESTING)
++  add_test(NAME circuit COMMAND $<TARGET_FILE:circuit>) 
++endif()
+diff --git a/examples/dynamic_registration/CMakeLists.txt b/examples/dynamic_registration/CMakeLists.txt
+index d91d76c..2695ce5 100644
+--- a/examples/dynamic_registration/CMakeLists.txt
++++ b/examples/dynamic_registration/CMakeLists.txt
+@@ -24,3 +24,6 @@ endif()
+ 
+ add_executable(dynamic_registration dynamic_registration.cc)
+ target_link_libraries(dynamic_registration Legion::Legion)
++if(Legion_ENABLE_TESTING)
++  add_test(NAME dynamic_registration COMMAND $<TARGET_FILE:dynamic_registration>) 
++endif()
+diff --git a/examples/ghost/CMakeLists.txt b/examples/ghost/CMakeLists.txt
+index afb110a..ccd1fe6 100644
+--- a/examples/ghost/CMakeLists.txt
++++ b/examples/ghost/CMakeLists.txt
+@@ -24,3 +24,6 @@ endif()
+ 
+ add_executable(ghost ghost.cc)
+ target_link_libraries(ghost Legion::Legion)
++if(Legion_ENABLE_TESTING)
++  add_test(NAME ghost COMMAND $<TARGET_FILE:ghost> -ll:cpu 4) 
++endif()
+diff --git a/examples/ghost_pull/CMakeLists.txt b/examples/ghost_pull/CMakeLists.txt
+index 21dd283..7bfd3f9 100644
+--- a/examples/ghost_pull/CMakeLists.txt
++++ b/examples/ghost_pull/CMakeLists.txt
+@@ -24,3 +24,6 @@ endif()
+ 
+ add_executable(ghost_pull ghost.cc)
+ target_link_libraries(ghost_pull Legion::Legion)
++if(Legion_ENABLE_TESTING)
++  add_test(NAME ghost_pull COMMAND $<TARGET_FILE:ghost_pull> -ll:cpu 4) 
++endif()
+diff --git a/examples/realm_saxpy/CMakeLists.txt b/examples/realm_saxpy/CMakeLists.txt
+index 5986e9b..c02837b 100644
+--- a/examples/realm_saxpy/CMakeLists.txt
++++ b/examples/realm_saxpy/CMakeLists.txt
+@@ -30,3 +30,6 @@ else()
+   add_executable(realm_saxpy ${CPU_SOURCES})
+ endif()
+ target_link_libraries(realm_saxpy Legion::Legion)
++if(Legion_ENABLE_TESTING)
++  add_test(NAME realm_saxpy COMMAND $<TARGET_FILE:realm_saxpy>) 
++endif()
+diff --git a/examples/spmd_cgsolver/CMakeLists.txt b/examples/spmd_cgsolver/CMakeLists.txt
+index 9f8a671..3373cf5 100644
+--- a/examples/spmd_cgsolver/CMakeLists.txt
++++ b/examples/spmd_cgsolver/CMakeLists.txt
+@@ -28,3 +28,6 @@ add_executable(spmd_cgsolver
+   cgtasks.h   cgtasks.cc
+ )
+ target_link_libraries(spmd_cgsolver Legion::Legion)
++if(Legion_ENABLE_TESTING)
++  add_test(NAME spmd_cgsolver COMMAND $<TARGET_FILE:spmd_cgsolver>) 
++endif()
+diff --git a/test/attach_file_mini/CMakeLists.txt b/test/attach_file_mini/CMakeLists.txt
+index 9183a68..1f49ee1 100644
+--- a/test/attach_file_mini/CMakeLists.txt
++++ b/test/attach_file_mini/CMakeLists.txt
+@@ -24,3 +24,6 @@ endif()
+ 
+ add_executable(attach_file_mini attach_file_mini.cc)
+ target_link_libraries(attach_file_mini Legion::Legion)
++if(Legion_ENABLE_TESTING)
++  add_test(NAME attach_file_mini COMMAND $<TARGET_FILE:attach_file_mini>) 
++endif()
+diff --git a/tutorial/00_hello_world/CMakeLists.txt b/tutorial/00_hello_world/CMakeLists.txt
+index e003957..027bacd 100644
+--- a/tutorial/00_hello_world/CMakeLists.txt
++++ b/tutorial/00_hello_world/CMakeLists.txt
+@@ -24,3 +24,6 @@ endif()
+ 
+ add_executable(hello_world hello_world.cc)
+ target_link_libraries(hello_world Legion::Legion)
++if(Legion_ENABLE_TESTING)
++  add_test(NAME hello_world COMMAND $<TARGET_FILE:hello_world>) 
++endif()
+diff --git a/tutorial/01_tasks_and_futures/CMakeLists.txt b/tutorial/01_tasks_and_futures/CMakeLists.txt
+index 5c9c580..68e9dfc 100644
+--- a/tutorial/01_tasks_and_futures/CMakeLists.txt
++++ b/tutorial/01_tasks_and_futures/CMakeLists.txt
+@@ -24,3 +24,6 @@ endif()
+ 
+ add_executable(tasks_and_futures tasks_and_futures.cc)
+ target_link_libraries(tasks_and_futures Legion::Legion)
++if(Legion_ENABLE_TESTING)
++  add_test(NAME tasks_and_futures COMMAND $<TARGET_FILE:tasks_and_futures>) 
++endif()
+diff --git a/tutorial/02_index_tasks/CMakeLists.txt b/tutorial/02_index_tasks/CMakeLists.txt
+index ad7caf9..e44f6c1 100644
+--- a/tutorial/02_index_tasks/CMakeLists.txt
++++ b/tutorial/02_index_tasks/CMakeLists.txt
+@@ -24,3 +24,6 @@ endif()
+ 
+ add_executable(index_tasks index_tasks.cc)
+ target_link_libraries(index_tasks Legion::Legion)
++if(Legion_ENABLE_TESTING)
++  add_test(NAME index_tasks COMMAND $<TARGET_FILE:index_tasks>) 
++endif()
+diff --git a/tutorial/03_global_vars/CMakeLists.txt b/tutorial/03_global_vars/CMakeLists.txt
+index 79cb7fa..2d0f5e3 100644
+--- a/tutorial/03_global_vars/CMakeLists.txt
++++ b/tutorial/03_global_vars/CMakeLists.txt
+@@ -24,3 +24,6 @@ endif()
+ 
+ add_executable(global_vars global_vars.cc)
+ target_link_libraries(global_vars Legion::Legion)
++if(Legion_ENABLE_TESTING)
++  add_test(NAME global_vars COMMAND $<TARGET_FILE:global_vars>) 
++endif()
+diff --git a/tutorial/04_logical_regions/CMakeLists.txt b/tutorial/04_logical_regions/CMakeLists.txt
+index 5ed6877..5ef3bde 100644
+--- a/tutorial/04_logical_regions/CMakeLists.txt
++++ b/tutorial/04_logical_regions/CMakeLists.txt
+@@ -24,3 +24,6 @@ endif()
+ 
+ add_executable(logical_regions logical_regions.cc)
+ target_link_libraries(logical_regions Legion::Legion)
++if(Legion_ENABLE_TESTING)
++  add_test(NAME logical_regions COMMAND $<TARGET_FILE:logical_regions>) 
++endif()
+diff --git a/tutorial/05_physical_regions/CMakeLists.txt b/tutorial/05_physical_regions/CMakeLists.txt
+index 73b5a94..06ee29e 100644
+--- a/tutorial/05_physical_regions/CMakeLists.txt
++++ b/tutorial/05_physical_regions/CMakeLists.txt
+@@ -24,3 +24,6 @@ endif()
+ 
+ add_executable(physical_regions physical_regions.cc)
+ target_link_libraries(physical_regions Legion::Legion)
++if(Legion_ENABLE_TESTING)
++  add_test(NAME physical_regions COMMAND $<TARGET_FILE:physical_regions>) 
++endif()
+diff --git a/tutorial/06_privileges/CMakeLists.txt b/tutorial/06_privileges/CMakeLists.txt
+index 2b3bcc7..f6f8927 100644
+--- a/tutorial/06_privileges/CMakeLists.txt
++++ b/tutorial/06_privileges/CMakeLists.txt
+@@ -24,3 +24,6 @@ endif()
+ 
+ add_executable(privileges privileges.cc)
+ target_link_libraries(privileges Legion::Legion)
++if(Legion_ENABLE_TESTING)
++  add_test(NAME privileges COMMAND $<TARGET_FILE:privileges>) 
++endif()
+diff --git a/tutorial/07_partitioning/CMakeLists.txt b/tutorial/07_partitioning/CMakeLists.txt
+index 0decf16..7ac8d0d 100644
+--- a/tutorial/07_partitioning/CMakeLists.txt
++++ b/tutorial/07_partitioning/CMakeLists.txt
+@@ -24,3 +24,6 @@ endif()
+ 
+ add_executable(partitioning partitioning.cc)
+ target_link_libraries(partitioning Legion::Legion)
++if(Legion_ENABLE_TESTING)
++  add_test(NAME partitioning COMMAND $<TARGET_FILE:partitioning>) 
++endif()
+diff --git a/tutorial/08_multiple_partitions/CMakeLists.txt b/tutorial/08_multiple_partitions/CMakeLists.txt
+index 730b5df..7decbcc 100644
+--- a/tutorial/08_multiple_partitions/CMakeLists.txt
++++ b/tutorial/08_multiple_partitions/CMakeLists.txt
+@@ -24,3 +24,6 @@ endif()
+ 
+ add_executable(multiple_partitions multiple_partitions.cc)
+ target_link_libraries(multiple_partitions Legion::Legion)
++if(Legion_ENABLE_TESTING)
++  add_test(NAME multiple_partitions COMMAND $<TARGET_FILE:multiple_partitions>) 
++endif()
+diff --git a/tutorial/09_custom_mapper/CMakeLists.txt b/tutorial/09_custom_mapper/CMakeLists.txt
+index a555b2f..d46a5d2 100644
+--- a/tutorial/09_custom_mapper/CMakeLists.txt
++++ b/tutorial/09_custom_mapper/CMakeLists.txt
+@@ -24,3 +24,6 @@ endif()
+ 
+ add_executable(custom_mapper custom_mapper.cc)
+ target_link_libraries(custom_mapper Legion::Legion)
++if(Legion_ENABLE_TESTING)
++  add_test(NAME custom_mapper COMMAND $<TARGET_FILE:custom_mapper>) 
++endif()

@@ -5,6 +5,8 @@ Summary:        A data-centric parallel programming system
 License:        ASL 2.0
 Url:            http://legion.stanford.edu/
 Source0:        https://github.com/StanfordLegion/legion/archive/%{name}-%{version}.tar.gz#/%{name}-%{version}.tar.gz
+# PATCH-FIX-UPSTREAM - 229.patch -  add make test to cmake build system
+Patch0:         https://patch-diff.githubusercontent.com/raw/StanfordLegion/legion/pull/229.patch
 
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
@@ -90,13 +92,15 @@ This package contains development headers and libraries for the legion library
 
 %prep
 %setup -q -n %{name}-%{name}-%{version}
+%patch0 -p1
 
 %build
 mkdir serial openmpi mpich
 
 pushd serial
 export LDFLAGS="%{__global_ldflags} -Wl,--as-needed"
-%{cmake} .. -DLegion_USE_HWLOC=ON -DLegion_USE_GASNet=OFF -DLegion_BUILD_EXAMPLES=ON
+%{cmake} .. -DLegion_USE_HWLOC=ON -DLegion_USE_GASNet=OFF -DLegion_BUILD_EXAMPLES=ON -DLegion_BUILD_TESTS=ON -DLegion_BUILD_TUTORIAL=ON \
+  -DLegion_BUILD_TESTS=ON -DLegion_BUILD_TUTORIAL=ON -DLegion_ENABLE_TESTING=ON
 %make_build
 popd
 
@@ -104,7 +108,8 @@ pushd openmpi
 %{_openmpi_load}
 export LDFLAGS="%{__global_ldflags} -Wl,--as-needed"
 %{cmake} .. -DLegion_USE_HWLOC=ON -DLegion_USE_GASNet=ON -DLegion_BUILD_EXAMPLES=ON -DCMAKE_INSTALL_LIBDIR=${MPI_LIB} -DGASNet_CONDUIT=mpi \
-  -DGASNet_mpi-par_LIBRARY=${MPI_LIB}/libgasnet-mpi-par.so -DGASNet_gasnet_tools-par_LIBRARY=$MPI_LIB/libgasnet_tools-par.so -DGASNet_INCLUDE_DIR=$MPI_INCLUDE
+  -DGASNet_mpi-par_LIBRARY=${MPI_LIB}/libgasnet-mpi-par.so -DGASNet_gasnet_tools-par_LIBRARY=$MPI_LIB/libgasnet_tools-par.so -DGASNet_INCLUDE_DIR=$MPI_INCLUDE \
+  -DLegion_BUILD_TESTS=ON -DLegion_BUILD_TUTORIAL=ON -DLegion_ENABLE_TESTING=ON
 %make_build
 %{_openmpi_unload}
 popd
@@ -113,15 +118,32 @@ pushd mpich
 %{_mpich_load}
 export LDFLAGS="%{__global_ldflags} -Wl,--as-needed"
 %{cmake} .. -DLegion_USE_HWLOC=ON -DLegion_USE_GASNet=ON -DLegion_BUILD_EXAMPLES=ON -DCMAKE_INSTALL_LIBDIR=${MPI_LIB} -DGASNet_CONDUIT=mpi \
-  -DGASNet_mpi-par_LIBRARY=${MPI_LIB}/libgasnet-mpi-par.so -DGASNet_gasnet_tools-par_LIBRARY=$MPI_LIB/libgasnet_tools-par.so -DGASNet_INCLUDE_DIR=$MPI_INCLUDE
+  -DGASNet_mpi-par_LIBRARY=${MPI_LIB}/libgasnet-mpi-par.so -DGASNet_gasnet_tools-par_LIBRARY=$MPI_LIB/libgasnet_tools-par.so -DGASNet_INCLUDE_DIR=$MPI_INCLUDE \
+  -DLegion_BUILD_TESTS=ON -DLegion_BUILD_TUTORIAL=ON -DLegion_ENABLE_TESTING=ON
 %make_build
 %{_mpich_unload}
 popd
 
 %install
 %make_install -C serial
+%{_openmpi_load}
 %make_install -C openmpi
+%{_openmpi_unload}
+%{_mpich_load}
 %make_install -C mpich
+%{_mpich_unload}
+
+%check
+make -C serial test
+%{_openmpi_load}
+make -C openmpi test
+%{_openmpi_unload}
+%{_mpich_load}
+make -C mpich test
+%{_mpich_unload}
+
+#move cmake files in a place where cmake can find them
+mv %{buildroot}{%{_datadir}/Legion,%{_libdir}/cmake/legion}
 
 # MPI subpackages don't need the ldconfig magic.  They are hidden by
 # default, in MPI back-end-specific directory, and only show to the
