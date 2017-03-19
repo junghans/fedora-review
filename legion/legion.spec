@@ -1,12 +1,14 @@
 Name:           legion
 Version:        17.02.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        A data-centric parallel programming system
 License:        ASL 2.0
 Url:            http://legion.stanford.edu/
 Source0:        https://github.com/StanfordLegion/legion/archive/%{name}-%{version}.tar.gz#/%{name}-%{version}.tar.gz
 # PATCH-FIX-UPSTREAM - 229.patch -  add make test to cmake build system
 Patch0:         https://patch-diff.githubusercontent.com/raw/StanfordLegion/legion/pull/229.patch
+# PATCH-FIX-UPSTREAM - 232.patch - fix segfault on single thread systems 
+Patch1:         https://patch-diff.githubusercontent.com/raw/StanfordLegion/legion/pull/232.patch
 
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
@@ -93,6 +95,7 @@ This package contains development headers and libraries for the legion library
 %prep
 %setup -q -n %{name}-%{name}-%{version}
 %patch0 -p1
+%patch1 -p1
 
 %build
 mkdir serial openmpi mpich
@@ -134,12 +137,20 @@ popd
 %{_mpich_unload}
 
 %check
-make -C serial test
+#some tests are broken on ppc64
+#https://github.com/StanfordLegion/legion/issues/233
+%ifarch ppc64
+%define testargs ARGS='-V -E \\(ghost\\|ghost_pull\\|custom_mapper\\)'
+%else
+%define testargs ARGS='-V'
+%endif
+
+make -C serial test %{testargs}
 %{_openmpi_load}
-make -C openmpi test
+make -C openmpi test %{testargs}
 %{_openmpi_unload}
 %{_mpich_load}
-make -C mpich test
+make -C mpich test %{testargs}
 %{_mpich_unload}
 
 #move cmake files in a place where cmake can find them
@@ -176,8 +187,12 @@ mv %{buildroot}{%{_datadir}/Legion,%{_libdir}/cmake/%{name}}
 %{_libdir}/mpich*/lib/lib*.so.1
 
 %changelog
+* Mon Mar 13 2017 Christoph Junghans <junghans@votca.org> - 17.02.0-3
+- Added 232.patch to fix segfault for test on 1 thread systems
+- Disable some broken tests on ppc64
+
 * Mon Mar 13 2017 Christoph Junghans <junghans@votca.org> - 17.02.0-2
-- Added 229.patch to  support "make check" in cmake
+- Added 229.patch to support "make check" in cmake
 - Minor changes from review (bug #1382755)
 
 * Fri Feb 24 2017 Christoph Junghans <junghans@votca.org> - 17.02.0-1
