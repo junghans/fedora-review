@@ -54,7 +54,9 @@ Generic:
      licensecheck in /travis/legion/review-legion/licensecheck.txt
 [ ]: License file installed when any subpackage combination is installed.
 [ ]: Package must own all directories that it creates.
-     Note: Directories without known owners: /usr/lib64/cmake
+     Note: Directories without known owners: /usr/lib64/mpich,
+     /usr/lib64/openmpi/lib, /usr/lib64/openmpi, /usr/lib64/cmake,
+     /usr/lib64/mpich/lib
 [ ]: %build honors applicable compiler flags or justifies otherwise.
 [ ]: Package contains no bundled libraries without FPC exception.
 [ ]: Changelog in prescribed format.
@@ -129,6 +131,9 @@ Generic:
 [ ]: %check is present and all tests pass.
 [ ]: Packages should try to preserve timestamps of original installed
      files.
+[ ]: Spec use %global instead of %define unless justified.
+     Note: %define requiring justification: %define testargs ARGS='-V -E
+     \\(ghost\\|ghost_pull\\|custom_mapper\\)', %define testargs ARGS='-V'
 [x]: Reviewer should test that the package builds in mock.
 [x]: Buildroot is not present
 [x]: Package has no %clean section with rm -rf %{buildroot} (or
@@ -137,7 +142,6 @@ Generic:
 [x]: Packager, Vendor, PreReq, Copyright tags should not be in spec file
 [x]: Sources can be downloaded from URI in Source: tag
 [x]: SourceX is a working URL.
-[x]: Spec use %global instead of %define unless justified.
 
 ===== EXTRA items =====
 
@@ -153,16 +157,16 @@ Generic:
 
 Rpmlint
 -------
-Checking: legion-17.02.0-2.fc27.x86_64.rpm
-          legion-openmpi-17.02.0-2.fc27.x86_64.rpm
-          legion-mpich-17.02.0-2.fc27.x86_64.rpm
-          legion-devel-17.02.0-2.fc27.x86_64.rpm
-          legion-debuginfo-17.02.0-2.fc27.x86_64.rpm
-          legion-17.02.0-2.fc27.src.rpm
+Checking: legion-17.02.0-3.fc27.x86_64.rpm
+          legion-openmpi-17.02.0-3.fc27.x86_64.rpm
+          legion-mpich-17.02.0-3.fc27.x86_64.rpm
+          legion-devel-17.02.0-3.fc27.x86_64.rpm
+          legion-debuginfo-17.02.0-3.fc27.x86_64.rpm
+          legion-17.02.0-3.fc27.src.rpm
 legion.x86_64: W: spelling-error Summary(en_US) centric -> eccentric, centrist, concentric
 legion.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
-legion.x86_64: W: shared-lib-calls-exit /usr/lib64/librealm.so.1 exit@GLIBC_2.2.5
 legion.x86_64: W: shared-lib-calls-exit /usr/lib64/liblegion.so.1 exit@GLIBC_2.2.5
+legion.x86_64: W: shared-lib-calls-exit /usr/lib64/librealm.so.1 exit@GLIBC_2.2.5
 legion.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
 legion.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
 legion-openmpi.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
@@ -176,15 +180,15 @@ legion-openmpi.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
 legion-openmpi.x86_64: E: library-without-ldconfig-postin /usr/lib64/openmpi/lib/liblegion.so.1
 legion-openmpi.x86_64: E: library-without-ldconfig-postun /usr/lib64/openmpi/lib/liblegion.so.1
 legion-mpich.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
-legion-mpich.x86_64: W: shared-lib-calls-exit /usr/lib64/mpich/lib/librealm.so.1 exit@GLIBC_2.2.5
 legion-mpich.x86_64: W: shared-lib-calls-exit /usr/lib64/mpich/lib/liblegion.so.1 exit@GLIBC_2.2.5
+legion-mpich.x86_64: W: shared-lib-calls-exit /usr/lib64/mpich/lib/librealm.so.1 exit@GLIBC_2.2.5
 legion-mpich.x86_64: W: no-documentation
-legion-mpich.x86_64: E: library-without-ldconfig-postin /usr/lib64/mpich/lib/librealm.so.1
-legion-mpich.x86_64: E: library-without-ldconfig-postun /usr/lib64/mpich/lib/librealm.so.1
-legion-mpich.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
-legion-mpich.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
 legion-mpich.x86_64: E: library-without-ldconfig-postin /usr/lib64/mpich/lib/liblegion.so.1
 legion-mpich.x86_64: E: library-without-ldconfig-postun /usr/lib64/mpich/lib/liblegion.so.1
+legion-mpich.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
+legion-mpich.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
+legion-mpich.x86_64: E: library-without-ldconfig-postin /usr/lib64/mpich/lib/librealm.so.1
+legion-mpich.x86_64: E: library-without-ldconfig-postun /usr/lib64/mpich/lib/librealm.so.1
 legion-devel.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
 legion-devel.x86_64: W: only-non-binary-in-usr-lib
 legion-devel.x86_64: W: no-documentation
@@ -197,7 +201,7 @@ legion.src: W: spelling-error %description -l en_US centric -> eccentric, centri
 
 Rpmlint (debuginfo)
 -------------------
-Checking: legion-debuginfo-17.02.0-2.fc27.x86_64.rpm
+Checking: legion-debuginfo-17.02.0-3.fc27.x86_64.rpm
 1 packages and 0 specfiles checked; 0 errors, 0 warnings.
 
 
@@ -215,14 +219,13 @@ legion.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
 legion.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
 legion-openmpi.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_RELEASE_MAJOR_1
-legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_timers_native
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_notrace
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_nodebugmalloc
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_notiopt
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_nosrclines
+legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/liblegion.so.1 gasnett_linkconfig_idiotcheck_timers_posixrt
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/liblegion.so.1 gasnett_linkconfig_idiotcheck_RELEASE_MINOR_28
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_atomics_native
-legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/liblegion.so.1 gasnett_linkconfig_idiotcheck_RELEASE_PATCH_0
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/liblegion.so.1 gasnett_linkconfig_idiotcheck_RELEASE_MAJOR_1
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_atomic64_native
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_membars_native
@@ -230,14 +233,15 @@ legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/lible
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_PAR
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/liblegion.so.1 gasnett_linkconfig_idiotcheck_64bit
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/liblegion.so.1 gasnett_linkconfig_idiotcheck_atomics_native
-legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_RELEASE_PATCH_0
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/liblegion.so.1 gasnett_linkconfig_idiotcheck_nodebug
+legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/liblegion.so.1 gasnett_linkconfig_idiotcheck_RELEASE_PATCH_2
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_FAST
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_noalign
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/liblegion.so.1 gasnett_linkconfig_idiotcheck_atomic32_native
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_pshm
+legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_RELEASE_PATCH_2
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_EXTENDED_REFERENCE
-legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/liblegion.so.1 gasnett_linkconfig_idiotcheck_timers_native
+legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_timers_posixrt
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_atomic32_native
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_nostats
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_nodebug
@@ -246,12 +250,11 @@ legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/lible
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/liblegion.so.1 gasnett_linkconfig_idiotcheck_membars_native
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_64bit
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/liblegion.so.1 gasnett_linkconfig_idiotcheck_atomic64_native
-legion-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/liblegion.so.1 libgasnet-mpi-par-1.28.0.so
+legion-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/liblegion.so.1 libgasnet-mpi-par-1.28.2.so
 legion-openmpi.x86_64: W: shared-lib-calls-exit /usr/lib64/openmpi/lib/liblegion.so.1 exit@GLIBC_2.2.5
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasnete_try_syncnbi_gets
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasneti_linkconfig_idiotcheck_RELEASE_MAJOR_1
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasneti_wait_mode
-legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasneti_linkconfig_idiotcheck_timers_native
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasneti_mynode
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasneti_linkconfig_idiotcheck_notrace
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasnete_coll_init
@@ -261,15 +264,14 @@ legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libre
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasneti_linkconfig_idiotcheck_nosrclines
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasnetc_hsl_init
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasnete_get_nbi_bulk
+legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasnett_linkconfig_idiotcheck_timers_posixrt
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasnete_coll_team_all
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasneti_vis_progressfn
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 _gasneti_progressfn_enabled_gasneti_pf_barrier_BOOLEAN
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasnet_barrier_notify
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasnete_try_syncnb
-legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasnet_init_GASNET_1280PARpshmFASTnodebugnotracenostatsnodebugmallocnosrclines
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasnett_linkconfig_idiotcheck_RELEASE_MINOR_28
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasneti_linkconfig_idiotcheck_atomics_native
-legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasnett_linkconfig_idiotcheck_RELEASE_PATCH_0
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasnett_linkconfig_idiotcheck_RELEASE_MAJOR_1
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasnetc_AMRequestShortM
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasneti_linkconfig_idiotcheck_atomic64_native
@@ -285,10 +287,10 @@ legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libre
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasnetc_AMRequestMediumM
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasnete_put_nbi
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasnete_end_nbi_accessregion
-legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasneti_linkconfig_idiotcheck_RELEASE_PATCH_0
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasnett_linkconfig_idiotcheck_nodebug
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 _gasneti_progressfn_enabled_gasneti_pf_vis_COUNTED
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasnete_begin_nbi_accessregion
+legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasnett_linkconfig_idiotcheck_RELEASE_PATCH_2
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasneti_linkconfig_idiotcheck_FAST
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasnet_barrier_wait
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasnetc_exit
@@ -299,13 +301,15 @@ legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libre
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasneti_linkconfig_idiotcheck_pshm
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasnetc_hsl_lock
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasnetc_AMReplyShortM
+legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasneti_linkconfig_idiotcheck_RELEASE_PATCH_2
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasneti_linkconfig_idiotcheck_EXTENDED_REFERENCE
-legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasnett_linkconfig_idiotcheck_timers_native
+legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasneti_linkconfig_idiotcheck_timers_posixrt
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasnet_ErrorDesc
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasnetc_hsl_destroy
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasneti_linkconfig_idiotcheck_atomic32_native
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasnetc_AMRequestLongM
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasnetc_getSegmentInfo
+legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasnet_init_GASNET_1282PARpshmFASTnodebugnotracenostatsnodebugmallocnosrclines
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasnetc_AMGetMsgSource
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasnetc_attach
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasneti_linkconfig_idiotcheck_nostats
@@ -319,7 +323,7 @@ legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/libre
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasneti_set_waitmode
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasnete_put_nb_bulk
 legion-openmpi.x86_64: W: undefined-non-weak-symbol /usr/lib64/openmpi/lib/librealm.so.1 gasnetc_AMPoll
-legion-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/librealm.so.1 libgasnet-mpi-par-1.28.0.so
+legion-openmpi.x86_64: W: unused-direct-shlib-dependency /usr/lib64/openmpi/lib/librealm.so.1 libgasnet-mpi-par-1.28.2.so
 legion-openmpi.x86_64: W: shared-lib-calls-exit /usr/lib64/openmpi/lib/librealm.so.1 exit@GLIBC_2.2.5
 legion-openmpi.x86_64: W: no-documentation
 legion-openmpi.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
@@ -330,14 +334,13 @@ legion-openmpi.x86_64: E: library-without-ldconfig-postin /usr/lib64/openmpi/lib
 legion-openmpi.x86_64: E: library-without-ldconfig-postun /usr/lib64/openmpi/lib/librealm.so.1
 legion-mpich.x86_64: W: spelling-error %description -l en_US centric -> eccentric, centrist, concentric
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_RELEASE_MAJOR_1
-legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_timers_native
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_notrace
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_nodebugmalloc
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_notiopt
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_nosrclines
+legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/liblegion.so.1 gasnett_linkconfig_idiotcheck_timers_posixrt
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/liblegion.so.1 gasnett_linkconfig_idiotcheck_RELEASE_MINOR_28
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_atomics_native
-legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/liblegion.so.1 gasnett_linkconfig_idiotcheck_RELEASE_PATCH_0
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/liblegion.so.1 gasnett_linkconfig_idiotcheck_RELEASE_MAJOR_1
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_atomic64_native
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_membars_native
@@ -345,14 +348,15 @@ legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/liblegion
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_PAR
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/liblegion.so.1 gasnett_linkconfig_idiotcheck_64bit
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/liblegion.so.1 gasnett_linkconfig_idiotcheck_atomics_native
-legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_RELEASE_PATCH_0
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/liblegion.so.1 gasnett_linkconfig_idiotcheck_nodebug
+legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/liblegion.so.1 gasnett_linkconfig_idiotcheck_RELEASE_PATCH_2
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_FAST
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_noalign
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/liblegion.so.1 gasnett_linkconfig_idiotcheck_atomic32_native
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_pshm
+legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_RELEASE_PATCH_2
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_EXTENDED_REFERENCE
-legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/liblegion.so.1 gasnett_linkconfig_idiotcheck_timers_native
+legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_timers_posixrt
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_atomic32_native
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_nostats
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_nodebug
@@ -361,12 +365,11 @@ legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/liblegion
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/liblegion.so.1 gasnett_linkconfig_idiotcheck_membars_native
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/liblegion.so.1 gasneti_linkconfig_idiotcheck_64bit
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/liblegion.so.1 gasnett_linkconfig_idiotcheck_atomic64_native
-legion-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/liblegion.so.1 libgasnet-mpi-par-1.28.0.so
+legion-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/liblegion.so.1 libgasnet-mpi-par-1.28.2.so
 legion-mpich.x86_64: W: shared-lib-calls-exit /usr/lib64/mpich/lib/liblegion.so.1 exit@GLIBC_2.2.5
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasnete_try_syncnbi_gets
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasneti_linkconfig_idiotcheck_RELEASE_MAJOR_1
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasneti_wait_mode
-legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasneti_linkconfig_idiotcheck_timers_native
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasneti_mynode
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasneti_linkconfig_idiotcheck_notrace
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasnete_coll_init
@@ -376,15 +379,14 @@ legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasneti_linkconfig_idiotcheck_nosrclines
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasnetc_hsl_init
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasnete_get_nbi_bulk
+legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasnett_linkconfig_idiotcheck_timers_posixrt
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasnete_coll_team_all
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasneti_vis_progressfn
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 _gasneti_progressfn_enabled_gasneti_pf_barrier_BOOLEAN
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasnet_barrier_notify
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasnete_try_syncnb
-legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasnet_init_GASNET_1280PARpshmFASTnodebugnotracenostatsnodebugmallocnosrclines
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasnett_linkconfig_idiotcheck_RELEASE_MINOR_28
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasneti_linkconfig_idiotcheck_atomics_native
-legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasnett_linkconfig_idiotcheck_RELEASE_PATCH_0
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasnett_linkconfig_idiotcheck_RELEASE_MAJOR_1
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasnetc_AMRequestShortM
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasneti_linkconfig_idiotcheck_atomic64_native
@@ -400,10 +402,10 @@ legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasnetc_AMRequestMediumM
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasnete_put_nbi
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasnete_end_nbi_accessregion
-legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasneti_linkconfig_idiotcheck_RELEASE_PATCH_0
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasnett_linkconfig_idiotcheck_nodebug
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 _gasneti_progressfn_enabled_gasneti_pf_vis_COUNTED
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasnete_begin_nbi_accessregion
+legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasnett_linkconfig_idiotcheck_RELEASE_PATCH_2
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasneti_linkconfig_idiotcheck_FAST
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasnet_barrier_wait
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasnetc_exit
@@ -414,13 +416,15 @@ legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasneti_linkconfig_idiotcheck_pshm
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasnetc_hsl_lock
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasnetc_AMReplyShortM
+legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasneti_linkconfig_idiotcheck_RELEASE_PATCH_2
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasneti_linkconfig_idiotcheck_EXTENDED_REFERENCE
-legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasnett_linkconfig_idiotcheck_timers_native
+legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasneti_linkconfig_idiotcheck_timers_posixrt
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasnet_ErrorDesc
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasnetc_hsl_destroy
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasneti_linkconfig_idiotcheck_atomic32_native
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasnetc_AMRequestLongM
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasnetc_getSegmentInfo
+legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasnet_init_GASNET_1282PARpshmFASTnodebugnotracenostatsnodebugmallocnosrclines
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasnetc_AMGetMsgSource
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasnetc_attach
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasneti_linkconfig_idiotcheck_nostats
@@ -434,7 +438,7 @@ legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasneti_set_waitmode
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasnete_put_nb_bulk
 legion-mpich.x86_64: W: undefined-non-weak-symbol /usr/lib64/mpich/lib/librealm.so.1 gasnetc_AMPoll
-legion-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/librealm.so.1 libgasnet-mpi-par-1.28.0.so
+legion-mpich.x86_64: W: unused-direct-shlib-dependency /usr/lib64/mpich/lib/librealm.so.1 libgasnet-mpi-par-1.28.2.so
 legion-mpich.x86_64: W: shared-lib-calls-exit /usr/lib64/mpich/lib/librealm.so.1 exit@GLIBC_2.2.5
 legion-mpich.x86_64: W: no-documentation
 legion-mpich.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
@@ -477,7 +481,7 @@ legion-openmpi (rpmlib, GLIBC filtered):
     legion(x86-64)
     libc.so.6()(64bit)
     libdl.so.2()(64bit)
-    libgasnet-mpi-par-1.28.0.so()(64bit)(openmpi-x86_64)
+    libgasnet-mpi-par-1.28.2.so()(64bit)(openmpi-x86_64)
     libgcc_s.so.1()(64bit)
     libgcc_s.so.1(GCC_3.0)(64bit)
     libhwloc.so.5()(64bit)
@@ -497,7 +501,7 @@ legion-mpich (rpmlib, GLIBC filtered):
     legion(x86-64)
     libc.so.6()(64bit)
     libdl.so.2()(64bit)
-    libgasnet-mpi-par-1.28.0.so()(64bit)(mpich-x86_64)
+    libgasnet-mpi-par-1.28.2.so()(64bit)(mpich-x86_64)
     libgcc_s.so.1()(64bit)
     libgcc_s.so.1(GCC_3.0)(64bit)
     libhwloc.so.5()(64bit)
