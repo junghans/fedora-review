@@ -21,25 +21,6 @@ System Standard documents 121.0-B-2 and 120.0-G-2.
 Libaec includes a free drop-in replacement for the SZIP
 library (http://www.hdfgroup.org/doc_resource/SZIP).
 
-%package
-Summary:        Adaptive Entropy Coding library
-Group:          Productivity/Archiving/Compression
-
-%description
-Libaec provides fast lossless compression of 1 up to 32 bit wide
-signed or unsigned integers (samples). The library achieves best
-results for low entropy data as often encountered in space imaging
-instrument data or numerical model output from weather or climate
-simulations. While floating point representations are not directly
-supported, they can also be efficiently coded by grouping exponents
-and mantissa.
-
-Libaec implements Golomb Rice coding as defined in the Space Data
-System Standard documents 121.0-B-2 and 120.0-G-2.
-
-Libaec source includes a free drop-in replacement for the SZIP
-library (http://www.hdfgroup.org/doc_resource/SZIP) provided as package libsz2.
-
 %package devel
 Summary:        Devel package for libaec (Adaptive Entropy Coding library)
 Requires:       libaec
