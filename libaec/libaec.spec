@@ -25,7 +25,7 @@ library (http://www.hdfgroup.org/doc_resource/SZIP).
 
 %package devel
 Summary:        Devel package for libaec (Adaptive Entropy Coding library)
-Requires:       libaec
+Requires:       %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
 Devel files and static library for libaec (Adaptive Entropy Coding library).
