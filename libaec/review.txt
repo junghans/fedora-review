@@ -24,21 +24,16 @@ Legend:
 [ ] = Manual review needed
 
 
-Issues:
-=======
-- Dist tag is present.
-
 
 ===== MUST items =====
 
 C/C++:
 [ ]: Package does not contain kernel modules.
 [ ]: Package contains no static executables.
-[ ]: Rpath absent or only used for internal libs.
-     Note: See rpmlint output
 [x]: Header files in -devel subpackage, if present.
 [x]: ldconfig called in %post and %postun if required.
 [x]: Package does not contain any libtool archives (.la)
+[x]: Rpath absent or only used for internal libs.
 [x]: Development (unversioned) .so files in -devel subpackage, if present.
 
 Generic:
@@ -91,6 +86,7 @@ Generic:
 [x]: Package does not run rm -rf %{buildroot} (or $RPM_BUILD_ROOT) at the
      beginning of %install.
 [x]: Macros in Summary, %description expandable at SRPM build time.
+[x]: Dist tag is present.
 [x]: Package does not contain duplicates in %files.
 [x]: Permissions on files are set properly.
 [x]: Package use %makeinstall only when make install DESTDIR=... doesn't
@@ -139,7 +135,7 @@ Generic:
 
 Generic:
 [x]: Rpmlint is run on debuginfo package(s).
-     Note: There are rpmlint messages (see attachment).
+     Note: No rpmlint messages.
 [x]: Rpmlint is run on all installed packages.
      Note: There are rpmlint messages (see attachment).
 [x]: Large data in /usr/share should live in a noarch subpackage if package
@@ -149,40 +145,28 @@ Generic:
 
 Rpmlint
 -------
-Checking: libaec-1.0.0-0.x86_64.rpm
-          libaec-devel-1.0.0-0.x86_64.rpm
-          libaec-debuginfo-1.0.0-0.x86_64.rpm
-          libaec-1.0.0-0.src.rpm
+Checking: libaec-1.0.0-1.fc27.x86_64.rpm
+          libaec-devel-1.0.0-1.fc27.x86_64.rpm
+          libaec-debuginfo-1.0.0-1.fc27.x86_64.rpm
+          libaec-1.0.0-1.fc27.src.rpm
 libaec.x86_64: W: spelling-error %description -l en_US lossless -> loss less, loss-less, loveless
-libaec.x86_64: E: no-changelogname-tag
-libaec.x86_64: W: invalid-license BSD-2-Clause
-libaec.x86_64: E: binary-or-shlib-defines-rpath /usr/bin/aec ['/usr/lib64']
-libaec.x86_64: E: binary-or-shlib-defines-rpath /usr/lib64/libsz.so.2.0.1 ['/usr/lib64']
 libaec.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
 libaec.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
 libaec.x86_64: W: no-manual-page-for-binary aec
 libaec-devel.x86_64: W: no-version-dependency-on libaec/libaec-libs/liblibaec 1.0.0
-libaec-devel.x86_64: E: no-changelogname-tag
-libaec-devel.x86_64: W: invalid-license BSD-2-Clause
 libaec-devel.x86_64: W: only-non-binary-in-usr-lib
 libaec-devel.x86_64: W: no-documentation
-libaec-debuginfo.x86_64: E: no-changelogname-tag
-libaec-debuginfo.x86_64: W: invalid-license BSD-2-Clause
 libaec.src: W: spelling-error %description -l en_US lossless -> loss less, loss-less, loveless
-libaec.src: E: no-changelogname-tag
-libaec.src: W: invalid-license BSD-2-Clause
-libaec.src:37: W: macro-in-comment %{optflags}
-4 packages and 0 specfiles checked; 6 errors, 13 warnings.
+libaec.src:41: W: macro-in-comment %{optflags}
+4 packages and 0 specfiles checked; 0 errors, 9 warnings.
 
 
 
 
 Rpmlint (debuginfo)
 -------------------
-Checking: libaec-debuginfo-1.0.0-0.x86_64.rpm
-libaec-debuginfo.x86_64: E: no-changelogname-tag
-libaec-debuginfo.x86_64: W: invalid-license BSD-2-Clause
-1 packages and 0 specfiles checked; 1 errors, 1 warnings.
+Checking: libaec-debuginfo-1.0.0-1.fc27.x86_64.rpm
+1 packages and 0 specfiles checked; 0 errors, 0 warnings.
 
 
 
@@ -192,21 +176,13 @@ Rpmlint (installed packages)
 ----------------------------
 sh: /usr/bin/python: No such file or directory
 libaec.x86_64: W: spelling-error %description -l en_US lossless -> loss less, loss-less, loveless
-libaec.x86_64: E: no-changelogname-tag
-libaec.x86_64: W: invalid-license BSD-2-Clause
-libaec.x86_64: E: binary-or-shlib-defines-rpath /usr/bin/aec ['/usr/lib64']
-libaec.x86_64: E: binary-or-shlib-defines-rpath /usr/lib64/libsz.so.2.0.1 ['/usr/lib64']
 libaec.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
 libaec.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
 libaec.x86_64: W: no-manual-page-for-binary aec
 libaec-devel.x86_64: W: no-version-dependency-on libaec/libaec-libs/liblibaec 1.0.0
-libaec-devel.x86_64: E: no-changelogname-tag
-libaec-devel.x86_64: W: invalid-license BSD-2-Clause
 libaec-devel.x86_64: W: only-non-binary-in-usr-lib
 libaec-devel.x86_64: W: no-documentation
-libaec-debuginfo.x86_64: E: no-changelogname-tag
-libaec-debuginfo.x86_64: W: invalid-license BSD-2-Clause
-3 packages and 0 specfiles checked; 5 errors, 10 warnings.
+3 packages and 0 specfiles checked; 0 errors, 7 warnings.
 
 
 
@@ -214,14 +190,14 @@ Requires
 --------
 libaec (rpmlib, GLIBC filtered):
     /sbin/ldconfig
-    libaec.so.0()(64bit)
+    libaec.so.0.0.6()(64bit)
     libc.so.6()(64bit)
     rtld(GNU_HASH)
 
 libaec-devel (rpmlib, GLIBC filtered):
     libaec
-    libaec.so.0()(64bit)
-    libsz.so.2()(64bit)
+    libaec.so.0.0.6()(64bit)
+    libsz.so.2.0.1()(64bit)
 
 libaec-debuginfo (rpmlib, GLIBC filtered):
 
@@ -232,8 +208,8 @@ Provides
 libaec:
     libaec
     libaec(x86-64)
-    libaec.so.0()(64bit)
-    libsz.so.2()(64bit)
+    libaec.so.0.0.6()(64bit)
+    libsz.so.2.0.1()(64bit)
 
 libaec-devel:
     libaec-devel
