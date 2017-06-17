@@ -46,7 +46,7 @@ make %{?_smp_mflags} check VERBOSE=1
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
-%files libaec
+%files
 %doc README README.SZIP ChangeLog
 %license COPYING doc/patent.txt
 %{_bindir}/aec
