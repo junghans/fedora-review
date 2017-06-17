@@ -109,7 +109,7 @@ Generic:
 [ ]: Final provides and requires are sane (see attachments).
 [ ]: Fully versioned dependency in subpackages if applicable.
      Note: No Requires: %{name}%{?_isa} = %{version}-%{release} in libaec-
-     devel , libaec-debuginfo
+     debuginfo
 [ ]: Package functions as described.
 [ ]: Latest version is packaged.
 [ ]: Package does not include license text files separate from upstream.
@@ -152,10 +152,9 @@ Checking: libaec-1.0.0-1.fc27.x86_64.rpm
 libaec.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
 libaec.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
 libaec.x86_64: W: no-manual-page-for-binary aec
-libaec-devel.x86_64: W: no-version-dependency-on libaec/libaec-libs/liblibaec 1.0.0
 libaec-devel.x86_64: W: only-non-binary-in-usr-lib
 libaec-devel.x86_64: W: no-documentation
-4 packages and 0 specfiles checked; 0 errors, 6 warnings.
+4 packages and 0 specfiles checked; 0 errors, 5 warnings.
 
 
 
@@ -175,10 +174,9 @@ sh: /usr/bin/python: No such file or directory
 libaec.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
 libaec.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
 libaec.x86_64: W: no-manual-page-for-binary aec
-libaec-devel.x86_64: W: no-version-dependency-on libaec/libaec-libs/liblibaec 1.0.0
 libaec-devel.x86_64: W: only-non-binary-in-usr-lib
 libaec-devel.x86_64: W: no-documentation
-3 packages and 0 specfiles checked; 0 errors, 6 warnings.
+3 packages and 0 specfiles checked; 0 errors, 5 warnings.
 
 
 
@@ -191,7 +189,7 @@ libaec (rpmlib, GLIBC filtered):
     rtld(GNU_HASH)
 
 libaec-devel (rpmlib, GLIBC filtered):
-    libaec
+    libaec(x86-64)
     libaec.so.0.0.6()(64bit)
     libsz.so.2.0.1()(64bit)
 
