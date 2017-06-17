@@ -149,16 +149,13 @@ Checking: libaec-1.0.0-1.fc27.x86_64.rpm
           libaec-devel-1.0.0-1.fc27.x86_64.rpm
           libaec-debuginfo-1.0.0-1.fc27.x86_64.rpm
           libaec-1.0.0-1.fc27.src.rpm
-libaec.x86_64: W: spelling-error %description -l en_US lossless -> loss less, loss-less, loveless
 libaec.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
 libaec.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
 libaec.x86_64: W: no-manual-page-for-binary aec
 libaec-devel.x86_64: W: no-version-dependency-on libaec/libaec-libs/liblibaec 1.0.0
 libaec-devel.x86_64: W: only-non-binary-in-usr-lib
 libaec-devel.x86_64: W: no-documentation
-libaec.src: W: spelling-error %description -l en_US lossless -> loss less, loss-less, loveless
-libaec.src:41: W: macro-in-comment %{optflags}
-4 packages and 0 specfiles checked; 0 errors, 9 warnings.
+4 packages and 0 specfiles checked; 0 errors, 6 warnings.
 
 
 
@@ -175,14 +172,13 @@ Checking: libaec-debuginfo-1.0.0-1.fc27.x86_64.rpm
 Rpmlint (installed packages)
 ----------------------------
 sh: /usr/bin/python: No such file or directory
-libaec.x86_64: W: spelling-error %description -l en_US lossless -> loss less, loss-less, loveless
 libaec.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
 libaec.x86_64: W: hidden-file-or-dir /usr/lib/.build-id
 libaec.x86_64: W: no-manual-page-for-binary aec
 libaec-devel.x86_64: W: no-version-dependency-on libaec/libaec-libs/liblibaec 1.0.0
 libaec-devel.x86_64: W: only-non-binary-in-usr-lib
 libaec-devel.x86_64: W: no-documentation
-3 packages and 0 specfiles checked; 0 errors, 7 warnings.
+3 packages and 0 specfiles checked; 0 errors, 6 warnings.
 
 
 
