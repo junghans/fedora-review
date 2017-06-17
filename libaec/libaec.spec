@@ -61,5 +61,5 @@ make -C build test
 %{_libdir}/lib*.so
 
 %changelog
-* Mon Mar 13 2017 Christoph Junghans <junghans@votca.org> - 1.0.0-1
+* Sat Jun 17 2017 Christoph Junghans <junghans@votca.org> - 1.0.0-1
 - initial import
