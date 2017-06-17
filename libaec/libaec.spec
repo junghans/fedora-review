@@ -6,10 +6,8 @@ License:        BSD
 Url:            https://gitlab.dkrz.de/k202009/libaec
 Source:         https://gitlab.dkrz.de/k202009/libaec/uploads/631e85bcf877c2dcaca9b2e6d6526339/libaec-1.0.0.tar.gz
 
-BuildRequires:  cmake
-
 %description
-Libaec provides fast lossless compression of 1 up to 32 bit wide
+Libaec provides fast loss-less compression of 1 up to 32 bit wide
 signed or unsigned integers (samples). The library achieves best
 results for low entropy data as often encountered in space imaging
 instrument data or numerical model output from weather or climate
@@ -34,19 +32,16 @@ Devel files and static library for libaec (Adaptive Entropy Coding library).
 %setup -q
 
 %build
-mkdir build
-pushd build
-%cmake ..
+%configure --disable-static
+sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
+sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
 %make_build
-#make %{?_smp_mflags} CFLAGS="%{optflags}"
-popd
 
 %install
-%make_install -C build
-[ %{_lib} = lib ] || mv $RPM_BUILD_ROOT/%{_prefix}/{lib,%{_lib}}
+%make_install
 
 %check
-make -C build test 
+make check 
 
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
