@@ -9,7 +9,7 @@ Source:         https://gitlab.dkrz.de/k202009/libaec/uploads/631e85bcf877c2dcac
 BuildRequires:  cmake
 
 %description
-Libaec provides fast lossless compression of 1 up to 32 bit wide
+Libaec provides fast loss-less compression of 1 up to 32 bit wide
 signed or unsigned integers (samples). The library achieves best
 results for low entropy data as often encountered in space imaging
 instrument data or numerical model output from weather or climate
@@ -38,7 +38,6 @@ mkdir build
 pushd build
 %cmake ..
 %make_build
-#make %{?_smp_mflags} CFLAGS="%{optflags}"
 popd
 
 %install
