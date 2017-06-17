@@ -43,6 +43,7 @@ popd
 
 %install
 %make_install -C build
+[ %{_lib} = lib ] || mv $RPM_BUILD_ROOT/%{_prefix}/{lib,%{_lib}
 
 %check
 make -C build test 
