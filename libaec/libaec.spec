@@ -1,10 +1,12 @@
 Name:           libaec
 Version:        1.0.0
-Release:        0
+Release:        1%{?dist}
 Summary:        Adaptive Entropy Coding library
-License:        BSD-2-Clause
+License:        BSD
 Url:            https://gitlab.dkrz.de/k202009/libaec
 Source:         https://gitlab.dkrz.de/k202009/libaec/uploads/631e85bcf877c2dcaca9b2e6d6526339/libaec-1.0.0.tar.gz
+
+BuildRequires:  cmake
 
 %description
 Libaec provides fast lossless compression of 1 up to 32 bit wide
@@ -32,16 +34,18 @@ Devel files and static library for libaec (Adaptive Entropy Coding library).
 %setup -q
 
 %build
-%configure --disable-static
+mkdir build
+pushd build
+%cmake ..
 %make_build
 #make %{?_smp_mflags} CFLAGS="%{optflags}"
+popd
 
 %install
-%make_install
-find $RPM_BUILD_ROOT%{_libdir} -name 'lib*.la' -delete
+%make_install -C build
 
 %check
-make %{?_smp_mflags} check VERBOSE=1
+make -C build test 
 
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -57,3 +61,5 @@ make %{?_smp_mflags} check VERBOSE=1
 %{_libdir}/lib*.so
 
 %changelog
+* Mon Mar 13 2017 Christoph Junghans <junghans@votca.org> - 1.0.0-1
+- initial import
