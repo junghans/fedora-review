@@ -1,6 +1,6 @@
 Name:           libaec
 Version:        1.0.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Adaptive Entropy Coding library
 License:        BSD
 Url:            https://gitlab.dkrz.de/k202009/libaec
@@ -28,7 +28,7 @@ Summary:        Devel package for libaec (Adaptive Entropy Coding library)
 Requires:       %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
-Devel files and static library for libaec (Adaptive Entropy Coding library).
+Devel files for libaec (Adaptive Entropy Coding library).
 
 %prep
 %setup -q
@@ -61,5 +61,8 @@ make -C build test
 %{_libdir}/lib*.so
 
 %changelog
+* Wed Jun 21 2017 Christoph Junghans <junghans@votca.org> - 1.0.0-2
+- comments from review #1462443
+
 * Sat Jun 17 2017 Christoph Junghans <junghans@votca.org> - 1.0.0-1
 - initial import
