@@ -35,7 +35,8 @@ after_success:
   - git fetch origin gh-pages && git checkout -b gh-pages FETCH_HEAD
   - cd ${PKG}
   - whoami
-  - ll -la
+  - groups
+  - ls -la
   - rm -f ${PKG}*.src.rpm
   - git checkout ${TRAVIS_COMMIT} -- ./${PKG}.spec
   - cp review-${PKG}/review.txt .
