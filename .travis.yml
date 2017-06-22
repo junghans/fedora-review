@@ -28,15 +28,13 @@ script:
     } > review.sh
   - chmod +x review.sh
   - docker run --privileged -v "${PWD}:/travis:rw" -it fedora:latest /travis/review.sh
+  - sudo chown -R travis:travis ${PWD}  
 
 after_success:
   - git config --global user.name "Automatic Deployment (Travis CI)"
   - git config --global user.email "builds@travis-ci.org"
   - git fetch origin gh-pages && git checkout -b gh-pages FETCH_HEAD
   - cd ${PKG}
-  - whoami
-  - groups
-  - ls -la
   - rm -f ${PKG}*.src.rpm
   - git checkout ${TRAVIS_COMMIT} -- ./${PKG}.spec
   - cp review-${PKG}/review.txt .
