@@ -21,6 +21,7 @@ script:
       echo "rpmbuild -D'_sourcedir ${H}' -D'_srcrpmdir ${H}' -bs ${H}/${PKG}.spec"
       echo "useradd -d ${H} -g mock review"
       echo "chown -R review:mock ${H}"
+      echo "systemd-machine-id-setup"
       echo "/travis/spinner.sh \"su - -c 'fedora-review -v --mock-config ${MOCK_CONFIG} -n ${PKG}' review\" || { cat ${H}/.cache/fedora-review.log; find  ${H}/review-${PKG} -name '*.log' -print -exec cat {} \\;; exit 1; }"
       echo "find ${H}/review-${PKG} -name '*.log' -print -exec cat {} \\;"
       echo "cat ${H}/review-${PKG}/licensecheck.txt"
