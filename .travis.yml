@@ -13,7 +13,7 @@ script:
   - PKG=$(git log -1 --pretty=%s | sed 's/:.*//')
   - if [[ ! -d ${PKG} ]]; then echo "Directory ${PKG} not found"; exit 1; fi
   - if [[ ! -f ${PKG}/${PKG}.spec ]]; then echo "No spec file (${PKG}.spec found in directory ${PKG}"; exit 1; fi
-  - docker run --privileged -v "${PWD}:/travis:rw" -it fedora:latest /travis/review.sh "${PKG}" ${MOCK_CONFIG}"
+  - docker run --privileged -v "${PWD}:/travis:rw" -it fedora:latest /travis/review.sh "${PKG}" "${MOCK_CONFIG}"
   - sudo chown -R travis:travis ${PWD}
 
 after_success:
