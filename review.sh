@@ -11,7 +11,7 @@ spectool -g ${PKG}.spec
 rpmbuild -D"_sourcedir ${PWD}" -D"_srcrpmdir ${PWD}" -bs ${PKG}.spec
 
 chown -R review:mock ${H}
-if ! /travis/spinner.sh "su - -c 'fedora-review -v --mock-config ${MOCK_CONFIG} --mock-options --old=chroot -n ${PKG}' review"; then
+if ! /travis/spinner.sh "su - -c 'fedora-review -v --mock-config ${MOCK_CONFIG} --mock-options --old-chroot -n ${PKG}' review"; then
   cat .cache/fedora-review.log
   find  review-${PKG} -name '*.log' -print -exec cat {} ;
   exit 1
