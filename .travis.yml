@@ -18,7 +18,7 @@ script:
       H="/travis/${PKG}"
       echo "#!/bin/bash -xe"
       echo "dnf -q -y install fedora-review spectool"
-echo "spectool -g ${PKG}.spec"
+      echo "spectool -g ${PKG}.spec"
       echo "rpmbuild -D'_sourcedir ${H}' -D'_srcrpmdir ${H}' -bs ${H}/${PKG}.spec"
       echo "useradd -d ${H} -g mock review"
       echo "chown -R review:mock ${H}"
