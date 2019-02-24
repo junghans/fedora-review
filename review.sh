@@ -5,11 +5,12 @@ MOCK_CONFIG="$2"
 EXIT_CODE=0
 H=/travis/$PKG
 
-dnf -q -y install fedora-review spectool sudo
+dnf -q -y install fedora-review spectool sudo dnf-plugins-core
 useradd -d ${H} -g mock review
 
 cd /travis/$PKG
 spectool -g ${PKG}.spec
+dnf builddep -y ${PKG}.spec
 rpmbuild -D"_sourcedir ${PWD}" -D"_srcrpmdir ${PWD}"  -D"_rpmdir ${PWD}" -ba ${PKG}.spec
 mv -v */*.rpm .
 
